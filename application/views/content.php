@@ -7,17 +7,21 @@
 </div>
 
 <div id="contenido" align="center" hidden>
-    
+
     <div id="admin" hidden>
-        
+
         <div id="home">
             home admin
         </div>
-        
+
         <div id="usuarios">
             <div id="msj_man_user"></div>
             <div id="Man_usuarios">
                 <table>
+                    <tr>
+                        <td>ID :</td>
+                        <td><input class="rounded" id="man_id" placeholder="ID" type="text" style="width: 20px;" maxlength="50" /></td>
+                    <tr>
                     <tr>
                         <td>Usuario :</td>
                         <td><input class="rounded" id="man_user" placeholder="Usuario" type="text" style="width: 160px;" maxlength="50" /></td>
@@ -55,15 +59,15 @@
             </div>
             <div class="rounded" id="lista_usuarios" style=" text-align: left;"></div>
         </div>
-        
+
         <div id="caja">
             admin de caha
         </div>
-        
+
         <div id="estadisticas">
             estadisticas para el admin
         </div>
-        
+
     </div>
     <div id="cajero" hidden>
         <div id="homec">

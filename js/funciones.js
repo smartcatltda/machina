@@ -269,6 +269,7 @@ function  seleccionar_user()
                 $("#msj_man_user").html("<label>Usuario No Registrado</label>");
                 $("#msj_man_user").css("color", "#FF0000").show('drop', 'slow').delay(3000).hide('drop', 'slow');
             } else {
+                $("#man_id").val(datos.id);
                 $("#man_user").val(datos.user);
                 $("#man_pass").val(datos.pass);
                 $("#man_tipo").val(datos.tipo);
@@ -285,28 +286,36 @@ function  seleccionar_user()
 }
 function editar_user()
 {
+    var id = $("#man_id").val();
     var nombre = $("#man_nombre").val();
     var apellido = $("#man_apellido").val();
     var user = $("#man_user").val();
     var pass = $("#man_pass").val();
     var tipo = $("#man_tipo").val();
-    if (nombre != "" && apellido != "" && user != "" && pass != "," && tipo != "") {
-        $.post(base_url + "controlador/modificar_user", {nombre: nombre, apellido: apellido, user: user, pass: pass, tipo: tipo},
+    if (nombre != "" && apellido != "" && user != "" && pass != "" && tipo != "") {
+        $.post(base_url + "controlador/modificar_user", {id: id, nombre: nombre, apellido: apellido, user: user, pass: pass, tipo: tipo},
         function (datos) {
             if (datos.valor == 1) {
                 $("#msj_man_user").hide();
                 $("#msj_man_user").html("<label>Usuario No Registrado</label>");
                 $("#msj_man_user").css("color", "#FF0000").show('drop', 'slow').delay(3000).hide('drop', 'slow');
             } else {
-                $("#msj_man_user").hide();
-                $("#msj_man_user").html("<label>Usuario Modificado Correctamente</label>");
-                $("#msj_man_user").css("color", "#55FF00").show('drop', 'slow').delay(3000).hide('drop', 'slow');
-                $("#man_nombre").val("");
-                $("#man_apellido").val("");
-                $("#man_user").val("");
-                $("#man_pass").val("");
-                $("#man_tipo").val("");
-                mostrar_user();
+                if (datos.valor == 2) {
+                    $("#msj_man_user").hide();
+                    $("#msj_man_user").html("<label>Nombre de Usuario No Disponible</label>");
+                    $("#msj_man_user").css("color", "#FF0000").show('drop', 'slow').delay(3000).hide('drop', 'slow');
+                } else {
+                    $("#msj_man_user").hide();
+                    $("#msj_man_user").html("<label>Usuario Modificado Correctamente</label>");
+                    $("#msj_man_user").css("color", "#55FF00").show('drop', 'slow').delay(3000).hide('drop', 'slow');
+                    $("#man_id").val("");
+                    $("#man_nombre").val("");
+                    $("#man_apellido").val("");
+                    $("#man_user").val("");
+                    $("#man_pass").val("");
+                    $("#man_tipo").val("");
+                    mostrar_user();
+                }
             }
         }, "json"
                 );

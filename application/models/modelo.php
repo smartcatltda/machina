@@ -47,23 +47,30 @@ class modelo extends CI_Model {
         return $this->db->get('usuario');
     }
 
-    function modificar_user($nombre, $apellido, $user, $pass, $tipo) {
-        $this->db->select('*');
+    function modificar_user($id, $nombre, $apellido, $user, $pass, $tipo) {
+        $this->db->select('user');
         $this->db->where('user', $user);
-        $cantidad = $this->db->get('usuario')->num_rows();
-        if ($cantidad > 0):
-            $data = array(
-                "nombre" => $nombre,
-                "apellido" => $apellido,
-                "user" => $user,
-                "pass" => $pass,
-                "tipo" => $tipo,
-            );
-            $this->db->where('user', $user);
-            $this->db->update('usuario', $data);
-            return 0;
+        $existe = $this->db->get('usuario')->num_rows();
+        if ($existe == 0):
+            $this->db->select('*');
+            $this->db->where('id_usuario', $id);
+            $cantidad = $this->db->get('usuario')->num_rows();
+            if ($cantidad > 0):
+                $data = array(
+                    "nombre" => $nombre,
+                    "apellido" => $apellido,
+                    "user" => $user,
+                    "pass" => $pass,
+                    "tipo" => $tipo,
+                );
+                $this->db->where('id_usuario', $id);
+                $this->db->update('usuario', $data);
+                return 0;
+            else:
+                return 1;
+            endif;
         else:
-            return 1;
+            return 2;
         endif;
     }
 
