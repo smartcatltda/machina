@@ -57,6 +57,8 @@ class Controlador extends CI_Controller {
         $cookie = array('user' => '', 'permiso' => '', 'esta logeado' => false);
         $this->session->set_userdata($cookie);
         echo json_encode(array('valor' => $valor));
+    }
+
     function mostrar_user() {
         $datos = $this->modelo->mostrar_user();
         $data ['cantidad'] = $datos->num_rows();

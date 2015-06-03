@@ -2,6 +2,19 @@
 
 class modelo extends CI_Model {
 
+    function conectar($user, $pass) {
+        $this->db->select('*');
+        $this->db->where('user', $user);
+        $this->db->where('pass', ($pass));
+        return $this->db->get('usuario')->num_rows();
+    }
+
+    function permiso($user) {
+        $this->db->select('tipo');
+        $this->db->where('user', $user);
+        return $this->db->get('usuario');
+    }
+
     //MANTENEDOR DE USUARIOS
     function mostrar_user() {
         $this->db->select('*');
@@ -64,26 +77,13 @@ class modelo extends CI_Model {
                 "tipo" => $tipo
             );
             $this->db->where('user', $user);
-            $this->db->update('usuario',$data);
+            $this->db->update('usuario', $data);
             return 0;
         else:
             return 1;
         endif;
     }
 
-    
-    function conectar($user, $pass) {
-        $this->db->select('*');
-        $this->db->where('user', $user);
-        $this->db->where('pass', ($pass));
-        return $this->db->get('usuario')->num_rows();
-    }
-    
-    function permiso($user) {
-        $this->db->select('tipo');
-        $this->db->where('user', $user);
-        return $this->db->get('usuario');
-    }
 }
 ?>
 

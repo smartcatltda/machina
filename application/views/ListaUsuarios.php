@@ -12,7 +12,7 @@
             if ($fila->tipo == 1):
                 $fila->tipo = "administrador";
             else :
-                $fila->tipo = "incativo";
+                $fila->tipo = "inactivo";
             endif;
         endif;
         ?>
