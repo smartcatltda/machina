@@ -22,6 +22,7 @@
         <div id="menuadmin" class="ui-widget-header ui-corner-all" hidden>
             <button id="bthome">Home</button>
             <button id="btusuarios">Usuarios</button>
+            <button id="btmaquinas">Maquinas</button>
             <button id="btcaja">Caja</button>
             <button id="btestadisticas">Estadisticas</button>
             <button id="salir">Salir</button>

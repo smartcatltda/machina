@@ -59,6 +59,7 @@ class Controlador extends CI_Controller {
         echo json_encode(array('valor' => $valor));
     }
 
+//    MANTENEDOR USUARIOS
     function mostrar_user() {
         $datos = $this->modelo->mostrar_user();
         $data ['cantidad'] = $datos->num_rows();
@@ -123,6 +124,66 @@ class Controlador extends CI_Controller {
         $user = $this->input->post('user');
         $valor = 1;
         if ($this->modelo->eliminar_user($user) == 0) {
+            $valor = 0;
+        }
+        echo json_encode(array("valor" => $valor));
+    }
+
+    //MANTENEDOR MAQUINAS
+    function mostrar_maquinas() {
+        $datos = $this->modelo->mostrar_maquinas();
+        $data ['cantidad'] = $datos->num_rows();
+        $data ['maquinas'] = $datos->result();
+        $this->load->view('ListaMaquinas', $data);
+    }
+
+    function guardar_maquina() {
+        $num_maquina = $this->input->post('num_maquina');
+        $estado = $this->input->post('estado');
+        $obs = $this->input->post('obs');
+        $valor = 0;
+        $msg = "Maquina Ya Registrada en el Sistema";
+        if ($this->modelo->guardar_maquina($num_maquina, $estado, $obs) == 0) {
+            $msg = "Maquina Guardada Correctamente";
+            $valor = 1;
+        }
+        echo json_encode(array("valor" => $valor, "msg" => $msg));
+    }
+
+    function seleccionar_maquina() {
+        $num_maquina = $this->input->post('num_maquina');
+        $datos = $this->modelo->ver_maquinas($num_maquina);
+        $data = $datos->result();
+        $contador = $datos->num_rows();
+        if ($contador > 0) {
+            foreach ($data as $fila) {
+                $num_maquina = $fila->num_maquina;
+                $estado = $fila->estado;
+                $obs = $fila->obs;
+            }
+            $valor = 0;
+            echo json_encode(array("valor" => $valor, "num_maquina" => $num_maquina, "estado" => $estado, "obs" => $obs));
+        } else {
+            $valor = 1;
+            echo json_encode(array("valor" => $valor));
+        }
+    }
+
+    function modificar_maquina() {
+        $num_maquina = $this->input->post('num_maquina');
+        $estado = $this->input->post('estado');
+        $obs = $this->input->post('obs');
+        $valor = 1;
+        if ($this->modelo->modificar_maquina($num_maquina, $estado, $obs) == 0) {
+            $valor = 0;
+        }
+        echo json_encode(array("valor" => $valor));
+    }
+
+    function eliminar_maquina() {
+        $id_maquina = $this->input->post('num_maquina');
+        $valor = 1;
+        if ($this->modelo->eliminar_maquina($id_maquina) == 0) {
             $valor = 0;
         }
         echo json_encode(array("valor" => $valor));

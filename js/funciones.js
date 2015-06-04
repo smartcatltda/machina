@@ -8,6 +8,9 @@ $(document).ready(function () {
     $("#btusuarios").button().click(function () {
         usuarios();
     });
+    $("#btmaquinas").button().click(function () {
+        maquinas();
+    });
     $("#btcaja").button().click(function () {
         caja();
     });
@@ -32,16 +35,13 @@ $(document).ready(function () {
     $("#admin").tabs();
     $("#cajero").tabs();
     verificalogin();
-
 //MANTENEDOR DE USUARIOS
     mostrar_user();
-
     $("#btguardaruser").button().click(function () {
         guardar_user();
     });
     $("#btseleccionaruser").button().click(function () {
         seleccionar_user();
-
     });
     $("#bteditaruser").button().click(function () {
         editar_user();
@@ -49,13 +49,25 @@ $(document).ready(function () {
     $("#bteliminaruser").button().click(function () {
         eliminar_user();
     });
+    //MANTENEDOR MAQUINAS
+    mostrar_maquinas();
+    $("#btguardarmaquina").button().click(function () {
+        guardar_maquina();
+    });
+    $("#btseleccionarmaquina").button().click(function () {
+        seleccionar_maquina();
+    });
+    $("#bteditarmaquina").button().click(function () {
+        editar_maquina();
+    });
+    $("#bteliminarmaquina").button().click(function () {
+        eliminar_maquina();
+    });
 });
-
 function conectar()
 {
     var user = $("#user").val();
     var pass = $("#pass").val();
-
     if (user != '' && pass != '')
     {
         $.post(base_url + "controlador/conectar",
@@ -73,7 +85,6 @@ function conectar()
                 $("#login").hide('fast');
                 $("#contenido").show('fast');
                 $("#nombrelogin").html('<label>Usted está conectado al sistema como "' + datos.user + '".</label>');
-
                 if (datos.permiso == 1)
                 {
                     $("#menucajero").hide('fast');
@@ -102,7 +113,6 @@ function conectar()
         $("#msg01").css("color", "#FF0000").show('drop', 'slow').delay(3000).hide('drop', 'slow');
     }
 }
-
 function verificalogin()
 {
     $.post(
@@ -122,7 +132,6 @@ function verificalogin()
                     $("#login").hide('fast');
                     $("#contenido").show('fast');
                     $("#nombrelogin").html('<label>Usted está conectado al sistema como "' + datos.user + '".</label>');
-
                     if (datos.permiso == 1)
                     {
                         $("#menucajero").hide('fast');
@@ -144,7 +153,6 @@ function verificalogin()
             'json'
             );
 }
-
 function salir()
 {
     $.post(base_url + "controlador/salir",
@@ -165,10 +173,10 @@ function salir()
             'json'
             );
 }
-
 function home()
 {
     $("#usuarios").hide('fast');
+    $("#maquinas").hide('fast');
     $("#caja").hide('fast');
     $("#estadisticas").hide('fast');
     $("#home").show('fast');
@@ -176,14 +184,24 @@ function home()
 function usuarios()
 {
     $("#home").hide('fast');
+    $("#maquinas").hide('fast');
     $("#caja").hide('fast');
     $("#estadisticas").hide('fast');
     $("#usuarios").show('fast');
+}
+function maquinas()
+{
+    $("#home").hide('fast');
+    $("#maquinas").show('fast');
+    $("#caja").hide('fast');
+    $("#estadisticas").hide('fast');
+    $("#usuarios").hide('fast');
 }
 function caja()
 {
     $("#home").hide('fast');
     $("#usuarios").hide('fast');
+    $("#maquinas").hide('fast');
     $("#estadisticas").hide('fast');
     $("#caja").show('fast');
 }
@@ -192,6 +210,7 @@ function estadisticas()
     $("#home").hide('fast');
     $("#caja").hide('fast');
     $("#usuarios").hide('fast');
+    $("#maquinas").hide('fast');
     $("#estadisticas").show('fast');
 }
 function homec()
@@ -212,7 +231,7 @@ function estadisticasc()
     $("#cajac").hide('fast');
     $("#estadisticasc").show('fast');
 }
-
+//MANTENEDOR USUARIO
 function mostrar_user()
 {
     $.post(
@@ -232,7 +251,6 @@ function guardar_user()
     var nombre = $("#man_nombre").val();
     var apellido = $("#man_apellido").val();
     var tipo = $("#man_tipo").val();
-
     if (user != "" && pass != "" && nombre != "" && apellido != "" && tipo != "") {
         $.post(base_url + "controlador/guardar_user", {nombre: nombre, apellido: apellido,
             user: user, pass: pass, tipo: tipo},
@@ -259,6 +277,7 @@ function guardar_user()
     }
 }
 function  seleccionar_user()
+
 {
     var user = $("#man_user").val();
     if (user != "") {
@@ -342,6 +361,163 @@ function eliminar_user()
     } else {
         $("#msj_man_user").hide();
         $("#msj_man_user").html("<label>Seleccionar Usuario a Eliminar</label>");
+        $("#msj_man_user").css("color", "#FF0000").show('drop', 'slow').delay(3000).hide('drop', 'slow');
+    }
+}
+
+//MANTENERDOR MAQUINAS
+function mostrar_maquinas()
+{
+    $.post(
+            base_url + "controlador/mostrar_maquinas",
+            {},
+            function (ruta, datos) {
+                $("#lista_maquinas").hide();
+                $("#lista_maquinas").html(ruta, datos);
+                $("#lista_maquinas").show('slow');
+            }
+    );
+}
+function guardar_maquina()
+{
+    var num_maquina = $("#man_nummaquina").val();
+    var estado = $("#man_estado").val();
+    var obs = $("#man_obs").val();
+    if (num_maquina != "" && estado != "") {
+        if (isNumeric(num_maquina) != false) {
+            $.post(base_url + "controlador/guardar_maquina", {num_maquina: num_maquina, estado: estado,
+                obs: obs},
+            function (data) {
+                $("#msj_man_maquinas").hide();
+                $("#msj_man_maquinas").html("<label>" + data.msg + "</label>");
+                if (data.valor == 1) {
+                    mostrar_maquinas();
+                    $("#msj_man_maquinas").css("color", "#55FF00").show('drop', 'slow').delay(3000).hide('drop', 'slow');
+                    $("#man_nummaquina").val("");
+                    $("#man_estado").val("");
+                    $("#man_obs").val("");
+                } else {
+                    $("#msj_man_maquinas").css("color", "#FF0000").show('drop', 'slow').delay(3000).hide('drop', 'slow');
+                }
+            }, "json"
+                    );
+        } else {
+            $("#msj_man_maquinas").hide();
+            $("#msj_man_maquinas").html("<label>Ingrese solo Numeros en el Campo NUMERO DE MAQUINA</label>");
+            $("#msj_man_maquinas").css("color", "#FF0000").show('drop', 'slow').delay(3000).hide('drop', 'slow');
+        }
+    } else {
+        $("#msj_man_maquinas").hide();
+        $("#msj_man_maquinas").html("<label>Faltan Datos por ingresar</label>");
+        $("#msj_man_maquinas").css("color", "#FF0000").show('drop', 'slow').delay(3000).hide('drop', 'slow');
+    }
+}
+function isNumeric(numero) {
+    return !isNaN(parseFloat(numero)) && isFinite(numero);
+}
+
+function  seleccionar_maquina()
+{
+    var num_maquina = $("#man_nummaquina").val();
+    if (num_maquina != "") {
+        if (isNumeric(num_maquina) != false) {
+            $.post(base_url + "controlador/seleccionar_maquina", {num_maquina: num_maquina},
+            function (datos) {
+                if (datos.valor == 1) {
+                    $("#msj_man_maquinas").hide();
+                    $("#msj_man_maquinas").html("<label>Maquina No Registrada</label>");
+                    $("#msj_man_maquinas").css("color", "#FF0000").show('drop', 'slow').delay(3000).hide('drop', 'slow');
+                } else {
+                    $("#man_nummaquina").val(datos.num_maquina);
+                    $("#man_estado").val(datos.estado);
+                    $("#man_obs").val(datos.obs);
+                }
+            }, "json"
+                    );
+        } else {
+            $("#msj_man_maquinas").hide();
+            $("#msj_man_maquinas").html("<label>Ingrese solo Numeros en el Campo Numero de Maquina</label>");
+            $("#msj_man_maquinas").css("color", "#FF0000").show('drop', 'slow').delay(3000).hide('drop', 'slow');
+        }
+    } else {
+        $("#msj_man_maquinas").hide();
+        $("#msj_man_maquinas").html("<label>Ingresar Maquina a Seleccionar</label>");
+        $("#msj_man_maquinas").css("color", "#FF0000").show('drop', 'slow').delay(3000).hide('drop', 'slow');
+    }
+}
+function editar_maquina()
+{
+    var num_maquina = $("#man_nummaquina").val();
+    var estado = $("#man_estado").val();
+    var obs = $("#man_obs").val();
+    if (num_maquina != "" && estado != "") {
+        if (isNumeric(num_maquina) != false) {
+            $.post(base_url + "controlador/modificar_maquina", {num_maquina: num_maquina, estado: estado, obs: obs},
+            function (datos) {
+                if (datos.valor == 1) {
+                    $("#msj_man_maquinas").hide();
+                    $("#msj_man_maquinas").html("<label>Maquina No Registrada</label>");
+                    $("#msj_man_maquinas").css("color", "#FF0000").show('drop', 'slow').delay(3000).hide('drop', 'slow');
+                } else {
+                    if (datos.valor == 2) {
+                        $("#msj_man_maquinas").hide();
+                        $("#msj_man_maquinas").html("<label>Numero de Maquina No Disponible</label>");
+                        $("#msj_man_maquinas").css("color", "#FF0000").show('drop', 'slow').delay(3000).hide('drop', 'slow');
+                    } else {
+                        $("#msj_man_maquinas").hide();
+                        $("#msj_man_maquinas").html("<label>Maquina Modificada Correctamente</label>");
+                        $("#msj_man_maquinas").css("color", "#55FF00").show('drop', 'slow').delay(3000).hide('drop', 'slow');
+                        $("#man_id_maquina").val("");
+                        $("#man_nummaquina").val("");
+                        $("#man_estado").val("");
+                        $("#man_obs").val("");
+                        mostrar_maquinas();
+                    }
+                }
+            }, "json"
+                    );
+        } else {
+            $("#msj_man_maquinas").hide();
+            $("#msj_man_maquinas").html("<label>Ingrese solo Numeros en el Campo NUMERO DE MAQUINA</label>");
+            $("#msj_man_maquinas").css("color", "#FF0000").show('drop', 'slow').delay(3000).hide('drop', 'slow');
+        }
+    } else {
+        $("#msj_man_maquinas").hide();
+        $("#msj_man_maquinas").html("<label>Debe Selecciona un Maquina para Editar</label>");
+        $("#msj_man_maquinas").css("color", "#FF0000").show('drop', 'slow').delay(3000).hide('drop', 'slow');
+    }
+}
+function eliminar_maquina()
+{
+    var num_maquina = $("#man_nummaquina").val();
+    if (num_maquina != "") {
+        if (isNumeric(num_maquina) != false) {
+            $.post(base_url + "controlador/eliminar_maquina", {num_maquina: num_maquina},
+            function (datos) {
+                if (datos.valor == 1) {
+                    $("#msj_man_maquinas").hide();
+                    $("#msj_man_maquinas").html("<label>Maquina No Registrado</label>");
+                    $("#msj_man_maquinas").css("color", "#FF0000").show('drop', 'slow').delay(3000).hide('drop', 'slow');
+                } else {
+                    $("#msj_man_maquinas").hide();
+                    $("#msj_man_maquinas").html("<label>Maquina Eliminada</label>");
+                    $("#msj_man_maquinas").css("color", "#55FF00").show('drop', 'slow').delay(3000).hide('drop', 'slow');
+                    $("#man_id_maquina").val("");
+                    $("#man_nummaquina").val("");
+                    $("#man_estado").val("");
+                    $("#man_obs").val("");
+                    mostrar_maquinas();
+                }
+            }, "json"
+                    );
+        } else {
+            $("#msj_man_maquinas").hide();
+            $("#msj_man_maquinas").html("<label>Ingrese solo Numeros en el Campo NUMERO DE MAQUINA</label>");
+            $("#msj_man_maquinas").css("color", "#FF0000").show('drop', 'slow').delay(3000).hide('drop', 'slow');
+        }
+    } else {
+        $("#msj_man_user").hide();
+        $("#msj_man_user").html("<label>Seleccionar Maquina a Eliminar</label>");
         $("#msj_man_user").css("color", "#FF0000").show('drop', 'slow').delay(3000).hide('drop', 'slow');
     }
 }
