@@ -9,4 +9,11 @@
     margin: 0 auto;
     background-color: #000000; 
     border-radius: 10px;
+    position:absolute; 
+    z-index:1
+}
+
+.titulo{
+    width: 1024px;
+    text-align: center;
 }

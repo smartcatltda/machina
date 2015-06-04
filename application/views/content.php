@@ -15,6 +15,7 @@
         </div>
 
         <div id="usuarios">
+            <div style="titulo"><h1>Administración de Usuarios</h1></div>
             <div id="msj_man_user"></div>
             <div id="Man_usuarios">
                 <table>
@@ -61,7 +62,43 @@
         </div>
 
         <div id="caja">
-            admin de caha
+            <div style="titulo"><h1>Administración de Caja</h1></div>
+
+            <table style="width: 800px;">
+                <tr>
+                    <td>Maquina :</td><td style="width: 10px;"></td><td>Key In :</td><td style="width: 10px;"></td><td>Key Out :</td><td style="width: 10px;"></td><td>Total :</td>
+                </tr>
+                <tr>
+                    <td>
+                        <select class="rounded" id="ac_maq" style="width: 160px;" >
+                            <!--estas opciones deberan ser cargadas de la lista de maquinas activas en el local-->
+                            <option value='1'>01</option>
+                            <option value='2'>02</option>
+                            <option value='1'>03</option>
+                            <option value='2'>04</option>
+                            <option value='1'>05</option>
+                            <option value='2'>06</option>
+                            <option value='1'>07</option>
+                            <option value='2'>08</option>
+                        </select>
+                    </td>
+                    <td>$</td><td><input class="rounded" id="ac_keyin" placeholder="Key In" type="text" style="width: 260px;" maxlength="50" /></td>
+                    <td>$</td><td><input class="rounded" id="ac_keyout" placeholder="Key Out" type="text" style="width: 260px;" maxlength="50" /></td>
+                    <td>$</td><td><input class="rounded" id="ac_total" type="text" style="width: 260px;" maxlength="50" disabled="true"/></td>
+                </tr>
+
+
+<!--                <tr>
+                    <td style="width: 10px;"></td><td> Ingrese Monto del Aumento :</td>
+                </tr>
+                <tr>
+                    <td>$</td><td><input class="rounded" id="ac_aumento" placeholder="Aumento" type="text" style="width: 260px;" maxlength="50" /></td>
+                </tr>-->
+            </table>
+
+            <td></td>
+            <tr></tr>
+
         </div>
 
         <div id="estadisticas">
