@@ -106,6 +106,71 @@ class modelo extends CI_Model {
         endif;
     }
 
+//MANTENEDOR MAQUINAS
+    function mostrar_maquinas() {
+        $this->db->select('*');
+        $this->db->from('maquina');
+        return $this->db->get();
+    }
+
+    function guardar_maquina($num_maquina, $estado, $obs) {
+        $this->db->select('num_maquina');
+        $this->db->where('num_maquina', $num_maquina);
+        $cantidad = $this->db->get('maquina')->num_rows();
+        if ($cantidad == 0):
+            $data = array(
+                "num_maquina" => $num_maquina,
+                "estado" => $estado,
+                "obs" => $obs,
+            );
+            $this->db->insert("maquina", $data);
+            return 0;
+        else:
+            return 1;
+        endif;
+    }
+
+    function ver_maquinas($num_maquina) {
+        $this->db->select('*');
+        $this->db->where('num_maquina', $num_maquina);
+        return $this->db->get('maquina');
+    }
+
+    function modificar_maquina($num_maquina, $estado, $obs) {
+        $this->db->select('*');
+        $this->db->where('num_maquina', $num_maquina);
+        $cantidad = $this->db->get('maquina')->num_rows();
+        if ($cantidad > 0):
+            $data = array(
+                "num_maquina" => $num_maquina,
+                "estado" => $estado,
+                "obs" => $obs,
+            );
+            $this->db->where('num_maquina', $num_maquina);
+            $this->db->update('maquina', $data);
+            return 0;
+        else:
+            return 1;
+        endif;
+    }
+
+    function eliminar_maquina($num_maquina) {
+        $this->db->select('*');
+        $this->db->where('num_maquina', $num_maquina);
+        $cantidad = $this->db->get('maquina')->num_rows();
+        $estado = '2';
+        if ($cantidad > 0):
+            $data = array(
+                "estado" => $estado
+            );
+            $this->db->where('num_maquina', $num_maquina);
+            $this->db->update('maquina', $data);
+            return 0;
+        else:
+            return 1;
+        endif;
+    }
+
 }
 ?>
 

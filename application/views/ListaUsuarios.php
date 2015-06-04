@@ -1,5 +1,5 @@
 <?php ?>
-<table>
+<table border="2">
     <th>NOMBRE</th>
     <th>APELLIDO</th>
     <th>USUARIO</th>
@@ -16,11 +16,11 @@
             endif;
         endif;
         ?>
-        <tr>
+        <tr align="center">
             <td width="120"><?= $fila->nombre ?></td>
             <td width="120"><?= $fila->apellido ?></td>
-            <td width="100"><?= $fila->user ?></td>
-            <td width="60"><?= $fila->tipo ?></td>
+            <td width="120"><?= $fila->user ?></td>
+            <td width="120"><?= $fila->tipo ?></td>
         </tr>
     <?php endforeach; ?>
 </table>
