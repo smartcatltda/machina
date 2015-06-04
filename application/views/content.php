@@ -55,6 +55,10 @@
             <div id="Man_usuarios">
                 <table>
                     <tr>
+                        <td>ID :</td>
+                        <td><input class="rounded" id="man_id" placeholder="ID" type="text" style="width: 20px;" maxlength="50" /></td>
+                    <tr>
+                    <tr>
                         <td>Usuario :</td>
                         <td><input class="rounded" id="man_user" placeholder="Usuario" type="text" style="width: 160px;" maxlength="50" /></td>
                     <tr>
