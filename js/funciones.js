@@ -1,4 +1,6 @@
 $(document).ready(function () {
+    //SOLO NUMEROS
+
     $("#conectar").button().click(function () {
         conectar();
     });
@@ -36,6 +38,7 @@ $(document).ready(function () {
     $("#cajero").tabs();
     verificalogin();
 //MANTENEDOR DE USUARIOS
+    validar_texto(event);
     mostrar_user();
     $("#btguardaruser").button().click(function () {
         guardar_user();
@@ -63,6 +66,7 @@ $(document).ready(function () {
     $("#bteliminarmaquina").button().click(function () {
         eliminar_maquina();
     });
+
 });
 function conectar()
 {
@@ -529,4 +533,19 @@ function eliminar_maquina()
         $("#msj_man_user").html("<label>Debe Seleccionar la Maquina a Eliminar</label>");
         $("#msj_man_user").css("color", "#FF0000").show('drop', 'slow').delay(3000).hide('drop', 'slow');
     }
+}
+function validar_texto(e) {
+    tecla = (document.all) ? e.keyCode : e.which;
+
+    //Tecla de retroceso para borrar, siempre la permite
+    if (tecla == 8) {
+        return true;
+    }
+
+    // Patron de entrada, en este caso solo acepta numeros
+    patron = /[0-9]/;
+
+    tecla_final = String.fromCharCode(tecla);
+
+    return patron.test(tecla_final);
 }
