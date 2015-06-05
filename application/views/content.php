@@ -21,7 +21,7 @@
                 <table>
                     <tr>
                         <td>Numero Maquina </td>
-                        <td><input class="rounded" id="man_nummaquina" placeholder="Numero de Maquina" type="text" style="width: 300px;" maxlength="50" /></td>
+                        <td><input class="rounded" id="man_nummaquina" placeholder="Numero de Maquina" type="text" style="width: 300px;" maxlength="50" onkeypress="return validar_texto(event)"/></td>
                     <tr>
                         <td>Estado </td>
                         <td>
