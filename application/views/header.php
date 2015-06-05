@@ -30,7 +30,7 @@
         <div id="menucajero" class="ui-widget-header ui-corner-all" hidden>
             <button id="bthomec">Home</button>
             <button id="btcajac">Caja</button>
-            <button id="btestadisticasc">Estadisticas</button>
+            <button id="btcierrecaja">Cierre</button>
             <button id="salirc">Salir</button>
         </div>
     </header>

@@ -28,8 +28,8 @@ $(document).ready(function () {
     $("#btcajac").button().click(function () {
         cajac();
     });
-    $("#btestadisticasc").button().click(function () {
-        estadisticasc();
+    $("#btcierrecaja").button().click(function () {
+        cierrecaja();
     });
     $("#salirc").button().click(function () {
         salir();
@@ -65,6 +65,20 @@ $(document).ready(function () {
     });
     $("#bteliminarmaquina").button().click(function () {
         eliminar_maquina();
+    });
+    //CAJA ADMIN
+    $("#btregistrarkey").button().click(function () {
+        
+    });
+    $("#btaumento").button().click(function () {
+        
+    });
+    //CAJA CAJERO
+    $("#btingresarpago").button().click(function () {
+        
+    });
+    $("#btregistrargasto").button().click(function () {
+        
     });
 
 });
@@ -220,20 +234,20 @@ function estadisticas()
 function homec()
 {
     $("#cajac").hide('fast');
-    $("#estadisticasc").hide('fast');
+    $("#cierrecaja").hide('fast');
     $("#homec").show('fast');
 }
 function cajac()
 {
     $("#homec").hide('fast');
-    $("#estadisticasc").hide('fast');
+    $("#cierrecaja").hide('fast');
     $("#cajac").show('fast');
 }
-function estadisticasc()
+function cierrecaja()
 {
     $("#homec").hide('fast');
     $("#cajac").hide('fast');
-    $("#estadisticasc").show('fast');
+    $("#cierrecaja").show('fast');
 }
 //MANTENEDOR USUARIO
 function mostrar_user()

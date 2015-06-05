@@ -12,8 +12,7 @@
     <div id="admin" hidden>
 
         <div id="home">
-            home admin
-            <div id="alto"></div>
+            <div class="home"></div>
         </div>
         <div id="maquinas">
             <div id="msj_man_maquinas"></div>
@@ -48,11 +47,15 @@
                 <button id="btseleccionarmaquina" style="width: 150px;">Seleccionar</button>
                 <button id="bteditarmaquina" style="width: 100px;">Editar</button>
                 <button id="bteliminarmaquina" style="width: 100px;">Eliminar</button>
-
-
             </div>
+<!--            esta lista deberia mostrar solo las maquinas activas 
+            si es que se acepta la idea de felix 
+            de dejar todas las maquinas 
+            cargadas en la base de datos y utilizar el mantenedor 
+            para poner activas las que estaran 
+            realmente en el local-->
             <div class="rounded" id="lista_maquinas"></div>
-            <div id="alto"></div>
+            
         </div>
         <div id="usuarios">
             <div id="msj_man_user"></div>
@@ -101,7 +104,7 @@
                 <br>  
             </div>
             <div class="rounded" id="lista_usuarios" float="right"></div>
-            <div id="alto"></div>
+            
         </div>
         <div id="caja">
             <div style="titulo"><h1>Administración de Caja</h1></div>
@@ -130,10 +133,12 @@
                     <td><button id="btregistrarkey" >Registrar</button></td>
                 </tr>
                 <tr>
-                    <td></td><td></td><td></td><td></td><td></td><td></td><td> Total Acumulado :</td>
+                    <td></td><td></td><td> Total Key In :</td><td></td><td> Total Key Out :</td><td></td><td> Total Acumulado :</td>
                 </tr>
                 <tr>
-                    <td></td><td></td><td></td><td></td><td></td>
+                    <td></td>
+                    <td>$</td><td><input class="rounded" id="ac_totalin" type="text" style="width: 260px;" disabled="true" /></td>
+                    <td>$</td><td><input class="rounded" id="ac_atotalout" type="text" style="width: 260px;" disabled="true" /></td>
                     <td>$</td><td><input class="rounded" id="ac_acumulado" type="text" style="width: 260px;" disabled="true" /></td>
                     <td></td>
                 </tr>
@@ -146,29 +151,94 @@
                     <td><button id="btaumento">Ingresar</button></td>
                 </tr>
             </table>
-
-            <td></td>
-            <tr></tr>
-            <div id="alto"></div>
+<!--            <div id="alto"></div>-->
         </div>
 
         <div id="estadisticas">
-            estadisticas para el admin
+            <div id="msj_estadisticas"></div>
+            <div style="titulo"><h1>Estadísticas</h1></div>
+            <br>
+            
             <div id="alto"></div>
         </div>
 
     </div>
     <div id="cajero" hidden>
         <div id="homec">
-            home cajero
-            <div id="alto"></div>
+            <div class="home"></div>
         </div>
         <div id="cajac">
-            caja cajero
-            <div id="alto"></div>
+            <div style="titulo"><h1>Caja</h1></div>
+            <br>
+            <div style="titulo" id="titulo_caja" style="width: 900px;"><h3>Ingreso de Pagos</h3></div>
+            <br>
+            <table style="width: 900px;">
+                <tr>
+                    <td>Maquina :</td><td></td><td style="width: 10px;"></td><td>Pago :</td><td></td><td></td>
+                </tr>
+                <tr>
+                    <td>
+                        <select class="rounded" id="ac_maq" style="width: 150px;" >
+                            <!--estas opciones deberan ser cargadas de la lista de maquinas activas en el local-->
+                            <option value='1'>01</option>
+                            <option value='2'>02</option>
+                            <option value='1'>03</option>
+                            <option value='2'>04</option>
+                            <option value='1'>05</option>
+                            <option value='2'>06</option>
+                            <option value='1'>07</option>
+                            <option value='2'>08</option>
+                        </select>
+                    </td>
+                    <td style="width: 150px;"></td>
+                    <td>$</td><td><input class="rounded" id="c_pago" placeholder="pago" type="text" style="width: 290px;" maxlength="50" /></td>
+                    <td style="width: 150px;"></td>
+                    <td><button style="width: 150px;" id="btingresarpago" >Ingresar</button></td>
+                </tr>
+            </table>
+            <br>
+            <div id="titulo_gasto" style="titulo" style="width: 900px;"><h3>Registro de Gastos</h3></div>
+            <br>
+            <table style="width: 900px;">
+                <tr>
+                    <td style="width: 290px;">Categoría :</td><td style="width: 10px;"></td><td style="width: 290px;">Gasto :</td><td></td>
+                </tr>
+                <tr>
+                    <td>
+                        <select class="rounded" id="c_categorias" style="width: 290px;" >
+                            <!--estas opciones deberan ser cargadas de la lista de categorias de gastos-->
+                            <option value='1'>aseo</option>
+                            <option value='2'>insumos</option>
+                            <option value='1'>huevos</option>
+                            <option value='2'>bicicletas</option>
+                            <option value='1'>al marcos le gusta el pico</option>
+                            <option value='2'>fabi y feña se aman</option>
+                            <option value='1'>xino ql</option>
+                            <option value='2'>patas de chancho</option>
+                        </select>
+                    </td>
+                    <td>$</td><td><input class="rounded" id="c_gasto" placeholder="gasto" type="text" style="width: 290px;" maxlength="50" /></td>
+                    <td style="width: 150px;"></td><td style="width: 150px;"></td>
+                </tr>
+                <tr>
+                    <td> Detalle :</td><td></td><td></td><td></td>
+                </tr>
+                <tr>
+                    <td colspan="3"><input rows="2" type="text" class="rounded" id="c_detalle" style="width: 600px;"></textarea></td>
+                    <td style="width: 150px;"></td>
+                    <td><button id="btregistrargasto" style="width: 150px;">Registrar</button></td>
+                </tr>
+            </table>
+            <br><br>
+
+            <td></td>
+            <tr></tr>
         </div>
-        <div id="estadisticasc">
-            estadisticas cahero
+        <div id="cierrecaja">
+            <div id="msj_cierrecaja"></div>
+            <div style="titulo"><h1>Cierre de Caja</h1></div>
+            <br>
+            
             <div id="alto"></div>
         </div>
     </div>

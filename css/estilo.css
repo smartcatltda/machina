@@ -1,6 +1,11 @@
 .rounded{
     border-radius: 10px;
 }
+.home{
+    width: 800px;
+    height: 520px;
+    background:url("images/SCC520-png-blanco.png");
+}
 #login{
     text-align: center;
     display: none;
@@ -9,11 +14,21 @@
     background:url("images/ui-bg_loop_25_000000_21x21.png") center top repeat;
     color: #ffffff;
 }
-#nombrelogin{
-    text-align: right;
+#usuarios{
+    height: 520px;
+}
+#maquinas{
+    overflow: hidden;
+    width: 100%;
+}
+#caja{
+    height: 520px;
+}
+#estadisticas{
+    height: 520px;
 }
 #nombrelogin{
-    text-align: right;
+    font-weight: bold;
 }
 #msg01{
     display: none;
@@ -69,7 +84,15 @@
     height: 430px;
     z-index: -1;
 }
-.titulo{
+titulo{
     width: 1024px;
     text-align: center;
+}
+#titulo_caja{
+    width: 900px;
+    text-align: left;
+}
+#titulo_gasto{
+    width: 900px;
+    text-align: left;
 }
