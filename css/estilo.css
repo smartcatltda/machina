@@ -1,6 +1,31 @@
 .rounded{
     border-radius: 10px;
 }
+#login{
+    text-align: center;
+    display: none;
+    margin-top: 10px; 
+    padding:100px 0;
+    background:url("images/ui-bg_loop_25_000000_21x21.png") center top repeat;
+    color: #ffffff;
+}
+#nombrelogin{
+    text-align: right;
+}
+#nombrelogin{
+    text-align: right;
+}
+#msg01{
+    display: none;
+    width: 1024px;
+    font-size: 50px; 
+    text-align: center;
+    margin: 0 auto;
+    background-color: #000000; 
+    border-radius: 10px;
+    position:absolute; 
+    z-index:1
+}
 #msj_man_user{
     display: none;
     width: 1024px;
@@ -12,7 +37,38 @@
     position:absolute; 
     z-index:1
 }
+#msj_man_maquinas{
+    display: none;
+    width: 1024px;
+    font-size: 50px; 
+    text-align: center;
+    margin: 0 auto;
+    background-color: #000000; 
+    border-radius: 10px;
+    position:absolute; 
+    z-index:1
+}
 
+#Man_usuarios{
+    float: left;
+    padding-left: 50px;
+}
+#lista_usuarios{
+    float: right;
+    padding-right: 50px;
+}
+#Man_maquinas{
+    float: left;
+    padding-left: 50px;
+}
+#lista_maquinas{
+    float: right;
+    padding-right: 50px;
+}
+#alto{
+    height: 430px;
+    z-index: -1;
+}
 .titulo{
     width: 1024px;
     text-align: center;

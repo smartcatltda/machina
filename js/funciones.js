@@ -299,7 +299,7 @@ function  seleccionar_user()
                 );
     } else {
         $("#msj_man_user").hide();
-        $("#msj_man_user").html("<label>Ingresar Usuario a Seleccionar</label>");
+        $("#msj_man_user").html("<label>Debe Ingresar el Nombre del Usuario a Seleccionar</label>");
         $("#msj_man_user").css("color", "#FF0000").show('drop', 'slow').delay(3000).hide('drop', 'slow');
     }
 }
@@ -369,7 +369,7 @@ function eliminar_user()
                 );
     } else {
         $("#msj_man_user").hide();
-        $("#msj_man_user").html("<label>Seleccionar Usuario a Eliminar</label>");
+        $("#msj_man_user").html("<label>Debe Seleccionar el Usuario a Eliminar</label>");
         $("#msj_man_user").css("color", "#FF0000").show('drop', 'slow').delay(3000).hide('drop', 'slow');
     }
 }
@@ -450,7 +450,7 @@ function  seleccionar_maquina()
         }
     } else {
         $("#msj_man_maquinas").hide();
-        $("#msj_man_maquinas").html("<label>Ingresar Maquina a Seleccionar</label>");
+        $("#msj_man_maquinas").html("<label>Debe Ingresar el Número de la Maquina a Seleccionar</label>");
         $("#msj_man_maquinas").css("color", "#FF0000").show('drop', 'slow').delay(3000).hide('drop', 'slow');
     }
 }
@@ -492,7 +492,7 @@ function editar_maquina()
         }
     } else {
         $("#msj_man_maquinas").hide();
-        $("#msj_man_maquinas").html("<label>Debe Selecciona un Maquina para Editar</label>");
+        $("#msj_man_maquinas").html("<label>Debe Seleccionar una Maquina para Editar</label>");
         $("#msj_man_maquinas").css("color", "#FF0000").show('drop', 'slow').delay(3000).hide('drop', 'slow');
     }
 }
@@ -526,7 +526,7 @@ function eliminar_maquina()
         }
     } else {
         $("#msj_man_user").hide();
-        $("#msj_man_user").html("<label>Seleccionar Maquina a Eliminar</label>");
+        $("#msj_man_user").html("<label>Debe Seleccionar la Maquina a Eliminar</label>");
         $("#msj_man_user").css("color", "#FF0000").show('drop', 'slow').delay(3000).hide('drop', 'slow');
     }
 }
