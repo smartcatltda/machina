@@ -171,6 +171,91 @@ class modelo extends CI_Model {
         endif;
     }
 
+//MANTENEDOR GASTOS
+    function cargar_cat_gasto() {
+        $this->db->select('*');
+        $this->db->from('categoria_gastos');
+        return $this->db->get();
+    }
+
+    function guardar_cat_gasto($nombre_gasto, $estado_cat_gasto, $desc) {
+        $this->db->select('nombre_categoria');
+        $this->db->where('nombre_categoria', $nombre_gasto);
+        $cantidad = $this->db->get('categoria_gastos')->num_rows();
+        if ($cantidad == 0):
+            $data = array(
+                "nombre_categoria" => $nombre_gasto,
+                "estado_cat_gasto" => $estado_cat_gasto,
+                "descripcion_categoria" => $desc,
+            );
+            $this->db->insert("categoria_gastos", $data);
+            return 0;
+        else:
+            return 1;
+        endif;
+    }
+
+    function ver_gastos($nombre_gasto) {
+        $this->db->select('*');
+        $this->db->where('nombre_categoria', $nombre_gasto);
+        return $this->db->get('categoria_gastos');
+    }
+
+    function editar_gasto($id_gasto, $nombre_gasto, $estado_gasto, $desc) {
+        $this->db->select('*');
+        $this->db->where('nombre_categoria', $nombre_gasto);
+        $datos = $this->db->get('categoria_gastos');
+        if ($datos->num_rows() == 0):
+            $this->db->select('*');
+            $this->db->where('id_categoria', $id);
+            $cantidad = $this->db->get('categoria_gastos')->num_rows();
+            if ($cantidad > 0):
+                $data = array(
+                    "nombre_categoria" => $nombre_gasto,
+                    "estado_cat_gasto" => $estado_gasto,
+                    "descripcion_categoria" => $desc,
+                );
+                $this->db->where('id_categoria', $id_gasto);
+                $this->db->update('categoria_gastos', $data);
+                return 0;
+            else:
+                return 1;
+            endif;
+        else:
+            foreach ($datos->result() as $fila) {
+                if ($fila->id_categoria == $id_gasto):
+                    $data = array(
+                        "nombre_categoria" => $nombre_gasto,
+                        "estado_cat_gasto" => $estado_gasto,
+                        "descripcion_categoria" => $desc,
+                    );
+                    $this->db->where('id_categoria', $id_gasto);
+                    $this->db->update('categoria_gastos', $data);
+                    return 0;
+                else:
+                    return 2;
+                endif;
+            }
+        endif;
+    }
+
+    function eliminar_gasto($nombre_gasto) {
+        $this->db->select('*');
+        $this->db->where('nombre_categoria', $nombre_gasto);
+        $cantidad = $this->db->get('categoria_gastos')->num_rows();
+        $estado = '2';
+        if ($cantidad > 0):
+            $data = array(
+                "estado_cat_gasto" => $estado
+            );
+            $this->db->where('nombre_categoria', $nombre_gasto);
+            $this->db->update('categoria_gastos', $data);
+            return 0;
+        else:
+            return 1;
+        endif;
+    }
+
 }
 ?>
 

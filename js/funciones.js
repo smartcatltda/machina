@@ -1,5 +1,4 @@
 $(document).ready(function () {
-    //SOLO NUMEROS
 
     $("#conectar").button().click(function () {
         conectar();
@@ -12,6 +11,9 @@ $(document).ready(function () {
     });
     $("#btmaquinas").button().click(function () {
         maquinas();
+    });
+    $("#btgastos").button().click(function () {
+        gastos_adm();
     });
     $("#btcaja").button().click(function () {
         caja();
@@ -70,20 +72,36 @@ $(document).ready(function () {
     });
     //CAJA ADMIN
     $("#btregistrarkey").button().click(function () {
-        
+
     });
     $("#btaumento").button().click(function () {
-        
+
+    });
+    //MANTENEDOR GASTOS
+    cargar_cat_gastos();
+    cargar_gastos_activos();
+    $("#btguardargasto").button().click(function () {
+        guardar_cat_gasto();
+    });
+    $("#btseleccionargastos").button().click(function () {
+        seleccionar_cat_gasto();
+    });
+    $("#bteditargastos").button().click(function () {
+        editar_cat_gasto();
+    });
+    $("#bteliminargastos").button().click(function () {
+        eliminar_cat_gasto();
     });
     //CAJA CAJERO
     $("#btingresarpago").button().click(function () {
-        
+
     });
     $("#btregistrargasto").button().click(function () {
-        
+
     });
 
 });
+
 function conectar()
 {
     var user = $("#user").val();
@@ -196,6 +214,7 @@ function salir()
 function home()
 {
     $("#usuarios").hide('fast');
+    $("#cat_gastos").hide('fast');
     $("#maquinas").hide('fast');
     $("#caja").hide('fast');
     $("#estadisticas").hide('fast');
@@ -205,6 +224,7 @@ function usuarios()
 {
     $("#home").hide('fast');
     $("#maquinas").hide('fast');
+    $("#cat_gastos").hide('fast');
     $("#caja").hide('fast');
     $("#estadisticas").hide('fast');
     $("#usuarios").show('fast');
@@ -213,6 +233,16 @@ function maquinas()
 {
     $("#home").hide('fast');
     $("#maquinas").show('fast');
+    $("#cat_gastos").hide('fast');
+    $("#caja").hide('fast');
+    $("#estadisticas").hide('fast');
+    $("#usuarios").hide('fast');
+}
+function gastos_adm()
+{
+    $("#home").hide('fast');
+    $("#maquinas").hide('fast');
+    $("#cat_gastos").show('fast');
     $("#caja").hide('fast');
     $("#estadisticas").hide('fast');
     $("#usuarios").hide('fast');
@@ -221,6 +251,7 @@ function caja()
 {
     $("#home").hide('fast');
     $("#usuarios").hide('fast');
+    $("#cat_gastos").hide('fast');
     $("#maquinas").hide('fast');
     $("#estadisticas").hide('fast');
     $("#caja").show('fast');
@@ -229,6 +260,7 @@ function estadisticas()
 {
     $("#home").hide('fast');
     $("#caja").hide('fast');
+    $("#cat_gastos").hide('fast');
     $("#usuarios").hide('fast');
     $("#maquinas").hide('fast');
     $("#estadisticas").show('fast');
@@ -401,9 +433,8 @@ function mostrar_maquinas()
             base_url + "controlador/mostrar_maquinas",
             {},
             function (ruta, datos) {
-                $("#lista_maquinas").hide();
                 $("#lista_maquinas").html(ruta, datos);
-                $("#lista_maquinas").show('slow');
+
             }
     );
 }
@@ -411,7 +442,7 @@ function cargar_maquinas() {
     $.post(
             base_url + "controlador/cargar_maquinas",
             {},
-            function(ruta, datos) {
+            function (ruta, datos) {
                 $("#man_nummaquina").html(ruta, datos);
             });
 }
@@ -419,7 +450,7 @@ function cargar_maquinas_activas() {
     $.post(
             base_url + "controlador/cargar_maquinas_activas",
             {},
-            function(ruta, datos) {
+            function (ruta, datos) {
                 $("#ac_maq").html(ruta, datos);
                 $("#c_maq").html(ruta, datos);
             });
@@ -569,16 +600,149 @@ function eliminar_maquina()
 }
 function validar_texto(e) {
     tecla = (document.all) ? e.keyCode : e.which;
-
     //Tecla de retroceso para borrar, siempre la permite
     if (tecla == 8) {
         return true;
     }
-
-    // Patron de entrada, en este caso solo acepta numeros
     patron = /[0-9]/;
-
     tecla_final = String.fromCharCode(tecla);
-
     return patron.test(tecla_final);
+}
+//MANTENEDOR GASTOS
+function cargar_cat_gastos()
+{
+    $.post(
+            base_url + "controlador/cargar_cat_gastos",
+            {},
+            function (ruta, datos) {
+                $("#lista_gastos").html(ruta, datos);
+
+            }
+    );
+}
+function guardar_cat_gasto()
+{
+    var estado_gasto = $("#man_estado_gasto").val();
+    var nombre_gasto = $("#man_nombre_gasto").val();
+    var desc = $("#man_desc_gasto").val();
+    if (nombre_gasto != "" && desc != "" && estado_gasto != "") {
+        $.post(base_url + "controlador/guardar_cat_gasto", {estado_gasto: estado_gasto, nombre_gasto: nombre_gasto, desc: desc},
+        function (data) {
+            $("#msj_man_gastos").hide();
+            $("#msj_man_gastos").html("<label>" + data.msg + "</label>");
+            if (data.valor == 1) {
+                cargar_cat_gastos();
+                $("#msj_man_gastos").css("color", "#55FF00").show('drop', 'slow').delay(3000).hide('drop', 'slow');
+                $("#id_cat_gastos").val("");
+                $("#man_nombre_gasto").val("");
+                $("#man_desc_gasto").val("");
+
+            } else {
+                $("#msj_man_gastos").css("color", "#FF0000").show('drop', 'slow').delay(3000).hide('drop', 'slow');
+            }
+        }, "json"
+                );
+    } else {
+        $("#msj_man_gastos").hide();
+        $("#msj_man_gastos").html("<label>Faltan Datos por Ingresar</label>");
+        $("#msj_man_gastos").css("color", "#FF0000").show('drop', 'slow').delay(3000).hide('drop', 'slow');
+    }
+}
+function  seleccionar_cat_gasto()
+{
+    var nombre_gasto = $("#man_nombre_gasto").val();
+    if (nombre_gasto != "") {
+        $.post(base_url + "controlador/seleccionar_cat_gasto", {nombre_gasto: nombre_gasto},
+        function (datos) {
+            if (datos.valor == 1) {
+                $("#msj_man_gastos").hide();
+                $("#msj_man_gastos").html("<label>Gasto No Registrado</label>");
+                $("#msj_man_gastos").css("color", "#FF0000").show('drop', 'slow').delay(3000).hide('drop', 'slow');
+            } else {
+                $("#id_cat_gastos").val(datos.id_cat_gasto);
+                $("#man_nombre").val(datos.nombre_gasto);
+                $("#man_estado_gasto").val(datos.estado_cat_gasto);
+                $("#man_desc_gasto").val(datos.desc);
+
+            }
+        }, "json"
+                );
+    } else {
+        $("#msj_man_gastos").hide();
+        $("#msj_man_gastos").html("<label>Ingresar Nombre de Gasto a Seleccionar</label>");
+        $("#msj_man_gastos").css("color", "#FF0000").show('drop', 'slow').delay(3000).hide('drop', 'slow');
+    }
+}
+function editar_cat_gasto()
+{
+    var id_gasto = $("#id_cat_gastos").val();
+    var nombre_gasto = $("#man_nombre_gasto").val();
+    var estado_gasto = $("#man_estado_gasto").val();
+    var desc = $("#man_desc_gasto").val();
+    if (id_gasto != "" && nombre_gasto != "" && estado_gasto != "" && desc != "") {
+        $.post(base_url + "controlador/editar_gasto", {id_gasto: id_gasto, nombre_gasto: nombre_gasto, estado_gasto: estado_gasto, desc: desc},
+        function (datos) {
+            if (datos.valor == 1) {
+                $("#msj_man_gastos").hide();
+                $("#msj_man_gastos").html("<label>Gasto No Registrado</label>");
+                $("#msj_man_gastos").css("color", "#FF0000").show('drop', 'slow').delay(3000).hide('drop', 'slow');
+            } else {
+                if (datos.valor == 2) {
+                    $("#msj_man_gastos").hide();
+                    $("#msj_man_gastos").html("<label>Nombre No Disponible</label>");
+                    $("#msj_man_gastos").css("color", "#FF0000").show('drop', 'slow').delay(3000).hide('drop', 'slow');
+                } else {
+                    $("#msj_man_gastos").hide();
+                    $("#msj_man_gastos").html("<label>Gasto Modificado Correctamente</label>");
+                    $("#msj_man_gastos").css("color", "#55FF00").show('drop', 'slow').delay(3000).hide('drop', 'slow');
+                    $("#id_cat_gastos").val("");
+                    $("#man_nombre_gasto").val("");
+                    $("#man_estado_gasto").val("1");
+                    $("#man_desc_gasto").val("");
+                    cargar_cat_gastos();
+                }
+            }
+        }, "json"
+                );
+    } else {
+        $("#msj_man_gastos").hide();
+        $("#msj_man_gastos").html("<label>Seleccione Gasto a Editar</label>");
+        $("#msj_man_gastos").css("color", "#FF0000").show('drop', 'slow').delay(3000).hide('drop', 'slow');
+    }
+}
+function eliminar_cat_gasto()
+{
+    var nombre_gasto = $("#man_nombre_gasto").val();
+    if (nombre_gasto != "") {
+        $.post(base_url + "controlador/eliminar_gasto", {nombre_gasto: nombre_gasto},
+        function (datos) {
+            if (datos.valor == 1) {
+                $("#msj_man_gastos").hide();
+                $("#msj_man_gastos").html("<label>Gasto No Registrado</label>");
+                $("#msj_man_gastos").css("color", "#FF0000").show('drop', 'slow').delay(3000).hide('drop', 'slow');
+            } else {
+                $("#msj_man_gastos").hide();
+                $("#msj_man_gastos").html("<label>Gasto Eliminado</label>");
+                $("#msj_man_gastos").css("color", "#55FF00").show('drop', 'slow').delay(3000).hide('drop', 'slow');
+                $("#id_cat_gastos").val("");
+                $("#man_nombre_gasto").val("");
+                $("#man_estado_gasto").val("1");
+                $("#man_desc_gasto").val("");
+                cargar_cat_gastos();
+            }
+        }, "json"
+                );
+    } else {
+        $("#msj_man_user").hide();
+        $("#msj_man_user").html("<label>Seleccione Gasto a Eliminar</label>");
+        $("#msj_man_user").css("color", "#FF0000").show('drop', 'slow').delay(3000).hide('drop', 'slow');
+    }
+}
+function cargar_gastos_activos() {
+    $.post(
+            base_url + "controlador/cargar_gastos_activos",
+            {},
+            function (ruta, datos) {
+                $("#c_categorias").html(ruta, datos);
+            });
 }

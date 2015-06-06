@@ -138,12 +138,12 @@ class Controlador extends CI_Controller {
         $data ['maquinas'] = $datos->result();
         $this->load->view('ListaMaquinas', $data);
     }
-    
+
     function cargar_maquinas() {
         $datos["maquinas"] = $this->modelo->mostrar_maquinas()->result();
         $this->load->view("maquinas", $datos);
     }
-    
+
     function cargar_maquinas_activas() {
         $datos["maquinas"] = $this->modelo->mostrar_maquinas()->result();
         $this->load->view("maquinas_activas", $datos);
@@ -199,6 +199,77 @@ class Controlador extends CI_Controller {
             $valor = 0;
         }
         echo json_encode(array("valor" => $valor));
+    }
+
+    //MANTENEDOR GASTOS
+    function cargar_cat_gastos() {
+        $datos = $this->modelo->cargar_cat_gasto();
+        $data ['cantidad'] = $datos->num_rows();
+        $data ['gastos'] = $datos->result();
+        $this->load->view('ListaGastos', $data);
+    }
+
+    function guardar_cat_gasto() {
+        $nombre_gasto = $this->input->post('nombre_gasto');
+        $desc = $this->input->post('desc');
+        $estado_gasto = $this->input->post('estado_gasto');
+        $valor = 0;
+        $msg = "Gasto Ya Registrado";
+        if ($this->modelo->guardar_cat_gasto($nombre_gasto, $estado_gasto, $desc) == 0) {
+            $msg = "Gasto Guardado Correctamente";
+            $valor = 1;
+        }
+        echo json_encode(array("valor" => $valor, "msg" => $msg));
+    }
+
+    function seleccionar_cat_gasto() {
+        $nombre_gasto = $this->input->post('nombre_gasto');
+        $datos = $this->modelo->ver_gastos($nombre_gasto);
+        $data = $datos->result();
+        $contador = $datos->num_rows();
+        if ($contador > 0) {
+            foreach ($data as $fila) {
+                $id_cat_gasto = $fila->id_categoria;
+                $nombre_gasto = $fila->nombre_categoria;
+                $estado_cat_gasto = $fila->estado_cat_gasto;
+                $desc = $fila->descripcion_categoria;
+            }
+            $valor = 0;
+            echo json_encode(array("id_cat_gasto" => $id_cat_gasto, "nombre_gasto" => $nombre_gasto, "estado_cat_gasto" => $estado_cat_gasto, "desc" => $desc));
+        } else {
+            $valor = 1;
+            echo json_encode(array("valor" => $valor));
+        }
+    }
+
+    function editar_gasto() {
+        $id_gasto = $this->input->post('id_gasto');
+        $nombre_gasto = $this->input->post('nombre_gasto');
+        $estado_gasto = $this->input->post('estado_gasto');
+        $desc = $this->input->post('desc');
+        $valor = 1;
+        if ($this->modelo->editar_gasto($id_gasto, $nombre_gasto, $estado_gasto, $desc) == 0) {
+            $valor = 0;
+        } else {
+            if ($this->modelo->editar_gasto($id_gasto, $nombre_gasto, $estado_gasto, $desc) == 2) {
+                $valor = 2;
+            }
+        }
+        echo json_encode(array("valor" => $valor));
+    }
+
+    function eliminar_gasto() {
+        $nombre_gasto = $this->input->post('nombre_gasto');
+        $valor = 1;
+        if ($this->modelo->eliminar_gasto($nombre_gasto) == 0) {
+            $valor = 0;
+        }
+        echo json_encode(array("valor" => $valor));
+    }
+
+    function cargar_gastos_activos() {
+        $datos["gastos"] = $this->modelo->cargar_cat_gasto()->result();
+        $this->load->view("gastos_activos", $datos);
     }
 
 }

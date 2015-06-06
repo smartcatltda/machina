@@ -14,6 +14,7 @@
         <div id="home">
             <div class="home"></div>
         </div>
+
         <div id="maquinas">
             <div id="msj_man_maquinas"></div>
             <div style="titulo"><h1>Administración de Maquinas</h1></div>
@@ -50,7 +51,47 @@
             </div>
             <div class="rounded" id="lista_maquinas"></div>
         </div>
-        
+
+        <div id="cat_gastos">
+            <div id="msj_man_gastos"></div>
+            <div style="titulo"><h1>Administración de Gastos</h1></div>
+            <div id="Man_gastos">
+                <br>
+                <table>
+                    <tr>
+                        <td><input hidden="true" id="id_cat_gastos" type="text" /></td>
+<!--                        <td><input hidden="true" id="man_estado_gasto" type="text" /></td>-->
+                    <tr>
+                    <tr>
+                        <td>Nombre Gasto :</td>
+                        <td><input class="rounded" id="man_nombre_gasto" placeholder="Nombre Gasto" style="width: 200px;"/></td>
+                    </tr>
+                    <tr>
+                        <td>Estado :</td>
+                        <td>
+                            <select class="rounded" id="man_estado_gasto" style="width: 200px;" >
+                                <option value='1' selected="">Activo</option>
+                                <option value='2'>Inactivo</option>
+                            </select>
+                        </td>
+                    </tr><tr></tr><tr></tr>
+                    <tr>
+                        <td>Descripción :</td>
+                        <td><textarea rows="10" cols="30" class="rounded" id="man_desc_gasto" style="width: 300px;"></textarea></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td align="right"><button id="btguardargasto" >Guardar</button></td>
+                    </tr>
+                </table>
+                <br><br>
+                <button id="btseleccionargastos" style="width: 150px;">Seleccionar</button>
+                <button id="bteditargastos" style="width: 150px;">Editar</button>
+                <button id="bteliminargastos" style="width: 15  0px;">Eliminar</button>
+            </div>
+            <div class="rounded" id="lista_gastos"></div>
+        </div>
+
         <div id="usuarios">
             <div id="msj_man_user"></div>
             <div style="titulo"><h1>Administración de Usuarios</h1></div>
@@ -99,7 +140,7 @@
             </div>
             <div class="rounded" id="lista_usuarios" float="right"></div>
         </div>
-        
+
         <div id="caja">
             <div style="titulo"><h1>Administración de Caja</h1></div>
             <br>
@@ -135,18 +176,18 @@
                     <td><button id="btaumento">Ingresar</button></td>
                 </tr>
             </table>
-<!--            <div id="alto"></div>-->
         </div>
 
         <div id="estadisticas">
             <div id="msj_estadisticas"></div>
             <div style="titulo"><h1>Estadísticas</h1></div>
             <br>
-            
+
             <div id="alto"></div>
         </div>
 
     </div>
+
     <div id="cajero" hidden>
         <div id="homec">
             <div class="home"></div>
@@ -179,17 +220,7 @@
                 </tr>
                 <tr>
                     <td>
-                        <select class="rounded" id="c_categorias" style="width: 290px;" >
-                            <!--estas opciones deberan ser cargadas de la lista de categorias de gastos-->
-                            <option value='1'>aseo</option>
-                            <option value='2'>insumos</option>
-                            <option value='1'>huevos</option>
-                            <option value='2'>bicicletas</option>
-                            <option value='1'>al marcos le gusta el pico</option>
-                            <option value='2'>fabi y feña se aman</option>
-                            <option value='1'>xino ql</option>
-                            <option value='2'>patas de chancho</option>
-                        </select>
+                        <select class="rounded" id="c_categorias" style="width: 290px;" ></select>
                     </td>
                     <td>$</td><td><input class="rounded" id="c_gasto" placeholder="gasto" type="text" style="width: 290px;" maxlength="50" /></td>
                     <td style="width: 150px;"></td><td style="width: 150px;"></td>
@@ -212,7 +243,7 @@
             <div id="msj_cierrecaja"></div>
             <div style="titulo"><h1>Cierre de Caja</h1></div>
             <br>
-            
+
             <div id="alto"></div>
         </div>
     </div>

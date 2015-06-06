@@ -23,15 +23,16 @@
             <button id="bthome">Home</button>
             <button id="btusuarios">Usuarios</button>
             <button id="btmaquinas">Maquinas</button>
+            <button id="btgastos">Gastos</button>
             <button id="btcaja">Caja</button>
             <button id="btestadisticas">Estadisticas</button>
-            <button id="salir">Salir</button>
+            <button id="salir"> Cerrar Sesión</button>
         </div>
         <div id="menucajero" class="ui-widget-header ui-corner-all" hidden>
             <button id="bthomec">Home</button>
             <button id="btcajac">Caja</button>
             <button id="btcierrecaja">Cierre</button>
-            <button id="salirc">Salir</button>
+            <button id="salirc">Cerrar Sesión</button>
         </div>
     </header>
     <body>

@@ -21,6 +21,10 @@
     overflow: hidden;
     width: 100%;
 }
+#cat_gastos{
+    overflow: hidden;
+    width: 100%;
+}
 #caja{
     height: 520px;
 }
@@ -63,6 +67,17 @@
     position:absolute; 
     z-index:1
 }
+#msj_man_gastos{
+    display: none;
+    width: 1024px;
+    font-size: 50px; 
+    text-align: center;
+    margin: 0 auto;
+    background-color: #000000; 
+    border-radius: 10px;
+    position:absolute; 
+    z-index:1
+}
 
 #Man_usuarios{
     float: left;
@@ -71,12 +86,21 @@
 #lista_usuarios{
     float: right;
     padding-right: 50px;
+
 }
 #Man_maquinas{
     float: left;
     padding-left: 50px;
 }
 #lista_maquinas{
+    float: right;
+    padding-right: 50px;
+}
+#Man_gastos{
+    float: left;
+    padding-left: 50px;
+}
+#lista_gastos{
     float: right;
     padding-right: 50px;
 }
