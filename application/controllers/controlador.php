@@ -138,6 +138,16 @@ class Controlador extends CI_Controller {
         $data ['maquinas'] = $datos->result();
         $this->load->view('ListaMaquinas', $data);
     }
+    
+    function cargar_maquinas() {
+        $datos["maquinas"] = $this->modelo->mostrar_maquinas()->result();
+        $this->load->view("maquinas", $datos);
+    }
+    
+    function cargar_maquinas_activas() {
+        $datos["maquinas"] = $this->modelo->mostrar_maquinas()->result();
+        $this->load->view("maquinas_activas", $datos);
+    }
 
     function guardar_maquina() {
         $num_maquina = $this->input->post('num_maquina');

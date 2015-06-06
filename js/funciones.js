@@ -54,6 +54,8 @@ $(document).ready(function () {
     });
     //MANTENEDOR MAQUINAS
     mostrar_maquinas();
+    cargar_maquinas();
+    cargar_maquinas_activas();
     $("#btguardarmaquina").button().click(function () {
         guardar_maquina();
     });
@@ -404,6 +406,23 @@ function mostrar_maquinas()
                 $("#lista_maquinas").show('slow');
             }
     );
+}
+function cargar_maquinas() {
+    $.post(
+            base_url + "controlador/cargar_maquinas",
+            {},
+            function(ruta, datos) {
+                $("#man_nummaquina").html(ruta, datos);
+            });
+}
+function cargar_maquinas_activas() {
+    $.post(
+            base_url + "controlador/cargar_maquinas_activas",
+            {},
+            function(ruta, datos) {
+                $("#ac_maq").html(ruta, datos);
+                $("#c_maq").html(ruta, datos);
+            });
 }
 function guardar_maquina()
 {

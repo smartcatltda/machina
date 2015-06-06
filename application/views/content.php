@@ -22,7 +22,7 @@
                 <table>
                     <tr>
                         <td>Numero Maquina </td>
-                        <td><input class="rounded" id="man_nummaquina" placeholder="Numero de Maquina" type="number" style="width: 200px;" maxlength="50" /></td>
+                        <td><select class="rounded" id="man_nummaquina" style="width: 200px;"/></td>
                     <tr>
                         <td>Estado </td>
                         <td>
@@ -48,15 +48,9 @@
                 <button id="bteditarmaquina" style="width: 100px;">Editar</button>
                 <button id="bteliminarmaquina" style="width: 100px;">Eliminar</button>
             </div>
-<!--            esta lista deberia mostrar solo las maquinas activas 
-            si es que se acepta la idea de felix 
-            de dejar todas las maquinas 
-            cargadas en la base de datos y utilizar el mantenedor 
-            para poner activas las que estaran 
-            realmente en el local-->
             <div class="rounded" id="lista_maquinas"></div>
-            
         </div>
+        
         <div id="usuarios">
             <div id="msj_man_user"></div>
             <div style="titulo"><h1>Administración de Usuarios</h1></div>
@@ -104,8 +98,8 @@
                 <br>  
             </div>
             <div class="rounded" id="lista_usuarios" float="right"></div>
-            
         </div>
+        
         <div id="caja">
             <div style="titulo"><h1>Administración de Caja</h1></div>
             <br>
@@ -115,17 +109,7 @@
                 </tr>
                 <tr>
                     <td>
-                        <select class="rounded" id="ac_maq" style="width: 160px;" >
-                            <!--estas opciones deberan ser cargadas de la lista de maquinas activas en el local-->
-                            <option value='1'>01</option>
-                            <option value='2'>02</option>
-                            <option value='1'>03</option>
-                            <option value='2'>04</option>
-                            <option value='1'>05</option>
-                            <option value='2'>06</option>
-                            <option value='1'>07</option>
-                            <option value='2'>08</option>
-                        </select>
+                        <select class="rounded" id="ac_maq" style="width: 160px;" ></select>
                     </td>
                     <td>$</td><td><input class="rounded" id="ac_keyin" placeholder="Key In" type="text" style="width: 260px;" maxlength="50" /></td>
                     <td>$</td><td><input class="rounded" id="ac_keyout" placeholder="Key Out" type="text" style="width: 260px;" maxlength="50" /></td>
@@ -178,17 +162,7 @@
                 </tr>
                 <tr>
                     <td>
-                        <select class="rounded" id="ac_maq" style="width: 150px;" >
-                            <!--estas opciones deberan ser cargadas de la lista de maquinas activas en el local-->
-                            <option value='1'>01</option>
-                            <option value='2'>02</option>
-                            <option value='1'>03</option>
-                            <option value='2'>04</option>
-                            <option value='1'>05</option>
-                            <option value='2'>06</option>
-                            <option value='1'>07</option>
-                            <option value='2'>08</option>
-                        </select>
+                        <select class="rounded" id="c_maq" style="width: 150px;" ></select>
                     </td>
                     <td style="width: 150px;"></td>
                     <td>$</td><td><input class="rounded" id="c_pago" placeholder="pago" type="text" style="width: 290px;" maxlength="50" /></td>
