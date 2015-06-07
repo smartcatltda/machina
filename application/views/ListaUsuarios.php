@@ -1,9 +1,9 @@
 <?php ?>
 <table border="2">
-    <th>NOMBRE</th>
-    <th>APELLIDO</th>
     <th>USUARIO</th>
     <th>TIPO</th>
+    <th>NOMBRE</th>
+    <th>APELLIDO</th>
     <?php
     foreach ($usuarios as $fila):
         if ($fila->tipo == 2):
@@ -17,10 +17,10 @@
         endif;
         ?>
         <tr align="center">
-            <td width="120"><?= $fila->nombre ?></td>
-            <td width="120"><?= $fila->apellido ?></td>
             <td width="120"><?= $fila->user ?></td>
             <td width="120"><?= $fila->tipo ?></td>
+            <td width="120"><?= $fila->nombre ?></td>
+            <td width="120"><?= $fila->apellido ?></td>
         </tr>
     <?php endforeach; ?>
 </table>

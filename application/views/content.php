@@ -1,20 +1,21 @@
 <div id="msg01"></div>
-
+<!--//Login-->
 <div id="login" hidden>
     <div style="titulo"><h1>Inicio de Sesión</h1></div>
-    <input class="ui-corner-all" placeholder="Usuario" size="30" id="user" maxlength="30" style="font-size: 20px;" required/ ><br>
-    <input class="ui-corner-all" placeholder="Contraseña" type="password" size="30" id="pass" style="font-size: 20px;" required/><br>
+    <input class="ui-corner-all" placeholder="Usuario" size="30" id="user" maxlength="30" style="font-size: 20px;" required onkeypress="enter_conectar(event)" autofocus/><br>
+    <input class="ui-corner-all" placeholder="Contraseña" type="password" size="30" id="pass" style="font-size: 20px;" required onkeypress="enter_conectar(event)"/><br>
     <button id="conectar">Conectar</button>
 </div>
 
 <div id="contenido" align="center" hidden>
 
+    <!--//ADMIN-->
     <div id="admin" hidden>
-
+        <!--HOME ADMIN-->
         <div id="home">
             <div class="home"></div>
         </div>
-
+        <!--MANTENEDOR MAQUINAS-->
         <div id="maquinas">
             <div id="msj_man_maquinas"></div>
             <div style="titulo"><h1>Administración de Maquinas</h1></div>
@@ -51,7 +52,7 @@
             </div>
             <div class="rounded" id="lista_maquinas"></div>
         </div>
-
+        <!--MANTENEDOR GASTOS-->
         <div id="cat_gastos">
             <div id="msj_man_gastos"></div>
             <div style="titulo"><h1>Administración de Gastos</h1></div>
@@ -70,7 +71,8 @@
                         <td>Estado :</td>
                         <td>
                             <select class="rounded" id="man_estado_gasto" style="width: 200px;" >
-                                <option value='1' selected="">Activo</option>
+                                <option value="" selected="">Seleccione</option>
+                                <option value='1'>Activo</option>
                                 <option value='2'>Inactivo</option>
                             </select>
                         </td>
@@ -91,7 +93,7 @@
             </div>
             <div class="rounded" id="lista_gastos"></div>
         </div>
-
+        <!--MANTENEDOR USUARIOS-->
         <div id="usuarios">
             <div id="msj_man_user"></div>
             <div style="titulo"><h1>Administración de Usuarios</h1></div>
@@ -103,18 +105,18 @@
                     <tr>
                     <tr>
                         <td style="width: 150px;">Usuario :</td>
-                        <td><input class="rounded" id="man_user" placeholder="Usuario" type="text" style="width: 200px;" maxlength="50" /></td>
+                        <td><input class="rounded" id="man_user" placeholder="Usuario" type="text" style="width: 200px;" maxlength="50" onkeypress="enter_usuario(event)" autofocus/></td>
                     <tr>
                         <td>Contraseña :</td>
-                        <td><input class="rounded" id="man_pass" placeholder="Contraseña" type="password" style="width: 200px;" maxlength="50" /></td>
+                        <td><input class="rounded" id="man_pass" placeholder="Contraseña" type="password" style="width: 200px;" maxlength="50" onkeypress="enter_usuario(event)"/></td>
                     </tr>
                     <tr>
                         <td>Nombre :</td>
-                        <td><input class="rounded" id="man_nombre" placeholder="Nombre" type="text" style="width: 200px;" maxlength="20" /></td>
+                        <td><input class="rounded" id="man_nombre" placeholder="Nombre" type="text" style="width: 200px;" maxlength="20" onkeypress="enter_usuario(event)" /></td>
                     </tr>
                     <tr>
                         <td>Apellido :</td>
-                        <td><input class="rounded" id="man_apellido" placeholder="Apellido" type="text" style="width: 200px;" maxlength="20" /></td>
+                        <td><input class="rounded" id="man_apellido" placeholder="Apellido" type="text" style="width: 200px;" maxlength="20" onkeypress="enter_usuario(event)"/></td>
                     </tr>
                     <tr>
                         <td>Tipo :</td>
@@ -140,7 +142,7 @@
             </div>
             <div class="rounded" id="lista_usuarios" float="right"></div>
         </div>
-
+        <!--ADMINISTRACION CAJA-->
         <div id="caja">
             <div style="titulo"><h1>Administración de Caja</h1></div>
             <br>
@@ -152,8 +154,8 @@
                     <td>
                         <select class="rounded" id="ac_maq" style="width: 160px;" ></select>
                     </td>
-                    <td>$</td><td><input class="rounded" id="ac_keyin" placeholder="Key In" type="text" style="width: 260px;" maxlength="50" /></td>
-                    <td>$</td><td><input class="rounded" id="ac_keyout" placeholder="Key Out" type="text" style="width: 260px;" maxlength="50" /></td>
+                    <td>$</td><td><input class="rounded" id="ac_keyin" placeholder="Key In" type="text" style="width: 260px;" maxlength="50" onkeypress="return validar_texto(event)" autofocus /></td>
+                    <td>$</td><td><input class="rounded" id="ac_keyout" placeholder="Key Out" type="text" style="width: 260px;" maxlength="50" onkeypress="return validar_texto(event)" /></td>
                     <td>$</td><td><input class="rounded" id="ac_total" type="text" style="width: 260px;" disabled="true"/></td>
                     <td><button id="btregistrarkey" >Registrar</button></td>
                 </tr>
@@ -172,12 +174,12 @@
                 </tr>
                 <tr>
                     <td></td><td></td><td></td><td></td><td></td>
-                    <td>$</td><td><input class="rounded" id="ac_aumento" placeholder="Aumento" type="text" style="width: 260px;" maxlength="50" /></td>
+                    <td>$</td><td><input class="rounded" id="ac_aumento" placeholder="Aumento" type="text" style="width: 260px;" maxlength="50" onkeypress="return validar_texto(event)"/></td>
                     <td><button id="btaumento">Ingresar</button></td>
                 </tr>
             </table>
         </div>
-
+        <!--REPORTES-->
         <div id="estadisticas">
             <div id="msj_estadisticas"></div>
             <div style="titulo"><h1>Estadísticas</h1></div>
@@ -185,13 +187,15 @@
 
             <div id="alto"></div>
         </div>
-
     </div>
 
+    <!--CAJERO-->
     <div id="cajero" hidden>
+        <!--HOME CAJERO-->
         <div id="homec">
             <div class="home"></div>
         </div>
+        <!--CAJA-->
         <div id="cajac">
             <div style="titulo"><h1>Caja</h1></div>
             <br>
@@ -239,6 +243,8 @@
             <td></td>
             <tr></tr>
         </div>
+
+        <!--CIERRE DE CAJA-->
         <div id="cierrecaja">
             <div id="msj_cierrecaja"></div>
             <div style="titulo"><h1>Cierre de Caja</h1></div>
@@ -247,6 +253,8 @@
             <div id="alto"></div>
         </div>
     </div>
+
+    <!--PIE DE PAGINA-->
     <div id="nombrelogin"></div>
 </div>
 

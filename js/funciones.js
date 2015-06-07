@@ -329,7 +329,6 @@ function guardar_user()
     }
 }
 function  seleccionar_user()
-
 {
     var user = $("#man_user").val();
     if (user != "") {
@@ -438,7 +437,8 @@ function mostrar_maquinas()
             }
     );
 }
-function cargar_maquinas() {
+function cargar_maquinas()
+{
     $.post(
             base_url + "controlador/cargar_maquinas",
             {},
@@ -446,7 +446,8 @@ function cargar_maquinas() {
                 $("#man_nummaquina").html(ruta, datos);
             });
 }
-function cargar_maquinas_activas() {
+function cargar_maquinas_activas()
+{
     $.post(
             base_url + "controlador/cargar_maquinas_activas",
             {},
@@ -489,10 +490,6 @@ function guardar_maquina()
         $("#msj_man_maquinas").css("color", "#FF0000").show('drop', 'slow').delay(3000).hide('drop', 'slow');
     }
 }
-function isNumeric(numero) {
-    return !isNaN(parseFloat(numero)) && isFinite(numero);
-}
-
 function  seleccionar_maquina()
 {
     var num_maquina = $("#man_nummaquina").val();
@@ -598,16 +595,7 @@ function eliminar_maquina()
         $("#msj_man_user").css("color", "#FF0000").show('drop', 'slow').delay(3000).hide('drop', 'slow');
     }
 }
-function validar_texto(e) {
-    tecla = (document.all) ? e.keyCode : e.which;
-    //Tecla de retroceso para borrar, siempre la permite
-    if (tecla == 8) {
-        return true;
-    }
-    patron = /[0-9]/;
-    tecla_final = String.fromCharCode(tecla);
-    return patron.test(tecla_final);
-}
+
 //MANTENEDOR GASTOS
 function cargar_cat_gastos()
 {
@@ -619,6 +607,15 @@ function cargar_cat_gastos()
 
             }
     );
+}
+function cargar_gastos_activos()
+{
+    $.post(
+            base_url + "controlador/cargar_gastos_activos",
+            {},
+            function (ruta, datos) {
+                $("#c_categorias").html(ruta, datos);
+            });
 }
 function guardar_cat_gasto()
 {
@@ -635,6 +632,7 @@ function guardar_cat_gasto()
                 $("#msj_man_gastos").css("color", "#55FF00").show('drop', 'slow').delay(3000).hide('drop', 'slow');
                 $("#id_cat_gastos").val("");
                 $("#man_nombre_gasto").val("");
+                $("#man_estado_gasto").val("");
                 $("#man_desc_gasto").val("");
 
             } else {
@@ -697,7 +695,7 @@ function editar_cat_gasto()
                     $("#msj_man_gastos").css("color", "#55FF00").show('drop', 'slow').delay(3000).hide('drop', 'slow');
                     $("#id_cat_gastos").val("");
                     $("#man_nombre_gasto").val("");
-                    $("#man_estado_gasto").val("1");
+                    $("#man_estado_gasto").val("");
                     $("#man_desc_gasto").val("");
                     cargar_cat_gastos();
                 }
@@ -726,7 +724,7 @@ function eliminar_cat_gasto()
                 $("#msj_man_gastos").css("color", "#55FF00").show('drop', 'slow').delay(3000).hide('drop', 'slow');
                 $("#id_cat_gastos").val("");
                 $("#man_nombre_gasto").val("");
-                $("#man_estado_gasto").val("1");
+                $("#man_estado_gasto").val("");
                 $("#man_desc_gasto").val("");
                 cargar_cat_gastos();
             }
@@ -738,11 +736,31 @@ function eliminar_cat_gasto()
         $("#msj_man_user").css("color", "#FF0000").show('drop', 'slow').delay(3000).hide('drop', 'slow');
     }
 }
-function cargar_gastos_activos() {
-    $.post(
-            base_url + "controlador/cargar_gastos_activos",
-            {},
-            function (ruta, datos) {
-                $("#c_categorias").html(ruta, datos);
-            });
+
+//VALIDACIONES
+function enter_conectar(e)
+{
+    tecla = (document.all) ? e.keyCode : e.which;
+    if (tecla == 13)
+        conectar();
+}
+function enter_usuario(e)
+{
+    tecla = (document.all) ? e.keyCode : e.which;
+    if (tecla == 13)
+        guardar_user();
+}
+function isNumeric(numero)
+{
+    return !isNaN(parseFloat(numero)) && isFinite(numero);
+}
+function validar_texto(e)
+{
+    tecla = (document.all) ? e.keyCode : e.which;
+    if (tecla == 8) {
+        return true;
+    }
+    patron = /[0-9]/;
+    tecla_final = String.fromCharCode(tecla);
+    return patron.test(tecla_final);
 }
