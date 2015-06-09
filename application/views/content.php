@@ -2,7 +2,7 @@
 <!--//Login-->
 <div id="login" hidden>
     <div style="titulo"><h1>Inicio de Sesión</h1></div>
-    <input class="ui-corner-all" placeholder="Usuario" size="30" id="user" maxlength="30" style="font-size: 20px;" required onkeypress="enter_conectar(event)" autofocus/><br>
+    <input class="ui-corner-all" placeholder="Usuario" size="30" id="user" maxlength="30" style="font-size: 20px;" required onkeypress="enter_user(event)" autofocus/><br>
     <input class="ui-corner-all" placeholder="Contraseña" type="password" size="30" id="pass" style="font-size: 20px;" required onkeypress="enter_conectar(event)"/><br>
     <button id="conectar">Conectar</button>
 </div>
@@ -31,7 +31,7 @@
                             <select class="rounded" id="man_estado" style="width: 200px;" >
                                 <option value="" selected="">Seleccione</option>
                                 <option value='1'>Activa</option>
-                                <option value='2'>Inactiva</option>
+                                <option value='0'>Inactiva</option>
                             </select>
                         </td>
                     </tr>
@@ -61,7 +61,6 @@
                 <table>
                     <tr>
                         <td><input hidden="true" id="id_cat_gastos" type="text" /></td>
-<!--                        <td><input hidden="true" id="man_estado_gasto" type="text" /></td>-->
                     <tr>
                     <tr>
                         <td>Nombre Gasto :</td>
@@ -152,10 +151,10 @@
                 </tr>
                 <tr>
                     <td>
-                        <select class="rounded" id="ac_maq" style="width: 160px;" ></select>
+                        <select onchange="foco('ac_keyin')" class="rounded" id="ac_maq" style="width: 160px;" ></select>
                     </td>
-                    <td>$</td><td><input class="rounded" id="ac_keyin" placeholder="Key In" type="text" style="width: 260px;" maxlength="50" onkeypress="return validar_texto(event)" autofocus /></td>
-                    <td>$</td><td><input class="rounded" id="ac_keyout" placeholder="Key Out" type="text" style="width: 260px;" maxlength="50" onkeypress="return validar_texto(event)" /></td>
+                    <td>$</td><td><input class="rounded" id="ac_keyin" placeholder="Key In" type="text" style="width: 260px;" maxlength="50" onkeypress="return validar_texto(event)" autofocus onkeydown="enter_keyin(event)" onkeyup="formatNumeros(this)" onchange="formatNumeros(this)" /></td>
+                    <td>$</td><td><input class="rounded" id="ac_keyout" placeholder="Key Out" type="text" style="width: 260px;" maxlength="50" onkeypress="return validar_texto(event)" onkeyup="formatNumeros(this)" onchange="formatNumeros(this)" /></td>
                     <td>$</td><td><input class="rounded" id="ac_total" type="text" style="width: 260px;" disabled="true"/></td>
                     <td><button id="btregistrarkey" >Registrar</button></td>
                 </tr>
@@ -174,7 +173,7 @@
                 </tr>
                 <tr>
                     <td></td><td></td><td></td><td></td><td></td>
-                    <td>$</td><td><input class="rounded" id="ac_aumento" placeholder="Aumento" type="text" style="width: 260px;" maxlength="50" onkeypress="return validar_texto(event)"/></td>
+                    <td>$</td><td><input class="rounded" id="ac_aumento" placeholder="Aumento" type="text" style="width: 260px;" maxlength="50" onkeypress="return validar_texto(event)" onkeyup="formatNumeros(this)" onchange="formatNumeros(this)"/></td>
                     <td><button id="btaumento">Ingresar</button></td>
                 </tr>
             </table>
@@ -197,6 +196,7 @@
         </div>
         <!--CAJA-->
         <div id="cajac">
+            <div id="msj_cajac"></div>
             <div style="titulo"><h1>Caja</h1></div>
             <br>
             <div style="titulo" id="titulo_caja" style="width: 900px;"><h3>Ingreso de Pagos</h3></div>
@@ -207,10 +207,10 @@
                 </tr>
                 <tr>
                     <td>
-                        <select class="rounded" id="c_maq" style="width: 150px;" ></select>
+                        <select class="rounded" onchange="foco('c_pago')" id="c_maq" style="width: 150px;" ></select>
                     </td>
                     <td style="width: 150px;"></td>
-                    <td>$</td><td><input class="rounded" id="c_pago" placeholder="pago" type="text" style="width: 290px;" maxlength="50" /></td>
+                    <td>$</td><td><input class="rounded" id="c_pago" placeholder="pago" type="text" style="width: 290px;" onkeydown="enter_pago(event)" maxlength="50" onkeypress="return validar_texto(event)" onkeyup="formatNumeros(this)" onchange="formatNumeros(this)"/></td>
                     <td style="width: 150px;"></td>
                     <td><button style="width: 150px;" id="btingresarpago" >Ingresar</button></td>
                 </tr>
@@ -226,14 +226,14 @@
                     <td>
                         <select class="rounded" id="c_categorias" style="width: 290px;" ></select>
                     </td>
-                    <td>$</td><td><input class="rounded" id="c_gasto" placeholder="gasto" type="text" style="width: 290px;" maxlength="50" /></td>
+                    <td>$</td><td><input class="rounded" id="c_gasto" placeholder="gasto" type="text" style="width: 290px;" maxlength="50" onkeypress="return validar_texto(event)" onkeyup="formatNumeros(this)" onchange="formatNumeros(this)"/></td>
                     <td style="width: 150px;"></td><td style="width: 150px;"></td>
                 </tr>
                 <tr>
                     <td> Detalle :</td><td></td><td></td><td></td>
                 </tr>
                 <tr>
-                    <td colspan="3"><input rows="2" type="text" class="rounded" id="c_detalle" style="width: 600px;"></textarea></td>
+                    <td colspan="3"><input rows="2" type="text" placeholder="Detalle" class="rounded" id="c_detalle" style="width: 600px;"></textarea></td>
                     <td style="width: 150px;"></td>
                     <td><button id="btregistrargasto" style="width: 150px;">Registrar</button></td>
                 </tr>

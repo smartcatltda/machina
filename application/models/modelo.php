@@ -10,7 +10,7 @@ class modelo extends CI_Model {
     }
 
     function permiso($user) {
-        $this->db->select('tipo');
+        $this->db->select('*');
         $this->db->where('user', $user);
         return $this->db->get('usuario');
     }
@@ -254,6 +254,38 @@ class modelo extends CI_Model {
         else:
             return 1;
         endif;
+    }
+
+//MANTENEDOR PAGO
+    function guardar_pago($num_maquina, $monto_pago, $min, $horas, $dia, $mes, $ano, $id_user) {
+        $data = array(
+            "num_maquina" => $num_maquina,
+            "monto_pago" => $monto_pago,
+            "hora_pago" => $horas,
+            "min_pago" => $min,
+            "dia_pago" => $dia,
+            "mes_pago" => $mes,
+            "ano_pago" => $ano,
+            "id_usuario" => $id_user,
+        );
+        $this->db->insert("pago", $data);
+        return 0;
+    }
+
+    function guardar_cgasto($id_categoria, $monto_gasto, $detalle, $min, $horas, $dia, $mes, $ano, $id_user) {
+        $data = array(
+            "id_categoria" => $id_categoria,
+            "monto_gasto" => $monto_gasto,
+            "id_usuario" => $id_user,
+            "obs_gasto" => $detalle,
+            "hora_gasto" => $horas,
+            "min_gasto" => $min,
+            "dia_gasto" => $dia,
+            "mes_gasto" => $mes,
+            "ano_gasto" => $ano,
+        );
+        $this->db->insert("gastos", $data);
+        return 0;
     }
 
 }

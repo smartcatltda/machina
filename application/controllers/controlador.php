@@ -21,35 +21,43 @@ class Controlador extends CI_Controller {
         $pass = $this->input->post('pass');
         $valor = 0;
         $permiso = "";
-        $mensaje = "El usuario no existe en la Base de Datos";
+        $nombre = "";
+        $apellido = "";
+        $id_user = "";
+        $mensaje = "Usuario o Contraseña Incorrectos";
         $cookie = array('user' => '', 'permiso' => '', 'esta logeado' => false);
         if ($this->modelo->conectar($user, $pass) == 1) {
             $valor = 1;
             $permiso = $this->modelo->permiso($user)->result();
             foreach ($permiso as $fila) {
+                $id_user = $fila->id_usuario;
                 $permiso = $fila->tipo;
+                $nombre = $fila->nombre;
+                $apellido = $fila->apellido;
             }
             if ($permiso == 0) {
                 $mensaje = "El usuario no tiene los permisos necesarios para acceder al sistema";
                 $valor = 0;
             } else {
-                $cookie = array('user' => $user, 'permiso' => $permiso, 'esta logeado' => true);
+                $cookie = array('user' => $user, 'permiso' => $permiso, 'nombre' => $nombre, 'apellido' => $apellido, 'id_user' => $id_user, 'esta logeado' => true);
             }
             $this->session->set_userdata($cookie);
         }
-        echo json_encode(array('valor' => $valor, 'user' => $user, 'permiso' => $permiso, 'mensaje' => $mensaje));
+        echo json_encode(array('valor' => $valor, 'user' => $user, 'permiso' => $permiso, 'nombre' => $nombre, 'apellido' => $apellido, 'id_user' => $id_user, 'mensaje' => $mensaje));
     }
 
     function verificalogin() {
         $valor = 0;
-        $user = '';
         $permiso = '';
+        $nombre = '';
+        $apellido = '';
         if ($this->session->userdata('esta logeado') == true) {
             $valor = 1;
-            $user = $this->session->userdata('user');
             $permiso = $this->session->userdata('permiso');
+            $nombre = $this->session->userdata('nombre');
+            $apellido = $this->session->userdata('apellido');
         }
-        echo json_encode(array('valor' => $valor, 'user' => $user, 'permiso' => $permiso));
+        echo json_encode(array('valor' => $valor, 'permiso' => $permiso, 'nombre' => $nombre, 'apellido' => $apellido));
     }
 
     function salir() {
@@ -270,6 +278,42 @@ class Controlador extends CI_Controller {
     function cargar_gastos_activos() {
         $datos["gastos"] = $this->modelo->cargar_cat_gasto()->result();
         $this->load->view("gastos_activos", $datos);
+    }
+
+//MANTENEDOR PAGO
+    function guardar_pago() {
+        $num_maquina = $this->input->post('num_maquina');
+        $monto_pago = $this->input->post('monto_pago');
+        $min = $this->input->post('min');
+        $horas = $this->input->post('horas');
+        $dia = $this->input->post('dia');
+        $mes = $this->input->post('mes') + 1;
+        $ano = $this->input->post('ano');
+        $id_user = $this->session->userdata('id_user');
+        $valor = 0;
+        if ($this->modelo->guardar_pago($num_maquina, $monto_pago, $min, $horas, $dia, $mes, $ano, $id_user) == 0) {
+            $msg = "Pago Guardado Correctamente";
+            $valor = 1;
+        }
+        echo json_encode(array("valor" => $valor, "msg" => $msg));
+    }
+
+    function guardar_cgasto() {
+        $id_categoria = $this->input->post('id_categoria');
+        $monto_gasto = $this->input->post('monto_gasto');
+        $detalle = $this->input->post('detalle');
+        $min = $this->input->post('min');
+        $horas = $this->input->post('horas');
+        $dia = $this->input->post('dia');
+        $mes = $this->input->post('mes') + 1;
+        $ano = $this->input->post('ano');
+        $id_user = $this->session->userdata('id_user');
+        $valor = 0;
+        if ($this->modelo->guardar_cgasto($id_categoria, $monto_gasto, $detalle, $min, $horas, $dia, $mes, $ano, $id_user) == 0) {
+            $msg = "Gasto Guardado Correctamente";
+            $valor = 1;
+        }
+        echo json_encode(array("valor" => $valor, "msg" => $msg));
     }
 
 }

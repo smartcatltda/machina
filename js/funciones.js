@@ -1,5 +1,5 @@
 $(document).ready(function () {
-
+    foco('user');
     $("#conectar").button().click(function () {
         conectar();
     });
@@ -8,15 +8,18 @@ $(document).ready(function () {
     });
     $("#btusuarios").button().click(function () {
         usuarios();
+        foco('man_user');
     });
     $("#btmaquinas").button().click(function () {
         maquinas();
     });
     $("#btgastos").button().click(function () {
         gastos_adm();
+        foco('man_nombre_gasto');
     });
     $("#btcaja").button().click(function () {
         caja();
+        foco('ac_keyin');
     });
     $("#btestadisticas").button().click(function () {
         estadisticas();
@@ -29,6 +32,7 @@ $(document).ready(function () {
     });
     $("#btcajac").button().click(function () {
         cajac();
+        foco('c_pago');
     });
     $("#btcierrecaja").button().click(function () {
         cierrecaja();
@@ -94,10 +98,10 @@ $(document).ready(function () {
     });
     //CAJA CAJERO
     $("#btingresarpago").button().click(function () {
-
+        guardar_cpago();
     });
     $("#btregistrargasto").button().click(function () {
-
+        guardar_cgasto();
     });
 
 });
@@ -122,7 +126,7 @@ function conectar()
             {
                 $("#login").hide('fast');
                 $("#contenido").show('fast');
-                $("#nombrelogin").html('<label>Usted está conectado al sistema como "' + datos.user + '".</label>');
+                $("#nombrelogin").html('<label>BIENVENIDO :' + " " + datos.nombre + " " + datos.apellido + '.</label>');
                 if (datos.permiso == 1)
                 {
                     $("#menucajero").hide('fast');
@@ -147,7 +151,7 @@ function conectar()
     else
     {
         $("#msg01").hide();
-        $("#msg01").html("<label>Debe ingresar usuario y contraseña.</label>");
+        $("#msg01").html("<label>Ingresar Usuario y Contraseña</label>");
         $("#msg01").css("color", "#FF0000").show('drop', 'slow').delay(3000).hide('drop', 'slow');
     }
 }
@@ -169,7 +173,7 @@ function verificalogin()
                 {
                     $("#login").hide('fast');
                     $("#contenido").show('fast');
-                    $("#nombrelogin").html('<label>Usted está conectado al sistema como "' + datos.user + '".</label>');
+                    $("#nombrelogin").html('<label>BIENVENIDO :' + " " + datos.nombre + " " + datos.apellido + '</label>');
                     if (datos.permiso == 1)
                     {
                         $("#menucajero").hide('fast');
@@ -737,18 +741,102 @@ function eliminar_cat_gasto()
     }
 }
 
+//MANTENEDOR PAGOS
+function guardar_cpago()
+{
+    var num_maquina = $("#c_maq").val();
+    var monto_pago = $("#c_pago").val().replace(/\./g, '');
+    var tiempo = new Date();
+    var min = tiempo.getMinutes();
+    var horas = tiempo.getHours();
+    var dia = tiempo.getDate();
+    var mes = tiempo.getMonth();
+    var ano = tiempo.getFullYear();
+    if (num_maquina != "" && monto_pago != "") {
+        $.post(base_url + "controlador/guardar_pago", {num_maquina: num_maquina, monto_pago: monto_pago, min: min, horas: horas, dia: dia, mes: mes, ano: ano},
+        function (data) {
+            $("#msj_cajac").hide();
+            $("#msj_cajac").html("<label>" + data.msg + "</label>");
+            if (data.valor == 1) {
+                $("#msj_cajac").css("color", "#55FF00").show('drop', 'slow').delay(3000).hide('drop', 'slow');
+                $("#c_maq").val("");
+                $("#c_pago").val("");
+            }
+        }, "json"
+                );
+    } else {
+        $("#msj_cajac").hide();
+        $("#msj_cajac").html("<label>Ingrese Monto del Pago</label>");
+        $("#msj_cajac").css("color", "#FF0000").show('drop', 'slow').delay(3000).hide('drop', 'slow');
+    }
+}
+function guardar_cgasto()
+{
+    var id_categoria = $("#c_categorias").val();
+    var monto_gasto = $("#c_gasto").val().replace(/\./g, '');
+    var detalle = $("#c_detalle").val();
+    var tiempo = new Date();
+    var min = tiempo.getMinutes();
+    var horas = tiempo.getHours();
+    var dia = tiempo.getDate();
+    var mes = tiempo.getMonth();
+    var ano = tiempo.getFullYear();
+    if (id_categoria != "" && monto_gasto != "") {
+        $.post(base_url + "controlador/guardar_cgasto", {id_categoria: id_categoria, monto_gasto: monto_gasto, detalle: detalle, min: min, horas: horas, dia: dia, mes: mes, ano: ano},
+        function (data) {
+            $("#msj_cajac").hide();
+            $("#msj_cajac").html("<label>" + data.msg + "</label>");
+            if (data.valor == 1) {
+                $("#msj_cajac").css("color", "#55FF00").show('drop', 'slow').delay(3000).hide('drop', 'slow');
+                $("#c_categorias").val("");
+                $("#c_gasto").val("");
+                $("#c_detalle").val("");
+            }
+        }, "json"
+                );
+    } else {
+        $("#msj_cajac").hide();
+        $("#msj_cajac").html("<label>Ingrese Monto del Gasto</label>");
+        $("#msj_cajac").css("color", "#FF0000").show('drop', 'slow').delay(3000).hide('drop', 'slow');
+    }
+}
+
 //VALIDACIONES
+function enter_user(e)
+{
+    tecla = (document.all) ? e.keyCode : e.which;
+    if (tecla == 13)
+        foco('pass');
+}
+function enter_keyin(e)
+{
+    tecla = (document.all) ? e.keyCode : e.which;
+    if (tecla == 13)
+        foco('ac_keyout');
+}
 function enter_conectar(e)
 {
     tecla = (document.all) ? e.keyCode : e.which;
     if (tecla == 13)
         conectar();
 }
-function enter_usuario(e)
+function enter_pago(e)
 {
     tecla = (document.all) ? e.keyCode : e.which;
     if (tecla == 13)
-        guardar_user();
+        guardar_cpago();
+}
+function formatNumeros(input)
+{
+    var num = input.value.replace(/\./g, '');
+    if (!isNaN(num)) {
+        num = num.toString().split('').reverse().join('').replace(/(?=\d*\.?)(\d{3})/g, '$1.');
+        num = num.split('').reverse().join('').replace(/^[\.]/, '');
+        input.value = num;
+    }
+}
+function foco(e) {
+    document.getElementById(e).focus();
 }
 function isNumeric(numero)
 {
