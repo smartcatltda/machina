@@ -802,17 +802,13 @@ function guardar_cgasto()
 }
 
 //VALIDACIONES
+//
+//LOGIN
 function enter_user(e)
 {
     tecla = (document.all) ? e.keyCode : e.which;
     if (tecla == 13)
         foco('pass');
-}
-function enter_keyin(e)
-{
-    tecla = (document.all) ? e.keyCode : e.which;
-    if (tecla == 13)
-        foco('ac_keyout');
 }
 function enter_conectar(e)
 {
@@ -820,6 +816,46 @@ function enter_conectar(e)
     if (tecla == 13)
         conectar();
 }
+
+//FOCUS MANTENEDOR USUARIO
+function enter_manusuario(e)
+{
+    tecla = (document.all) ? e.keyCode : e.which;
+    if (tecla == 13)
+        foco('man_pass');
+}
+function enter_manpass(e)
+{
+    tecla = (document.all) ? e.keyCode : e.which;
+    if (tecla == 13)
+        foco('man_nombre');
+}
+function enter_mannombre(e)
+{
+    tecla = (document.all) ? e.keyCode : e.which;
+    if (tecla == 13)
+        foco('man_apellido');
+}
+function enter_manapellido(e)
+{
+    tecla = (document.all) ? e.keyCode : e.which;
+    if (tecla == 13)
+        foco('man_tipo');
+}
+function enter_mantipo(e)
+{
+    tecla = (document.all) ? e.keyCode : e.which;
+    if (tecla == 13)
+        guardar_user();
+}
+//FOCUS MANTENEDOR KEYS
+function enter_keyin(e)
+{
+    tecla = (document.all) ? e.keyCode : e.which;
+    if (tecla == 13)
+        foco('ac_keyout');
+}
+
 function enter_pago(e)
 {
     tecla = (document.all) ? e.keyCode : e.which;

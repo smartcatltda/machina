@@ -104,18 +104,18 @@
                     <tr>
                     <tr>
                         <td style="width: 150px;">Usuario :</td>
-                        <td><input class="rounded" id="man_user" placeholder="Usuario" type="text" style="width: 200px;" maxlength="50" onkeypress="enter_usuario(event)" autofocus/></td>
+                        <td><input class="rounded" id="man_user" placeholder="Usuario" type="text" style="width: 200px;" maxlength="50" onkeypress="enter_manusuario(event)" autofocus/></td>
                     <tr>
                         <td>Contraseña :</td>
-                        <td><input class="rounded" id="man_pass" placeholder="Contraseña" type="password" style="width: 200px;" maxlength="50" onkeypress="enter_usuario(event)"/></td>
+                        <td><input class="rounded" id="man_pass" placeholder="Contraseña" type="password" style="width: 200px;" maxlength="50" onkeypress="enter_manpass(event)"/></td>
                     </tr>
                     <tr>
                         <td>Nombre :</td>
-                        <td><input class="rounded" id="man_nombre" placeholder="Nombre" type="text" style="width: 200px;" maxlength="20" onkeypress="enter_usuario(event)" /></td>
+                        <td><input class="rounded" id="man_nombre" placeholder="Nombre" type="text" style="width: 200px;" maxlength="20" onkeypress="enter_mannombre(event)" /></td>
                     </tr>
                     <tr>
                         <td>Apellido :</td>
-                        <td><input class="rounded" id="man_apellido" placeholder="Apellido" type="text" style="width: 200px;" maxlength="20" onkeypress="enter_usuario(event)"/></td>
+                        <td><input class="rounded" id="man_apellido" placeholder="Apellido" type="text" style="width: 200px;" maxlength="20" onkeypress="enter_manapellido(event)"/></td>
                     </tr>
                     <tr>
                         <td>Tipo :</td>
