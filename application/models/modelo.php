@@ -256,6 +256,33 @@ class modelo extends CI_Model {
         endif;
     }
 
+//ADMINISTRACION DE CAJA
+    function registrar_key($num_maquina, $key_in, $key_out, $total_key, $hora, $min, $dia, $mes, $ano) {
+        $this->db->select('*');
+        $this->db->where('num_maquina', $num_maquina);
+        $this->db->where('dia_key', $dia);
+        $this->db->where('mes_key', $mes);
+        $this->db->where('ano_key', $ano);
+        $cantidad = $this->db->get('key')->num_rows();
+        if ($cantidad == 0):
+            $data = array(
+                "num_maquina" => $num_maquina,
+                "key_in" => $key_in,
+                "key_out" => $key_out,
+                "total_key" => $total_key,
+                "hora_key" => $hora,
+                "min_key" => $min,
+                "dia_key" => $dia,
+                "mes_key" => $mes,
+                "ano_key" => $ano,
+            );
+            $this->db->insert("key", $data);
+            return 0;
+        else:
+            return 1;
+        endif;
+    }
+
 //MANTENEDOR PAGO
     function guardar_pago($num_maquina, $monto_pago, $min, $horas, $dia, $mes, $ano, $id_user) {
         $data = array(

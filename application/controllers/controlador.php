@@ -280,6 +280,44 @@ class Controlador extends CI_Controller {
         $this->load->view("gastos_activos", $datos);
     }
 
+//ADMINISTRACION DE CAJA
+    function diferencia_keys() {
+        $key_in = $this->input->post('key_in');
+        $key_out = $this->input->post('key_out');
+        $total = $key_in - $key_out;
+        echo json_encode(array("total" => $total));
+    }
+    function sumatoria_keys() {
+        $key_in = $this->input->post('key_in');
+        $key_out = $this->input->post('key_out');
+        $total_key = $this->input->post('total_key');
+        $total_in = $this->input->post('total_in') + $key_in;
+        $total_out = $this->input->post('total_out') + $key_out;
+        $acumulado = $this->input->post('acumulado') + $total_key;
+        
+        echo json_encode(array("total_in" => $total_in, "total_out" => $total_out, "acumulado" => $acumulado));
+    }
+
+    function registrar_key() {
+        $num_maquina = $this->input->post('num_maquina');
+        $key_in = $this->input->post('key_in');
+        $key_out = $this->input->post('key_out');
+        $total_key = $this->input->post('total_key');
+        $hora = $this->input->post('hora');
+        $min = $this->input->post('min');
+        $dia = $this->input->post('dia');
+        $mes = $this->input->post('mes') + 1;
+        $ano = $this->input->post('ano');
+        if ($this->modelo->registrar_key($num_maquina, $key_in, $key_out, $total_key, $hora, $min, $dia, $mes, $ano) == 0) {
+            $msg = "Key Registrada Correctamente";
+            $valor = 1;
+        }else{
+            $msg = "Hoy ya ha Ingresado las Keys de esta Maquina";
+            $valor = 0;
+        }
+        echo json_encode(array("valor" => $valor, "msg" => $msg));
+    }
+
 //MANTENEDOR PAGO
     function guardar_pago() {
         $num_maquina = $this->input->post('num_maquina');

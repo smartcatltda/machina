@@ -1,6 +1,6 @@
 <footer>
     <div class="ui-widget-content" align="center">
-        <div id="smartcat">Sistema desarrollado por  <a href="">Smart Cat - Soluciones Tecnológicas</a></div>
+        <div class="logo"></div><div id="smartcat" style="height: 30px;">Sistema desarrollado por  <a href="">Smart Cat - Soluciones Tecnológicas</a></div>
     </div>
 </footer>
 </body>
