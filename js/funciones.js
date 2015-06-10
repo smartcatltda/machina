@@ -97,7 +97,10 @@ $(document).ready(function () {
         guardar_cgasto();
     });
     //CIERRE DE CAJA
-
+    cargar_pagos();
+    $("#bteditarpago").button().click(function () {
+        editar_pago();
+    });
 
 });
 
@@ -266,18 +269,21 @@ function estadisticas()
 }
 function homec()
 {
+    $("#dialog-confirm").hide();
     $("#cajac").hide('fast');
     $("#cierrecaja").hide('fast');
     $("#homec").show('fast');
 }
 function cajac()
 {
+    $("#dialog-confirm").hide();
     $("#homec").hide('fast');
     $("#cierrecaja").hide('fast');
     $("#cajac").show('fast');
 }
 function cierrecaja()
 {
+    $("#dialog-confirm").hide();
     $("#homec").hide('fast');
     $("#cajac").hide('fast');
     $("#cierrecaja").show('fast');
@@ -777,6 +783,7 @@ function guardar_cpago()
                 $("#msj_cajac").css("color", "#55FF00").show('drop', 'slow').delay(3000).hide('drop', 'slow');
                 $("#c_maq").val("");
                 $("#c_pago").val("");
+                cargar_pagos();
             }
         }, "json"
                 );
@@ -814,6 +821,92 @@ function guardar_cgasto()
         $("#msj_cajac").hide();
         $("#msj_cajac").html("<label>Ingrese Monto del Gasto</label>");
         $("#msj_cajac").css("color", "#FF0000").show('drop', 'slow').delay(3000).hide('drop', 'slow');
+    }
+}
+
+function cargar_pagos()
+{
+    var tiempo = new Date();
+    var dia = tiempo.getDate();
+    var mes = tiempo.getMonth();
+    var ano = tiempo.getFullYear();
+    $.post(
+            base_url + "controlador/cargar_pagos",
+            {dia: dia, mes: mes, ano: ano},
+    function (ruta, datos) {
+        $("#lista_pagos").html(ruta, datos);
+
+    });
+}
+
+function  seleccionar_pago(id)
+{
+    var id_pago = id;
+    if (id != "") {
+        $.post(base_url + "controlador/seleccionar_pago", {id_pago: id_pago},
+        function (datos) {
+            var monto_pago = datos.monto_pago;
+            monto_pago = monto_pago.toString().split('').reverse().join('').replace(/(?=\d*\.?)(\d{3})/g, '$1.');
+            monto_pago = monto_pago.split('').reverse().join('').replace(/^[\.]/, '');
+            $("#id_pago").val(datos.id_pago);
+            $("#c_maq_cierre").val(datos.num_maquina);
+            $("#c_pago_cierre").val(monto_pago);
+        }, "json"
+                );
+    }
+}
+
+function editar_pago()
+{
+
+    var id_pago = $("#id_pago").val();
+    var monto_pago = $("#c_pago_cierre").val().replace(/\./g, '');
+    var comet=$("#c_comet").val()
+    var time = new Date();
+    var horas = time.getHours();
+    var min = time.getMinutes();
+    if (id_pago != "" && monto_pago != "") {
+        $(function () {
+            $("#dialog-confirm").dialog({
+                resizable: true,
+                height: 240,
+                modal: true,
+                buttons: {
+                    "Continuar": function () {
+                        $("#dialog-confirm").show();
+                        $(this).dialog("close");
+                        $.post(base_url + "controlador/editar_pago", {id_pago: id_pago, monto_pago: monto_pago, horas: horas, min: min},
+                        function (datos) {
+                            if (datos.valor == 0) {
+                                $("#msj_cierrecaja").hide();
+                                $("#msj_cierrecaja").html("<label>Modificado Correctamente</label>");
+                                $("#msj_cierrecaja").css("color", "#55FF00").show('drop', 'slow').delay(3000).hide('drop', 'slow');
+                                $("#id_pago").val("");
+                                $("#c_maq_cierre").val("");
+                                $("#c_pago_cierre").val("");
+                                cargar_pagos();
+                            }
+                        }, "json"
+                                );
+                    },
+                    Cancel: function () {
+                        $(this).dialog("close");
+                        $("#dialog-confirm").show();
+                        $("#msj_cierrecaja").hide();
+                        $("#id_pago").val("");
+                        $("#c_maq_cierre").val("");
+                        $("#c_pago_cierre").val("");
+                    }
+                }
+            });
+        });
+    } else {
+        $("#msj_cierrecaja").hide();
+        $("#msj_cierrecaja").html("<label>Seleccione Registro a Editar</label>");
+        $("#msj_cierrecaja").css("color", "#FF0000").show('drop', 'slow').delay(3000).hide('drop', 'slow');
+        $("#id_pago").val("");
+        $("#c_maq_cierre").val("");
+        $("#c_pago_cierre").val("");
     }
 }
 
@@ -904,3 +997,4 @@ function validar_texto(e)
     tecla_final = String.fromCharCode(tecla);
     return patron.test(tecla_final);
 }
+

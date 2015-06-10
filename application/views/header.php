@@ -30,7 +30,7 @@
         <div id="menucajero" class="ui-widget-header ui-corner-all" hidden>
             <button id="bthomec">Home</button>
             <button onclick="foco('c_pago')" id="btcajac">Caja</button>
-            <button id="btcierrecaja">Cierre</button>
+            <button onclick="cargar_pagos(), foco('c_pago_cierre')"id="btcierrecaja">Cierre</button>
             <button style="float: right" id="salirc">Cerrar Sesión</button>
         </div>
     </header>

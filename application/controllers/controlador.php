@@ -248,7 +248,7 @@ class Controlador extends CI_Controller {
         echo json_encode(array("valor" => $valor));
     }
 
-     function cargar_gastos_activos() {
+    function cargar_gastos_activos() {
         $datos["gastos"] = $this->modelo->cargar_cat_gasto()->result();
         $this->load->view("gastos_activos", $datos);
     }
@@ -260,6 +260,7 @@ class Controlador extends CI_Controller {
         $total = $key_in - $key_out;
         echo json_encode(array("total" => $total));
     }
+
     function sumatoria_keys() {
         $key_in = $this->input->post('key_in');
         $key_out = $this->input->post('key_out');
@@ -267,7 +268,7 @@ class Controlador extends CI_Controller {
         $total_in = $this->input->post('total_in') + $key_in;
         $total_out = $this->input->post('total_out') + $key_out;
         $acumulado = $this->input->post('acumulado') + $total_key;
-        
+
         echo json_encode(array("total_in" => $total_in, "total_out" => $total_out, "acumulado" => $acumulado));
     }
 
@@ -284,7 +285,7 @@ class Controlador extends CI_Controller {
         if ($this->modelo->registrar_key($num_maquina, $key_in, $key_out, $total_key, $hora, $min, $dia, $mes, $ano) == 0) {
             $msg = "Key Registrada Correctamente";
             $valor = 1;
-        }else{
+        } else {
             $msg = "Hoy ya ha Ingresado las Keys de esta Maquina";
             $valor = 0;
         }
@@ -327,7 +328,41 @@ class Controlador extends CI_Controller {
         echo json_encode(array("valor" => $valor, "msg" => $msg));
     }
 
+    function cargar_pagos() {
+        $id_user = $this->session->userdata('id_user');
+        $dia = $this->input->post('dia');
+        $mes = $this->input->post('mes') + 1;
+        $ano = $this->input->post('ano');
+        $datos['pagos'] = $this->modelo->cargar_pagos($id_user, $dia, $mes, $ano)->result();
+        $datos['cantidad'] = $this->modelo->cargar_pagos($id_user, $dia, $mes, $ano)->num_rows();
+        $this->load->view("ListaPagos", $datos);
+    }
+
+    function seleccionar_pago() {
+        $id_pago = $this->input->post('id_pago');
+        $datos = $this->modelo->ver_pago($id_pago);
+        $data = $datos->result();
+        foreach ($data as $fila) {
+            $id_pago = $fila->id_pago;
+            $num_maquina = $fila->num_maquina;
+            $monto_pago = $fila->monto_pago;
+        }
+        echo json_encode(array("id_pago" => $id_pago, "num_maquina" => $num_maquina, "monto_pago" => $monto_pago));
+    }
+
+    function editar_pago() {
+        $id_pago = $this->input->post('id_pago');
+        $monto_pago = $this->input->post('monto_pago');
+        $hora = $this->input->post('horas');
+        $min = $this->input->post('min');
+        if ($this->modelo->editar_pago($id_pago, $monto_pago, $hora, $min) == 0) {
+            $valor = 0;
+        }
+        echo json_encode(array("valor" => $valor));
+    }
+
 }
 
 /* End of file controlador.php */
-/* Location: ./application/controllers/controlador.php */
+    /* Location: ./application/controllers/controlador.php */
+    

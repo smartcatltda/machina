@@ -264,6 +264,43 @@ class modelo extends CI_Model {
         return 0;
     }
 
+    function cargar_pagos($id_user, $dia, $mes, $ano) {
+        $this->db->select('*');
+        $this->db->where('id_usuario', $id_user);
+        $this->db->where('dia_pago', $dia);
+        $this->db->where('mes_pago', $mes);
+        $this->db->where('ano_pago', $ano);
+        $this->db->where('estado_pago','0');
+        $this->db->from('pago');
+        $this->db->order_by('id_pago','DESC');
+        $this->db->limit(3);
+        return $this->db->get();
+    }
+
+    function ver_pago($id_pago) {
+        $this->db->select('*');
+        $this->db->where('id_pago', $id_pago);
+        return $this->db->get('pago');
+    }
+
+    function editar_pago($id_pago, $monto_pago, $hora, $min) {
+        $this->db->select('*');
+        $this->db->where('id_pago', $id_pago);
+        $cantidad = $this->db->get('pago')->num_rows();
+        if ($cantidad > 0):
+            $data = array(
+                "monto_pago" => $monto_pago,
+                "hora_pago" => $hora,
+                "min_pago" => $min,
+            );
+            $this->db->where('id_pago', $id_pago);
+            $this->db->update('pago', $data);
+            return 0;
+        else:
+            return 1;
+        endif;
+    }
+
 }
 ?>
 

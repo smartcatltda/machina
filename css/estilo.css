@@ -61,6 +61,17 @@
     position:absolute; 
     z-index:1
 }
+#msj_cierrecaja{
+    display: none;
+    width: 1024px;
+    font-size: 50px; 
+    text-align: center;
+    margin: 0 auto;
+    background-color: #000000; 
+    border-radius: 10px;
+    position:absolute; 
+    z-index:1
+}
 #msj_man_maquinas{
     display: none;
     width: 1024px;
@@ -127,6 +138,10 @@ titulo{
     width: 1024px;
     text-align: center;
 }
+titulo_1{
+    width: 1024px;
+    text-align: left;
+}
 #titulo_caja{
     width: 900px;
     text-align: left;
@@ -134,4 +149,7 @@ titulo{
 #titulo_gasto{
     width: 900px;
     text-align: left;
+}
+.span{
+    background-image: url("images/advertencia.png");
 }
