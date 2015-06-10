@@ -4,7 +4,6 @@
         <title>MACHINA |</title>
         <meta charset="utf-8">
 
-
         <script src="js/jquery.js" type="text/javascript"></script>
         <script src="js/jquery-ui.js" type="text/javascript"></script>
         <script src="js/jquery-ui.min.js" type="text/javascript"></script>

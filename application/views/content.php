@@ -48,7 +48,7 @@
                 <br>
                 <button id="btseleccionarmaquina" style="width: 150px;">Seleccionar</button>
                 <button id="bteditarmaquina" style="width: 100px;">Editar</button>
-                <button id="bteliminarmaquina" style="width: 100px;">Eliminar</button>
+
             </div>
             <div class="rounded" id="lista_maquinas"></div>
         </div>
@@ -60,7 +60,7 @@
                 <br>
                 <table>
                     <tr>
-                        <td><input hidden="true" id="id_cat_gastos" type="text" /></td>
+                        <td><input hidden="true"readonly="readonly" id="id_cat_gastos" type="text" /></td>
                     <tr>
                     <tr>
                         <td>Nombre Gasto :</td>
@@ -82,13 +82,11 @@
                     </tr>
                     <tr>
                         <td></td>
-                        <td align="right"><button id="btguardargasto" >Guardar</button></td>
+                        <td align="right"><button id="bteditargastos" style="width: 150px;">Editar</button>
+                            <button id="btguardargasto" >Guardar</button></td>
                     </tr>
                 </table>
                 <br><br>
-                <button id="btseleccionargastos" style="width: 150px;">Seleccionar</button>
-                <button id="bteditargastos" style="width: 150px;">Editar</button>
-                <button id="bteliminargastos" style="width: 15  0px;">Eliminar</button>
             </div>
             <div class="rounded" id="lista_gastos"></div>
         </div>
@@ -129,13 +127,11 @@
                     </tr>
                     <tr>
                         <td></td>
-                        <td align="right"><button id="btguardaruser" style="width: 100px;">Guardar</button></td>
+                        <td align="right"><button id="bteditaruser" style="width: 100px;">Editar</button>
+                            <button id="btguardaruser" style="width: 100px;">Guardar</button></td>
                     </tr>
                 </table>
                 <br>
-                <button id="btseleccionaruser" style="width: 150px;">Seleccionar</button>
-                <button id="bteditaruser" style="width: 100px;">Editar</button>
-                <button id="bteliminaruser" style="width: 100px;">Eliminar</button>
                 <br>
                 <br>  
             </div>
@@ -199,21 +195,20 @@
             <div id="msj_cajac"></div>
             <div style="titulo"><h1>Caja</h1></div>
             <br>
-            <div style="titulo" id="titulo_caja" style="width: 900px;"><h3>Ingreso de Pagos</h3></div>
+            <div style="titulo" id="titulo_caja" ><h3>Ingreso de Pagos</h3></div>
             <br>
-            <table style="width: 900px;">
+            <table>
                 <tr>
-                    <td>Maquina :</td><td></td><td style="width: 10px;"></td><td>Pago :</td><td></td><td></td>
+                    <td>Maquina :</td>
+                    <td>Pago : $</td>
                 </tr>
                 <tr>
                     <td>
                         <select class="rounded" onchange="foco('c_pago')" id="c_maq" style="width: 150px;" ></select>
                     </td>
-                    <td style="width: 150px;"></td>
-                    <td>$</td><td><input class="rounded" id="c_pago" placeholder="pago" type="text" style="width: 290px;" onkeydown="enter_pago(event)" maxlength="50" onkeypress="return validar_texto(event)" onkeyup="formatNumeros(this)" onchange="formatNumeros(this)"/></td>
-                    <td style="width: 150px;"></td>
-                    <td><button style="width: 150px;" id="btingresarpago" >Ingresar</button></td>
+                    <td><input class="rounded" id="c_pago" placeholder="pago" type="text" style="width: 290px;" onkeydown="enter_pago(event)" maxlength="50" onkeypress="return validar_texto(event)" onkeyup="formatNumeros(this)" onchange="formatNumeros(this)"/></td>
                 </tr>
+                <td><button style="width: 150px;" id="btingresarpago" >Ingresar</button></td>
             </table>
             <br>
             <div id="titulo_gasto" style="titulo" style="width: 900px;"><h3>Registro de Gastos</h3></div>
@@ -248,9 +243,22 @@
         <div id="cierrecaja">
             <div id="msj_cierrecaja"></div>
             <div style="titulo"><h1>Cierre de Caja</h1></div>
+            <div style="titulo" id="titulo_cierre_caja" style="width: 900px;"><h3>Editar de Pagos</h3></div>
+            <table style="width: 900px;">
+                <tr>
+                    <td>Maquina :</td><td></td><td style="width: 10px;"></td><td>Pago :</td><td></td><td></td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="text" readonly="readonly" class="rounded" id="c_maq_cierre" style="width: 150px;" />
+                    </td>
+                    <td style="width: 150px;"></td>
+                    <td>$</td><td><input class="rounded" id="c_pago_cierre" placeholder="pago" type="text" style="width: 290px;" maxlength="50" onkeypress="return validar_texto(event)" onkeyup="formatNumeros(this)" onchange="formatNumeros(this)"/></td>
+                    <td style="width: 150px;"></td>
+                    <td><button style="width: 150px;" id="bteditarpago" >Editar</button></td>
+                </tr>
+            </table>
             <br>
-
-            <div id="alto"></div>
         </div>
     </div>
 

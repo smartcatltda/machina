@@ -2,7 +2,7 @@
     <label>No se ha activado ninguna maquina!</label>
 <?php else: ?>
     <br>
-    <table id="tabla_maquinas" border="2">
+    <table id="tabla_maquinas" class="dataTableScrollDiv" border="2">
         <th>NUMERO DE MAQUINA</th>
         <th>OBSERVACIONES</th>
         <?php

@@ -89,24 +89,7 @@ class modelo extends CI_Model {
         endif;
     }
 
-    function eliminar_user($user) {
-        $this->db->select('*');
-        $this->db->where('user', $user);
-        $cantidad = $this->db->get('usuario')->num_rows();
-        $tipo = '0';
-        if ($cantidad > 0):
-            $data = array(
-                "tipo" => $tipo
-            );
-            $this->db->where('user', $user);
-            $this->db->update('usuario', $data);
-            return 0;
-        else:
-            return 1;
-        endif;
-    }
-
-//MANTENEDOR MAQUINAS
+    //MANTENEDOR MAQUINAS
     function mostrar_maquinas() {
         $this->db->select('*');
         $this->db->from('maquina');
@@ -154,23 +137,6 @@ class modelo extends CI_Model {
         endif;
     }
 
-    function eliminar_maquina($num_maquina) {
-        $this->db->select('*');
-        $this->db->where('num_maquina', $num_maquina);
-        $cantidad = $this->db->get('maquina')->num_rows();
-        $estado = '2';
-        if ($cantidad > 0):
-            $data = array(
-                "estado" => $estado
-            );
-            $this->db->where('num_maquina', $num_maquina);
-            $this->db->update('maquina', $data);
-            return 0;
-        else:
-            return 1;
-        endif;
-    }
-
 //MANTENEDOR GASTOS
     function cargar_cat_gasto() {
         $this->db->select('*');
@@ -207,7 +173,7 @@ class modelo extends CI_Model {
         $datos = $this->db->get('categoria_gastos');
         if ($datos->num_rows() == 0):
             $this->db->select('*');
-            $this->db->where('id_categoria', $id);
+            $this->db->where('id_categoria', $id_gasto);
             $cantidad = $this->db->get('categoria_gastos')->num_rows();
             if ($cantidad > 0):
                 $data = array(
@@ -236,23 +202,6 @@ class modelo extends CI_Model {
                     return 2;
                 endif;
             }
-        endif;
-    }
-
-    function eliminar_gasto($nombre_gasto) {
-        $this->db->select('*');
-        $this->db->where('nombre_categoria', $nombre_gasto);
-        $cantidad = $this->db->get('categoria_gastos')->num_rows();
-        $estado = '2';
-        if ($cantidad > 0):
-            $data = array(
-                "estado_cat_gasto" => $estado
-            );
-            $this->db->where('nombre_categoria', $nombre_gasto);
-            $this->db->update('categoria_gastos', $data);
-            return 0;
-        else:
-            return 1;
         endif;
     }
 

@@ -130,15 +130,6 @@ class Controlador extends CI_Controller {
         echo json_encode(array("valor" => $valor));
     }
 
-    function eliminar_user() {
-        $user = $this->input->post('user');
-        $valor = 1;
-        if ($this->modelo->eliminar_user($user) == 0) {
-            $valor = 0;
-        }
-        echo json_encode(array("valor" => $valor));
-    }
-
     //MANTENEDOR MAQUINAS
     function mostrar_maquinas() {
         $datos = $this->modelo->mostrar_maquinas();
@@ -195,15 +186,6 @@ class Controlador extends CI_Controller {
         $obs = $this->input->post('obs');
         $valor = 1;
         if ($this->modelo->modificar_maquina($num_maquina, $estado, $obs) == 0) {
-            $valor = 0;
-        }
-        echo json_encode(array("valor" => $valor));
-    }
-
-    function eliminar_maquina() {
-        $id_maquina = $this->input->post('num_maquina');
-        $valor = 1;
-        if ($this->modelo->eliminar_maquina($id_maquina) == 0) {
             $valor = 0;
         }
         echo json_encode(array("valor" => $valor));
@@ -266,16 +248,7 @@ class Controlador extends CI_Controller {
         echo json_encode(array("valor" => $valor));
     }
 
-    function eliminar_gasto() {
-        $nombre_gasto = $this->input->post('nombre_gasto');
-        $valor = 1;
-        if ($this->modelo->eliminar_gasto($nombre_gasto) == 0) {
-            $valor = 0;
-        }
-        echo json_encode(array("valor" => $valor));
-    }
-
-    function cargar_gastos_activos() {
+     function cargar_gastos_activos() {
         $datos["gastos"] = $this->modelo->cargar_cat_gasto()->result();
         $this->load->view("gastos_activos", $datos);
     }

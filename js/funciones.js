@@ -55,9 +55,7 @@ $(document).ready(function () {
     $("#bteditaruser").button().click(function () {
         editar_user();
     });
-    $("#bteliminaruser").button().click(function () {
-        eliminar_user();
-    });
+
     //MANTENEDOR MAQUINAS
     mostrar_maquinas();
     cargar_maquinas();
@@ -70,9 +68,6 @@ $(document).ready(function () {
     });
     $("#bteditarmaquina").button().click(function () {
         editar_maquina();
-    });
-    $("#bteliminarmaquina").button().click(function () {
-        eliminar_maquina();
     });
     //CAJA ADMIN
     $("#btregistrarkey").button().click(function () {
@@ -87,14 +82,8 @@ $(document).ready(function () {
     $("#btguardargasto").button().click(function () {
         guardar_cat_gasto();
     });
-    $("#btseleccionargastos").button().click(function () {
-        seleccionar_cat_gasto();
-    });
     $("#bteditargastos").button().click(function () {
         editar_cat_gasto();
-    });
-    $("#bteliminargastos").button().click(function () {
-        eliminar_cat_gasto();
     });
     //CAJA CAJERO
     $("#btingresarpago").button().click(function () {
@@ -103,6 +92,8 @@ $(document).ready(function () {
     $("#btregistrargasto").button().click(function () {
         guardar_cgasto();
     });
+    //CIERRE DE CAJA
+
 
 });
 
@@ -332,9 +323,9 @@ function guardar_user()
         $("#msj_man_user").css("color", "#FF0000").show('drop', 'slow').delay(3000).hide('drop', 'slow');
     }
 }
-function  seleccionar_user()
+function  seleccionar_user(user)
 {
-    var user = $("#man_user").val();
+    var user = user;
     if (user != "") {
         $.post(base_url + "controlador/seleccionar_user", {user: user},
         function (datos) {
@@ -399,36 +390,6 @@ function editar_user()
         $("#msj_man_user").css("color", "#FF0000").show('drop', 'slow').delay(3000).hide('drop', 'slow');
     }
 }
-function eliminar_user()
-{
-    var user = $("#man_user").val();
-    if (user != "") {
-        $.post(base_url + "controlador/eliminar_user", {user: user},
-        function (datos) {
-            if (datos.valor == 1) {
-                $("#msj_man_user").hide();
-                $("#msj_man_user").html("<label>Usuario No Registrado</label>");
-                $("#msj_man_user").css("color", "#FF0000").show('drop', 'slow').delay(3000).hide('drop', 'slow');
-            } else {
-                $("#msj_man_user").hide();
-                $("#msj_man_user").html("<label>Usuario Eliminado</label>");
-                $("#msj_man_user").css("color", "#55FF00").show('drop', 'slow').delay(3000).hide('drop', 'slow');
-                $("#man_nombre").val("");
-                $("#man_apellido").val("");
-                $("#man_user").val("");
-                $("#man_pass").val("");
-                $("#man_tipo").val("");
-                mostrar_user();
-            }
-        }, "json"
-                );
-    } else {
-        $("#msj_man_user").hide();
-        $("#msj_man_user").html("<label>Debe Seleccionar el Usuario a Eliminar</label>");
-        $("#msj_man_user").css("color", "#FF0000").show('drop', 'slow').delay(3000).hide('drop', 'slow');
-    }
-}
-
 //MANTENERDOR MAQUINAS
 function mostrar_maquinas()
 {
@@ -650,9 +611,9 @@ function guardar_cat_gasto()
         $("#msj_man_gastos").css("color", "#FF0000").show('drop', 'slow').delay(3000).hide('drop', 'slow');
     }
 }
-function  seleccionar_cat_gasto()
+function  seleccionar_cat_gasto(nombre)
 {
-    var nombre_gasto = $("#man_nombre_gasto").val();
+    var nombre_gasto = nombre;
     if (nombre_gasto != "") {
         $.post(base_url + "controlador/seleccionar_cat_gasto", {nombre_gasto: nombre_gasto},
         function (datos) {
@@ -662,7 +623,7 @@ function  seleccionar_cat_gasto()
                 $("#msj_man_gastos").css("color", "#FF0000").show('drop', 'slow').delay(3000).hide('drop', 'slow');
             } else {
                 $("#id_cat_gastos").val(datos.id_cat_gasto);
-                $("#man_nombre").val(datos.nombre_gasto);
+                $("#man_nombre_gasto").val(datos.nombre_gasto);
                 $("#man_estado_gasto").val(datos.estado_cat_gasto);
                 $("#man_desc_gasto").val(datos.desc);
 
@@ -710,34 +671,6 @@ function editar_cat_gasto()
         $("#msj_man_gastos").hide();
         $("#msj_man_gastos").html("<label>Seleccione Gasto a Editar</label>");
         $("#msj_man_gastos").css("color", "#FF0000").show('drop', 'slow').delay(3000).hide('drop', 'slow');
-    }
-}
-function eliminar_cat_gasto()
-{
-    var nombre_gasto = $("#man_nombre_gasto").val();
-    if (nombre_gasto != "") {
-        $.post(base_url + "controlador/eliminar_gasto", {nombre_gasto: nombre_gasto},
-        function (datos) {
-            if (datos.valor == 1) {
-                $("#msj_man_gastos").hide();
-                $("#msj_man_gastos").html("<label>Gasto No Registrado</label>");
-                $("#msj_man_gastos").css("color", "#FF0000").show('drop', 'slow').delay(3000).hide('drop', 'slow');
-            } else {
-                $("#msj_man_gastos").hide();
-                $("#msj_man_gastos").html("<label>Gasto Eliminado</label>");
-                $("#msj_man_gastos").css("color", "#55FF00").show('drop', 'slow').delay(3000).hide('drop', 'slow');
-                $("#id_cat_gastos").val("");
-                $("#man_nombre_gasto").val("");
-                $("#man_estado_gasto").val("");
-                $("#man_desc_gasto").val("");
-                cargar_cat_gastos();
-            }
-        }, "json"
-                );
-    } else {
-        $("#msj_man_user").hide();
-        $("#msj_man_user").html("<label>Seleccione Gasto a Eliminar</label>");
-        $("#msj_man_user").css("color", "#FF0000").show('drop', 'slow').delay(3000).hide('drop', 'slow');
     }
 }
 
