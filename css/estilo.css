@@ -6,6 +6,11 @@
     height: 520px;
     background:url("images/SCC520-png-blanco.png");
 }
+.logo{
+    background:url("images/SCC-catheadmini.png");
+    width: 40px;
+    height: 36px;
+}
 #login{
     text-align: center;
     display: none;

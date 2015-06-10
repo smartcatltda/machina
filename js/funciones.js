@@ -71,8 +71,12 @@ $(document).ready(function () {
     });
     //CAJA ADMIN
     $("#btregistrarkey").button().click(function () {
-
+        registrar_key();
     });
+    $("#btreiniciarkeys").button().click(function () {
+        reiniciar_keys();
+    });
+
     $("#btaumento").button().click(function () {
 
     });
@@ -674,6 +678,85 @@ function editar_cat_gasto()
     }
 }
 
+//ADMINISTRACION DE CAJA
+
+function diferencia_keys()
+{
+    var key_in = $("#ac_keyin").val().replace(/\./g, '');
+    var key_out = $("#ac_keyout").val().replace(/\./g, '');
+    if (key_in != "" && key_out != "") {
+        $.post(base_url + "controlador/diferencia_keys", {key_in: key_in, key_out: key_out},
+        function (data) {
+            var num = data.total;
+            num = num.toString().split('').reverse().join('').replace(/(?=\d*\.?)(\d{3})/g, '$1.');
+            num = num.split('').reverse().join('').replace(/^[\.]/, '');
+            $("#ac_total").val(num);
+        }, "json"
+                );
+    }
+}
+function sumatoria_keys()
+{
+    var key_in = $("#ac_keyin").val().replace(/\./g, '');
+    var key_out = $("#ac_keyout").val().replace(/\./g, '');
+    var total_key = $("#ac_total").val().replace(/\./g, '');
+    var total_in = $("#ac_totalin").val().replace(/\./g, '');
+    var total_out = $("#ac_totalout").val().replace(/\./g, '');
+    var acumulado = $("#ac_acumulado").val().replace(/\./g, '');
+    $.post(base_url + "controlador/sumatoria_keys", {key_in: key_in, key_out: key_out, total_key: total_key, total_in: total_in, total_out: total_out, acumulado: acumulado},
+    function (data) {
+        var total_in = data.total_in;
+        var total_out = data.total_out;
+        var acumulado = data.acumulado;
+        total_in = total_in.toString().split('').reverse().join('').replace(/(?=\d*\.?)(\d{3})/g, '$1.');
+        total_out = total_out.toString().split('').reverse().join('').replace(/(?=\d*\.?)(\d{3})/g, '$1.');
+        acumulado = acumulado.toString().split('').reverse().join('').replace(/(?=\d*\.?)(\d{3})/g, '$1.');
+        total_in = total_in.split('').reverse().join('').replace(/^[\.]/, '');
+        total_out = total_out.split('').reverse().join('').replace(/^[\.]/, '');
+        acumulado = acumulado.split('').reverse().join('').replace(/^[\.]/, '');
+        $("#ac_totalin").val(total_in);
+        $("#ac_totalout").val(total_out);
+        $("#ac_acumulado").val(acumulado);
+    }, "json"
+            );
+}
+function reiniciar_keys() {
+    $("#ac_totalin").val("");
+    $("#ac_totalout").val("");
+    $("#ac_acumulado").val("");
+    $("#ac_total").val("");
+}
+function registrar_key()
+{
+    var num_maquina = $("#ac_maq").val();
+    var key_in = $("#ac_keyin").val().replace(/\./g, '');
+    var key_out = $("#ac_keyout").val().replace(/\./g, '');
+    var total_key = $("#ac_total").val().replace(/\./g, '');
+    var tiempo = new Date();
+    var hora = tiempo.getHours();
+    var min = tiempo.getMinutes();
+    var dia = tiempo.getDate();
+    var mes = tiempo.getMonth();
+    var ano = tiempo.getFullYear();
+    if (key_in != "" && key_out != "") {
+        $.post(base_url + "controlador/registrar_key", {num_maquina: num_maquina, key_in: key_in, key_out: key_out, total_key: total_key, hora: hora, min: min, dia: dia, mes: mes, ano: ano},
+        function (data) {
+            $("#msj_keys").hide();
+            $("#msj_keys").html("<label>" + data.msg + "</label>");
+            if (data.valor == 1) {
+                sumatoria_keys();
+                $("#ac_keyin").val("");
+                $("#ac_keyout").val("");
+            }
+            $("#msj_keys").css("color", "#55FF00").show('drop', 'slow').delay(3000).hide('drop', 'slow');
+        }, "json"
+                );
+    } else {
+        $("#msj_keys").hide();
+        $("#msj_keys").html("<label>Ingrese Ambas Keys</label>");
+        $("#msj_keys").css("color", "#FF0000").show('drop', 'slow').delay(3000).hide('drop', 'slow');
+    }
+}
 //MANTENEDOR PAGOS
 function guardar_cpago()
 {

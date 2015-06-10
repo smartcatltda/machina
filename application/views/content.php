@@ -139,6 +139,7 @@
         </div>
         <!--ADMINISTRACION CAJA-->
         <div id="caja">
+            <div id="msj_keys"></div>
             <div style="titulo"><h1>Administración de Caja</h1></div>
             <br>
             <table style="width: 800px;">
@@ -149,9 +150,9 @@
                     <td>
                         <select onchange="foco('ac_keyin')" class="rounded" id="ac_maq" style="width: 160px;" ></select>
                     </td>
-                    <td>$</td><td><input class="rounded" id="ac_keyin" placeholder="Key In" type="text" style="width: 260px;" maxlength="50" onkeypress="return validar_texto(event)" autofocus onkeydown="enter_keyin(event)" onkeyup="formatNumeros(this)" onchange="formatNumeros(this)" /></td>
-                    <td>$</td><td><input class="rounded" id="ac_keyout" placeholder="Key Out" type="text" style="width: 260px;" maxlength="50" onkeypress="return validar_texto(event)" onkeyup="formatNumeros(this)" onchange="formatNumeros(this)" /></td>
-                    <td>$</td><td><input class="rounded" id="ac_total" type="text" style="width: 260px;" disabled="true"/></td>
+                    <td>$</td><td><input class="rounded" id="ac_keyin" placeholder="Key In" type="text" style="width: 260px;" maxlength="50" onkeypress="return validar_texto(event)" autofocus onkeydown="enter_keyin(event)" onkeyup="formatNumeros(this); formatNumeros(this)" /></td>
+                    <td>$</td><td><input class="rounded" id="ac_keyout" placeholder="Key Out" type="text" style="width: 260px;" maxlength="50" onkeypress="return validar_texto(event)" onkeyup="diferencia_keys(this); formatNumeros(this)"/></td>
+                    <td>$</td><td><input class="rounded" id="ac_total" type="text" style="width: 260px;" disabled="true" onload="formatNumeros(this)"/></td>
                     <td><button id="btregistrarkey" >Registrar</button></td>
                 </tr>
                 <tr>
@@ -159,10 +160,10 @@
                 </tr>
                 <tr>
                     <td></td>
-                    <td>$</td><td><input class="rounded" id="ac_totalin" type="text" style="width: 260px;" disabled="true" /></td>
-                    <td>$</td><td><input class="rounded" id="ac_atotalout" type="text" style="width: 260px;" disabled="true" /></td>
-                    <td>$</td><td><input class="rounded" id="ac_acumulado" type="text" style="width: 260px;" disabled="true" /></td>
-                    <td></td>
+                    <td>$</td><td><input class="rounded" id="ac_totalin" placeholder="0" type="text" style="width: 260px;" disabled="true" /></td>
+                    <td>$</td><td><input class="rounded" id="ac_totalout" placeholder="0" type="text" style="width: 260px;" disabled="true" /></td>
+                    <td>$</td><td><input class="rounded" id="ac_acumulado" placeholder="0" type="text" style="width: 260px;" disabled="true" /></td>
+                    <td><button id="btreiniciarkeys" >Resetear</button></td>
                 </tr>
                 <tr>
                     <td></td><td></td><td></td><td></td><td></td><td></td><td> Ingrese Monto del Aumento :</td>
