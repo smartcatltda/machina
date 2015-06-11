@@ -231,6 +231,18 @@ class modelo extends CI_Model {
             return 1;
         endif;
     }
+    function ingresar_aumento($monto_aumento, $hora, $min, $dia, $mes, $ano){
+        $data = array(
+            "monto_aumento" => $monto_aumento,
+            "hora_aumento" => $hora,
+            "min_aumento" => $min,
+            "dia_aumento" => $dia,
+            "mes_aumento" => $mes,
+            "ano_aumento" => $ano,
+        );
+        $this->db->insert("aumento", $data);
+        return 0;
+    }
 
 //MANTENEDOR PAGO
     function guardar_pago($num_maquina, $monto_pago, $min, $horas, $dia, $mes, $ano, $id_user) {

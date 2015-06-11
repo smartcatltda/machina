@@ -291,6 +291,21 @@ class Controlador extends CI_Controller {
         }
         echo json_encode(array("valor" => $valor, "msg" => $msg));
     }
+    
+    function ingresar_aumento() {
+        $monto_aumento = $this->input->post('monto_aumento');
+        $hora = $this->input->post('hora');
+        $min = $this->input->post('min');
+        $dia = $this->input->post('dia');
+        $mes = $this->input->post('mes') + 1;
+        $ano = $this->input->post('ano');
+        $valor = 0;
+        if ($this->modelo->ingresar_aumento($monto_aumento, $hora, $min, $dia, $mes, $ano) == 0) {
+            $msg = "Aumento Registrado Correctamente";
+            $valor = 1;
+        }
+        echo json_encode(array("valor" => $valor, "msg" => $msg));
+    }
 
 //MANTENEDOR PAGO
     function guardar_pago() {
