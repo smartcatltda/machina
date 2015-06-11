@@ -352,10 +352,16 @@ class Controlador extends CI_Controller {
 
     function editar_pago() {
         $id_pago = $this->input->post('id_pago');
+        $num_maquina = $this->input->post('num_maquina');
         $monto_pago = $this->input->post('monto_pago');
+        $coment = $this->input->post('coment');
+        $estado = 1;
         $hora = $this->input->post('horas');
         $min = $this->input->post('min');
-        if ($this->modelo->editar_pago($id_pago, $monto_pago, $hora, $min) == 0) {
+        $dia = $this->input->post('dia');
+        $mes = $this->input->post('mes') + 1;
+        $ano = $this->input->post('ano');
+        if ($this->modelo->editar_pago($id_pago, $monto_pago, $coment, $num_maquina, $estado, $hora, $min, $dia, $mes, $ano) == 0) {
             $valor = 0;
         }
         echo json_encode(array("valor" => $valor));

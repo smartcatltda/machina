@@ -270,9 +270,9 @@ class modelo extends CI_Model {
         $this->db->where('dia_pago', $dia);
         $this->db->where('mes_pago', $mes);
         $this->db->where('ano_pago', $ano);
-        $this->db->where('estado_pago','0');
+        $this->db->where('estado_pago', '0');
         $this->db->from('pago');
-        $this->db->order_by('id_pago','DESC');
+        $this->db->order_by('id_pago', 'DESC');
         $this->db->limit(3);
         return $this->db->get();
     }
@@ -283,22 +283,34 @@ class modelo extends CI_Model {
         return $this->db->get('pago');
     }
 
-    function editar_pago($id_pago, $monto_pago, $hora, $min) {
+    function editar_pago($id_pago, $monto_pago, $coment, $num_maquina, $estado, $hora, $min, $dia, $mes, $ano) {
         $this->db->select('*');
         $this->db->where('id_pago', $id_pago);
         $cantidad = $this->db->get('pago')->num_rows();
-        if ($cantidad > 0):
-            $data = array(
-                "monto_pago" => $monto_pago,
-                "hora_pago" => $hora,
-                "min_pago" => $min,
-            );
-            $this->db->where('id_pago', $id_pago);
-            $this->db->update('pago', $data);
-            return 0;
-        else:
-            return 1;
-        endif;
+        $user = $this->session->userdata('id_user');
+        $data = array(
+            "num_maquina" => $num_maquina,
+            "monto_pago" => $monto_pago,
+            "hora_pago" => $hora,
+            "min_pago" => $min,
+            "dia_pago" => $dia,
+            "mes_pago" => $mes,
+            "ano_pago" => $ano,
+            "estado_pago" => '0',
+            "edit_pago" => $id_pago,
+                        "id_usuario" => $user,
+        );
+        $this->db->where('id_pago', $id_pago);
+        $this->db->insert('pago', $data);
+
+        $datos = array(
+            "estado_pago"=>$estado,   
+            "coment_edit" => $coment,
+        );
+        $this->db->where('id_pago', $id_pago);
+        $this->db->update('pago', $datos);
+        
+        return 0;
     }
 
 }
