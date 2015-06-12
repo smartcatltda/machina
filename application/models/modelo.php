@@ -298,19 +298,70 @@ class modelo extends CI_Model {
             "ano_pago" => $ano,
             "estado_pago" => '0',
             "edit_pago" => $id_pago,
-                        "id_usuario" => $user,
+            "id_usuario" => $user,
         );
         $this->db->where('id_pago', $id_pago);
         $this->db->insert('pago', $data);
 
         $datos = array(
-            "estado_pago"=>$estado,   
+            "estado_pago" => $estado,
             "coment_edit" => $coment,
         );
         $this->db->where('id_pago', $id_pago);
         $this->db->update('pago', $datos);
-        
+
         return 0;
+    }
+
+    function pagos_cuadratura($dia, $mes, $ano, $id_user) {
+        $this->db->select('monto_pago');
+        $this->db->where('dia_pago', $dia);
+        $this->db->where('mes_pago', $mes);
+        $this->db->where('ano_pago', $ano);
+        $this->db->where('id_usuario', $id_user);
+        return $this->db->get('pago');
+    }
+
+    function aumento_cuadratura($dia, $mes, $ano) {
+        $this->db->select('monto_aumento');
+        $this->db->where('dia_aumento', $dia);
+        $this->db->where('mes_aumento', $mes);
+        $this->db->where('ano_aumento', $ano);
+        return $this->db->get('aumento');
+    }
+
+    function caja_anterior($dia, $mes, $ano, $id_user) {
+        $this->db->select('total_caja');
+        $this->db->where('dia_cuadratura', $dia);
+        $this->db->where('mes_cuadratura', $mes);
+        $this->db->where('ano_cuadratura', $ano);
+        $this->db->where('id_usuario', $id_user);
+        return $this->db->get('cuadratura_caja');
+    }
+
+    function guarda_cuadratura($total_caja, $total_aumentos, $total_pagos, $caja_anterior, $dia, $mes, $ano, $min, $hora, $id_user) {
+        $data = array(
+            "total_aumentos" => $total_aumentos,
+            "total_pagos" => $total_pagos,
+            "caja_anterior" => $caja_anterior,
+            "total_caja" => $total_caja,
+            "hora_cuadratura" => $hora,
+            "min_cuadratura" => $min,
+            "dia_cuadratura" => $dia,
+            "mes_cuadratura" => $mes,
+            "ano_cuadratura" => $ano,
+            "id_usuario" => $id_user,
+        );
+        $this->db->insert("cuadratura_caja", $data);
+    }
+
+    function ver_cuadratura($id_user, $dia, $mes, $ano) {
+        $this->db->select('*');
+        $this->db->where('dia_cuadratura', $dia);
+        $this->db->where('mes_cuadratura', $mes);
+        $this->db->where('ano_cuadratura', $ano);
+        $this->db->where('id_usuario', $id_user);
+        return $this->db->get('cuadratura_caja');
     }
 
 }

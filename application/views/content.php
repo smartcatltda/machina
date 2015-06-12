@@ -244,7 +244,7 @@
             <tr></tr>
         </div>
 
-        <!--CIERRE DE CAJA-->
+        <!--EDITAR PAGO CAJA-->
         <div id="cierrecaja">
             <div id="msj_cierrecaja"></div>
             <div style=""id="dialog-confirm" title="Confirmación">
@@ -292,8 +292,27 @@
             <div class="rounded" id="lista_pagos"></div>
             <div id="alto"></div>
         </div>
+        <!--    CUADRATURA CAJA-->
+        <div id="cuadratura">
+            <div style=""id="dialog-cuadratura" title="Advertencia">
+                <p><span style="display: none; float:left; margin:0 7px 20px 0; text-justify: auto"></span>Una vez realizado el Cierre de Caja no podrá ejecutar ninguna otra operación en el sistema.</p>
+                <p>¿ Está seguro que desea continuar ?</p>          
+            </div>
+            <div style="titulo"><h1>Resumen Diario</h1></div>
+            <div></div>
+            <br>
+            <br>
+            <div class="rounded" id="lista_cuadratura"></div>
+            <div id='bt_cuadratura'>
+                <table style="width: 900px;">
+                    <tr align='center'>
+                        <td colspan="2"><button class="rounded"style="width: 250px; height: 50px; margin-top: 10%; font-weight: bold;" id="btcuadrar">Cierre Caja</button></td>
+                    </tr>
+                </table>
+            </div>
+            <div id="alto"></div>
+        </div>
     </div>
-
     <!--PIE DE PAGINA-->
     <div id="nombrelogin"></div>
 </div>

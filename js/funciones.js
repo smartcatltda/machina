@@ -26,6 +26,7 @@ $(document).ready(function () {
     });
     $("#salir").button().click(function () {
         salir();
+        location.reload();
     });
     $("#bthomec").button().click(function () {
         homec();
@@ -37,8 +38,12 @@ $(document).ready(function () {
     $("#btcierrecaja").button().click(function () {
         cierrecaja();
     });
+    $("#btcuadratura").button().click(function () {
+        cuadratura();
+    });
     $("#salirc").button().click(function () {
         salir();
+        location.reload();
     });
     $("#admin").tabs();
     $("#cajero").tabs();
@@ -100,6 +105,9 @@ $(document).ready(function () {
     cargar_pagos();
     $("#bteditarpago").button().click(function () {
         editar_pago();
+    });
+    $("#btcuadrar").button().click(function () {
+        informe_cuadratura();
     });
 
 });
@@ -165,6 +173,7 @@ function verificalogin()
                     $("#contenido").hide();
                     $("#menucajero").hide();
                     $("#menuadmin").hide();
+                    foco('user');
                     $("#login").show('fast');
                 }
                 else
@@ -270,23 +279,38 @@ function estadisticas()
 function homec()
 {
     $("#dialog-confirm").hide();
+    $("#dialog-cuadratura").hide();
     $("#cajac").hide('fast');
+    $("#cuadratura").hide('fast');
     $("#cierrecaja").hide('fast');
     $("#homec").show('fast');
 }
 function cajac()
 {
     $("#dialog-confirm").hide();
+    $("#dialog-cuadratura").hide();
     $("#homec").hide('fast');
+    $("#cuadratura").hide('fast');
     $("#cierrecaja").hide('fast');
     $("#cajac").show('fast');
 }
 function cierrecaja()
 {
     $("#dialog-confirm").hide();
+    $("#dialog-cuadratura").hide();
     $("#homec").hide('fast');
     $("#cajac").hide('fast');
+    $("#cuadratura").hide('fast');
     $("#cierrecaja").show('fast');
+}
+function cuadratura()
+{
+    $("#dialog-confirm").hide();
+    $("#dialog-cuadratura").hide();
+    $("#homec").hide('fast');
+    $("#cajac").hide('fast');
+    $("#cierrecaja").hide('fast');
+    $("#cuadratura").show('fast');
 }
 //MANTENEDOR USUARIO
 function mostrar_user()
@@ -804,7 +828,7 @@ function guardar_cgasto()
     var dia = tiempo.getDate();
     var mes = tiempo.getMonth();
     var ano = tiempo.getFullYear();
-    if (id_categoria != "" && monto_gasto != "") {
+    if (id_categoria != "" && monto_gasto != "" && detalle != "") {
         $.post(base_url + "controlador/guardar_cgasto", {id_categoria: id_categoria, monto_gasto: monto_gasto, detalle: detalle, min: min, horas: horas, dia: dia, mes: mes, ano: ano},
         function (data) {
             $("#msj_cajac").hide();
@@ -819,7 +843,7 @@ function guardar_cgasto()
                 );
     } else {
         $("#msj_cajac").hide();
-        $("#msj_cajac").html("<label>Ingrese Monto del Gasto</label>");
+        $("#msj_cajac").html("<label>Complete Todos los Campos</label>");
         $("#msj_cajac").css("color", "#FF0000").show('drop', 'slow').delay(3000).hide('drop', 'slow');
     }
 }
@@ -835,7 +859,6 @@ function cargar_pagos()
             {dia: dia, mes: mes, ano: ano},
     function (ruta, datos) {
         $("#lista_pagos").html(ruta, datos);
-
     });
 }
 
@@ -910,6 +933,46 @@ function editar_pago()
         $("#msj_cierrecaja").html("<label>Complete Todos los Campos</label>");
         $("#msj_cierrecaja").css("color", "#FF0000").show('drop', 'slow').delay(3000).hide('drop', 'slow');
     }
+}
+
+function informe_cuadratura()
+{
+    var time = new Date();
+    var hora = time.getHours();
+    var min = time.getMinutes();
+    var dia = time.getDate();
+    var mes = time.getMonth();
+    var ano = time.getFullYear();
+    $(function () {
+        $("#dialog-cuadratura").dialog({
+            resizable: true,
+            height: 335,
+            width: 335,
+            modal: true,
+            buttons: {
+                "Continuar": function () {
+                    $("#dialog-cuadratura").show();
+                    $(this).dialog("close");
+                    $.post(
+                            base_url + "controlador/informe_cuadratura",
+                            {dia: dia, mes: mes, ano: ano, hora: hora, min: min},
+                    function (ruta, datos) {
+                        $("#lista_cuadratura").html(ruta, datos);
+                        $("#bt_cuadratura").hide();
+                        $("#bt_cuadratura").hide();
+                    }
+                    );
+                },
+                Cancel: function () {
+                    $(this).dialog("close");
+                    $("#dialog-cuadratura").show();
+                }
+            }
+        });
+    });
+
+
+
 }
 
 //VALIDACIONES

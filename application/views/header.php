@@ -31,6 +31,7 @@
             <button id="bthomec">Home</button>
             <button onclick="foco('c_pago')" id="btcajac">Caja</button>
             <button onclick="cargar_pagos(), foco('c_pago_cierre')"id="btcierrecaja">Pagos</button>
+            <button id="btcuadratura">Cierre Caja</button>
             <button style="float: right" id="salirc">Cerrar Sesión</button>
         </div>
     </header>

@@ -36,6 +36,9 @@
 #estadisticas{
     height: 520px;
 }
+#cuadratura{
+    height: 520px;
+}
 #nombrelogin{
     font-weight: bold;
 }
@@ -62,6 +65,17 @@
     z-index:1
 }
 #msj_cierrecaja{
+    display: none;
+    width: 1024px;
+    font-size: 50px; 
+    text-align: center;
+    margin: 0 auto;
+    background-color: #000000; 
+    border-radius: 10px;
+    position:absolute; 
+    z-index:1
+}
+#msj_cuadratura{
     display: none;
     width: 1024px;
     font-size: 50px; 
