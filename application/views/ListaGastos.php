@@ -1,5 +1,5 @@
 <?php ?>
-<table id="tabla_gastos" class="display" border="2">
+<table id="tabla_gastos"  border="2">
     <thead>
         <tr>
             <th>NOMBRE</th>

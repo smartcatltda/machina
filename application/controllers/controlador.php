@@ -507,6 +507,7 @@ class Controlador extends CI_Controller {
         else:
             $data = $this->modelo->aumento_cuadratura($dia, $mes, $ano)->result();
             foreach ($data as $fila) {
+                $acum = 0;
                 $acum+=intval($fila->monto_aumento);
             }
             $total_aumentos = $acum;
