@@ -60,7 +60,6 @@ $(document).ready(function () {
     $("#bteditaruser").button().click(function () {
         editar_user();
     });
-
     //MANTENEDOR MAQUINAS
     mostrar_maquinas();
     cargar_maquinas();
@@ -81,9 +80,13 @@ $(document).ready(function () {
     $("#btreiniciarkeys").button().click(function () {
         reiniciar_keys();
     });
-
     $("#btaumento").button().click(function () {
-
+        ingresar_aumento();
+    });
+    //ESTADISTICAS ADMIN
+    $("#estad_datepicker").datepicker();
+    $("#btestad").button().click(function () {
+        generar_informe();
     });
     //MANTENEDOR GASTOS
     cargar_cat_gastos();
@@ -109,9 +112,7 @@ $(document).ready(function () {
     $("#btcuadrar").button().click(function () {
         informe_cuadratura();
     });
-
 });
-
 function conectar()
 {
     var user = $("#user").val();
@@ -432,7 +433,6 @@ function mostrar_maquinas()
             {},
             function (ruta, datos) {
                 $("#lista_maquinas").html(ruta, datos);
-
             }
     );
 }
@@ -603,7 +603,6 @@ function cargar_cat_gastos()
             {},
             function (ruta, datos) {
                 $("#lista_gastos").html(ruta, datos);
-
             }
     );
 }
@@ -633,7 +632,6 @@ function guardar_cat_gasto()
                 $("#man_nombre_gasto").val("");
                 $("#man_estado_gasto").val("");
                 $("#man_desc_gasto").val("");
-
             } else {
                 $("#msj_man_gastos").css("color", "#FF0000").show('drop', 'slow').delay(3000).hide('drop', 'slow');
             }
@@ -660,7 +658,6 @@ function  seleccionar_cat_gasto(nombre)
                 $("#man_nombre_gasto").val(datos.nombre_gasto);
                 $("#man_estado_gasto").val(datos.estado_cat_gasto);
                 $("#man_desc_gasto").val(datos.desc);
-
             }
         }, "json"
                 );
@@ -786,6 +783,65 @@ function registrar_key()
         $("#msj_keys").html("<label>Ingrese Ambas Keys</label>");
         $("#msj_keys").css("color", "#FF0000").show('drop', 'slow').delay(3000).hide('drop', 'slow');
     }
+}
+
+function ingresar_aumento()
+{
+    var monto_aumento = $("#ac_aumento").val().replace(/\./g, '');
+    var tiempo = new Date();
+    var hora = tiempo.getHours();
+    var min = tiempo.getMinutes();
+    var dia = tiempo.getDate();
+    var mes = tiempo.getMonth();
+    var ano = tiempo.getFullYear();
+    if (monto_aumento != "") {
+        $.post(base_url + "controlador/ingresar_aumento", {monto_aumento: monto_aumento, hora: hora, min: min, dia: dia, mes: mes, ano: ano},
+        function (data) {
+            $("#msj_keys").hide();
+            $("#msj_keys").html("<label>" + data.msg + "</label>");
+            if (data.valor == 1) {
+                $("#ac_aumento").val("");
+            }
+            $("#msj_keys").css("color", "#55FF00").show('drop', 'slow').delay(3000).hide('drop', 'slow');
+        }, "json"
+                );
+    } else {
+        $("#msj_keys").hide();
+        $("#msj_keys").html("<label>Debe Ingresar la Cantidad del Aumento</label>");
+        $("#msj_keys").css("color", "#FF0000").show('drop', 'slow').delay(3000).hide('drop', 'slow');
+    }
+}
+
+//ESTADISTICAS ADMIN
+function generar_informe() {
+    var tipo = $("#tipo_select").val();
+    var rango = $("#rango_select").val();
+    var fecha = $("#estad_datepicker").val();
+    if (fecha != "") {
+        if (rango == "d") {
+            $.post(base_url + "controlador/informe_diario", {tipo: tipo, fecha: fecha},
+            function (ruta, datos) {
+                $("#informe").html(ruta, datos);
+            });
+        } else {
+            if (rango == "m") {
+                $.post(base_url + "controlador/informe_mensual", {tipo: tipo, fecha: fecha},
+                function (ruta, datos) {
+                    $("#informe").html(ruta, datos);
+                });
+            } else {
+                $.post(base_url + "controlador/informe_anual", {tipo: tipo, fecha: fecha},
+                function (ruta, datos) {
+                    $("#informe").html(ruta, datos);
+                });
+            }
+        }
+    } else {
+        $("#msj_est").hide();
+        $("#msj_est").html("<label>Debe Seleccionar una Fecha</label>");
+        $("#msj_est").css("color", "#FF0000").show('drop', 'slow').delay(3000).hide('drop', 'slow');
+    }
+
 }
 //MANTENEDOR PAGOS
 function guardar_cpago()

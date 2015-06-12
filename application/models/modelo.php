@@ -232,6 +232,166 @@ class modelo extends CI_Model {
         endif;
     }
 
+    function ingresar_aumento($monto_aumento, $hora, $min, $dia, $mes, $ano) {
+        $data = array(
+            "monto_aumento" => $monto_aumento,
+            "hora_aumento" => $hora,
+            "min_aumento" => $min,
+            "dia_aumento" => $dia,
+            "mes_aumento" => $mes,
+            "ano_aumento" => $ano,
+        );
+        $this->db->insert("aumento", $data);
+        return 0;
+    }
+
+//ESTADISTICAS ADMIN DIARIO
+    function diario_keys($dia, $mes, $ano) {
+        $this->db->select('*');
+        $this->db->where('dia_key', $dia);
+        $this->db->where('mes_key', $mes);
+        $this->db->where('ano_key', $ano);
+        return $this->db->get('key');
+    }
+
+    function diario_aumentos($dia, $mes, $ano) {
+        $this->db->select('*');
+        $this->db->where('dia_aumento', $dia);
+        $this->db->where('mes_aumento', $mes);
+        $this->db->where('ano_aumento', $ano);
+        return $this->db->get('aumento');
+    }
+
+    function diario_pagos($dia, $mes, $ano) {
+        $this->db->select('*');
+        $this->db->from('pago');
+        $this->db->join('usuario', 'pago.id_usuario = usuario.id_usuario');
+        $this->db->where('dia_pago', $dia);
+        $this->db->where('mes_pago', $mes);
+        $this->db->where('ano_pago', $ano);
+        return $this->db->get();
+    }
+
+    function diario_gastos($dia, $mes, $ano) {
+        $this->db->select('*');
+        $this->db->from('gastos');
+        $this->db->join('usuario', 'gastos.id_usuario = usuario.id_usuario');
+        $this->db->join('categoria_gastos', 'gastos.id_categoria = categoria_gastos.id_categoria');
+        $this->db->where('dia_gasto', $dia);
+        $this->db->where('mes_gasto', $mes);
+        $this->db->where('ano_gasto', $ano);
+        return $this->db->get();
+    }
+
+    function diario_cierres($dia, $mes, $ano) {
+        $this->db->select('*');
+        $this->db->from('cuadratura_caja');
+        $this->db->join('usuario', 'cuadratura_caja.id_usuario = usuario.id_usuario');
+        $this->db->where('dia_cuadratura', $dia);
+        $this->db->where('mes_cuadratura', $mes);
+        $this->db->where('ano_cuadratura', $ano);
+        return $this->db->get();
+    }
+
+    //ESTADISTICAS ADMIN MENSUAL
+    function mensual_keys($mes, $ano) {
+        $this->db->select('*');
+        $this->db->where('mes_key', $mes);
+        $this->db->where('ano_key', $ano);
+        return $this->db->get('key');
+    }
+
+    function mensual_aumentos($mes, $ano) {
+        $this->db->select('*');
+        $this->db->where('mes_aumento', $mes);
+        $this->db->where('ano_aumento', $ano);
+        return $this->db->get('aumento');
+    }
+
+    function mensual_pagos($mes, $ano) {
+        $this->db->select('num_maquina');
+        $this->db->select_sum('monto_pago');
+        $this->db->where('mes_pago', $mes);
+        $this->db->where('ano_pago', $ano);
+        $this->db->where('estado_pago', 0);
+        $this->db->from('pago');
+        $this->db->group_by('num_maquina');
+        return $this->db->get();
+    }
+
+    function mensual_gastos($mes, $ano) {
+        $this->db->select('nombre_categoria');
+        $this->db->select_sum('monto_gasto');
+        $this->db->from('gastos');
+        $this->db->join('categoria_gastos', 'gastos.id_categoria = categoria_gastos.id_categoria');
+        $this->db->where('mes_gasto', $mes);
+        $this->db->where('ano_gasto', $ano);
+        $this->db->group_by('nombre_categoria');
+        return $this->db->get();
+    }
+
+    function mensual_cierres($mes, $ano) {
+        $this->db->select('*');
+        $this->db->from('cuadratura_caja');
+        $this->db->join('usuario', 'cuadratura_caja.id_usuario = usuario.id_usuario');
+        $this->db->where('mes_cuadratura', $mes);
+        $this->db->where('ano_cuadratura', $ano);
+        return $this->db->get();
+    }
+
+    //ESTADISTICAS ADMIN ANUAL
+    function anual_keys($ano) {
+        $this->db->select('num_maquina');
+        $this->db->select_sum('key_in');
+        $this->db->select_sum('key_out');
+        $this->db->select_sum('total_key');
+        $this->db->where('ano_key', $ano);
+        $this->db->from('key');
+        $this->db->group_by('num_maquina');
+        return $this->db->get();
+    }
+
+    function anual_aumentos($ano) {
+        $this->db->select('mes_aumento');
+        $this->db->select_sum('monto_aumento');
+        $this->db->where('ano_aumento', $ano);
+        $this->db->from('aumento');
+        $this->db->group_by('mes_aumento');
+        return $this->db->get();
+    }
+
+    function anual_pagos($ano) {
+        $this->db->select('num_maquina');
+        $this->db->select_sum('monto_pago');
+        $this->db->where('ano_pago', $ano);
+        $this->db->where('estado_pago', 0);
+        $this->db->from('pago');
+        $this->db->group_by('num_maquina');
+        return $this->db->get();
+    }
+
+    function anual_gastos($ano) {
+        $this->db->select('nombre_categoria');
+        $this->db->select_sum('monto_gasto');
+        $this->db->from('gastos');
+        $this->db->join('categoria_gastos', 'gastos.id_categoria = categoria_gastos.id_categoria');
+        $this->db->where('ano_gasto', $ano);
+        $this->db->group_by('nombre_categoria');
+        return $this->db->get();
+    }
+    
+    function anual_cierres($ano) {
+        $this->db->select('mes_cuadratura');
+        $this->db->select_avg('total_aumentos');
+        $this->db->select_avg('total_pagos');
+        $this->db->select_avg('caja_anterior');
+        $this->db->select_avg('total_caja');
+        $this->db->where('ano_cuadratura', $ano);
+        $this->db->from('cuadratura_caja');
+        $this->db->group_by('mes_cuadratura');
+        return $this->db->get();
+    }
+
 //MANTENEDOR PAGO
     function guardar_pago($num_maquina, $monto_pago, $min, $horas, $dia, $mes, $ano, $id_user) {
         $data = array(

@@ -151,7 +151,7 @@
                         <select onchange="foco('ac_keyin')" class="rounded" id="ac_maq" style="width: 160px;" ></select>
                     </td>
                     <td>$</td><td><input class="rounded" id="ac_keyin" placeholder="Key In" type="text" style="width: 260px;" maxlength="50" onkeypress="return validar_texto(event)" autofocus onkeydown="enter_keyin(event)" onkeyup="formatNumeros(this);
-                            formatNumeros(this)" /></td>
+                            formatNumeros(this)"/></td>
                     <td>$</td><td><input class="rounded" id="ac_keyout" placeholder="Key Out" type="text" style="width: 260px;" maxlength="50" onkeypress="return validar_texto(event)" onkeyup="diferencia_keys(this);
                             formatNumeros(this)"/></td>
                     <td>$</td><td><input class="rounded" id="ac_total" type="text" style="width: 260px;" disabled="true" onload="formatNumeros(this)"/></td>
@@ -179,11 +179,48 @@
         </div>
         <!--REPORTES-->
         <div id="estadisticas">
-            <div id="msj_estadisticas"></div>
+            <div id="msj_est"></div>
             <div style="titulo"><h1>Estadísticas</h1></div>
             <br>
-
-            <div id="alto"></div>
+            <table border="1">
+                <thead>
+                    <tr>
+                        <th rowspan="2">Tipo de Informe</th>
+                        <th rowspan="2">Rango de Tiempo</th>
+                        <th rowspan="2">Fecha</th>
+                    </tr>
+                    <tr>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <select class="rounded" id="tipo_select" style="width: 200px;">
+                                <option value="k">Keys</option>
+                                <option value="a">Aumentos</option>
+                                <option value="p">Pagos</option>
+                                <option value="g">Gastos</option>
+                                <option value="c">Cierres de Caja</option>
+                            </select>
+                        </td>
+                        <td>
+                            <select class="rounded" id="rango_select" style="width: 200px;">
+                                <option value="d">Diario</option>
+                                <option value="m">Mensual</option>
+                                <option value="a">Anual</option>
+                            </select>
+                        </td>
+                        <td><input type="text" id="estad_datepicker" class="rounded"></td>
+                    </tr>
+                </tbody>
+            </table>
+            <table>
+                <tr>
+                    <td style="width: 650px; text-align: right"><button id="btestad">Generar Informe</button></td>
+                </tr>
+            </table>
+            <div id="informe"></div>
+            <!--<div id="alto"></div>-->
         </div>
     </div>
 
