@@ -894,14 +894,17 @@ function  seleccionar_pago(id)
 
 function editar_pago()
 {
-
     var id_pago = $("#id_pago").val();
+    var num_maquina = $("#c_maq_cierre").val();
     var monto_pago = $("#c_pago_cierre").val().replace(/\./g, '');
-    var comet = $("#c_comet").val();
+    var coment = $("#c_coment").val()
     var time = new Date();
     var horas = time.getHours();
     var min = time.getMinutes();
-    if (id_pago != "" && monto_pago != "") {
+    var dia = time.getDate();
+    var mes = time.getMonth();
+    var ano = time.getFullYear();
+    if (id_pago != "" && num_maquina != "" && monto_pago != "" && coment != "") {
         $(function () {
             $("#dialog-confirm").dialog({
                 resizable: true,
@@ -911,15 +914,16 @@ function editar_pago()
                     "Continuar": function () {
                         $("#dialog-confirm").show();
                         $(this).dialog("close");
-                        $.post(base_url + "controlador/editar_pago", {id_pago: id_pago, monto_pago: monto_pago, horas: horas, min: min},
+                        $.post(base_url + "controlador/editar_pago", {id_pago: id_pago, num_maquina: num_maquina, monto_pago: monto_pago, coment: coment, horas: horas, min: min, dia: dia, mes: mes, ano: ano},
                         function (datos) {
                             if (datos.valor == 0) {
                                 $("#msj_cierrecaja").hide();
-                                $("#msj_cierrecaja").html("<label>Modificado Correctamente</label>");
+                                $("#msj_cierrecaja").html("<label>Pago Modificado Correctamente</label>");
                                 $("#msj_cierrecaja").css("color", "#55FF00").show('drop', 'slow').delay(3000).hide('drop', 'slow');
                                 $("#id_pago").val("");
                                 $("#c_maq_cierre").val("");
                                 $("#c_pago_cierre").val("");
+                                $("#c_coment").val("");
                                 cargar_pagos();
                             }
                         }, "json"
@@ -932,17 +936,15 @@ function editar_pago()
                         $("#id_pago").val("");
                         $("#c_maq_cierre").val("");
                         $("#c_pago_cierre").val("");
+                        $("#c_coment").val("");
                     }
                 }
             });
         });
     } else {
         $("#msj_cierrecaja").hide();
-        $("#msj_cierrecaja").html("<label>Seleccione Registro a Editar</label>");
+        $("#msj_cierrecaja").html("<label>Complete Todos los Campos</label>");
         $("#msj_cierrecaja").css("color", "#FF0000").show('drop', 'slow').delay(3000).hide('drop', 'slow');
-        $("#id_pago").val("");
-        $("#c_maq_cierre").val("");
-        $("#c_pago_cierre").val("");
     }
 }
 
