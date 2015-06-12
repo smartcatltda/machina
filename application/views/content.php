@@ -179,14 +179,14 @@
         </div>
         <!--REPORTES-->
         <div id="estadisticas">
-            <div id="msj_estadisticas"></div>
+            <div id="msj_est"></div>
             <div style="titulo"><h1>Estadísticas</h1></div>
             <br>
             <table border="1">
                 <thead>
                     <tr>
                         <th rowspan="2">Tipo de Informe</th>
-                        <th rowspan="2">Tiempo</th>
+                        <th rowspan="2">Rango de Tiempo</th>
                         <th rowspan="2">Fecha</th>
                     </tr>
                     <tr>
@@ -199,11 +199,12 @@
                                 <option value="k">Keys</option>
                                 <option value="a">Aumentos</option>
                                 <option value="p">Pagos</option>
+                                <option value="g">Gastos</option>
                                 <option value="c">Cierres de Caja</option>
                             </select>
                         </td>
                         <td>
-                            <select class="rounded" id="tiempo_select" style="width: 200px;">
+                            <select class="rounded" id="rango_select" style="width: 200px;">
                                 <option value="d">Diario</option>
                                 <option value="m">Mensual</option>
                                 <option value="a">Anual</option>
@@ -215,11 +216,11 @@
             </table>
             <table>
                 <tr>
-                    <td style="width: 680px; text-align: right"><button id="btestad">Generar Informe</button></td>
+                    <td style="width: 650px; text-align: right"><button id="btestad">Generar Informe</button></td>
                 </tr>
             </table>
-
-            <div id="alto"></div>
+            <div id="informe"></div>
+            <!--<div id="alto"></div>-->
         </div>
     </div>
 

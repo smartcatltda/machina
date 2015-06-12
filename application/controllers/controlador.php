@@ -291,7 +291,7 @@ class Controlador extends CI_Controller {
         }
         echo json_encode(array("valor" => $valor, "msg" => $msg));
     }
-    
+
     function ingresar_aumento() {
         $monto_aumento = $this->input->post('monto_aumento');
         $hora = $this->input->post('hora');
@@ -305,6 +305,107 @@ class Controlador extends CI_Controller {
             $valor = 1;
         }
         echo json_encode(array("valor" => $valor, "msg" => $msg));
+    }
+
+//ESTADISTICAS ADMIN
+    function informe_diario() {
+        $tipo = $this->input->post('tipo');
+        $fecha = $this->input->post('fecha');
+        list($mes, $dia, $ano) = explode("/", $fecha);
+        if ($tipo == "k") {
+            $datos["diario_keys"] = $this->modelo->diario_keys($dia, $mes, $ano)->result();
+            $datos["cantidad"] = $this->modelo->diario_keys($dia, $mes, $ano)->num_rows();
+            $this->load->view("diario_keys", $datos);
+        } else {
+            if ($tipo == "a") {
+                $datos["diario_aumentos"] = $this->modelo->diario_aumentos($dia, $mes, $ano)->result();
+                $datos["cantidad"] = $this->modelo->diario_aumentos($dia, $mes, $ano)->num_rows();
+                $this->load->view("diario_aumentos", $datos);
+            } else {
+                if ($tipo == "p") {
+                    $datos["diario_pagos"] = $this->modelo->diario_pagos($dia, $mes, $ano)->result();
+                    $datos["cantidad"] = $this->modelo->diario_pagos($dia, $mes, $ano)->num_rows();
+                    $this->load->view("diario_pagos", $datos);
+                } else {
+                    if ($tipo == "g") {
+                        $datos["diario_gastos"] = $this->modelo->diario_gastos($dia, $mes, $ano)->result();
+                        $datos["cantidad"] = $this->modelo->diario_gastos($dia, $mes, $ano)->num_rows();
+                        $this->load->view("diario_gastos", $datos);
+                    } else {
+
+                        $datos["diario_cierres"] = $this->modelo->diario_cierres($dia, $mes, $ano)->result();
+                        $datos["cantidad"] = $this->modelo->diario_cierres($dia, $mes, $ano)->num_rows();
+                        $this->load->view("diario_cierres", $datos);
+                    }
+                }
+            }
+        }
+    }
+
+    function informe_mensual() {
+        $tipo = $this->input->post('tipo');
+        $fecha = $this->input->post('fecha');
+        list($mes, $dia, $ano) = explode("/", $fecha);
+        if ($tipo == "k") {
+            $datos["mensual_keys"] = $this->modelo->mensual_keys($mes, $ano)->result();
+            $datos["cantidad"] = $this->modelo->mensual_keys($mes, $ano)->num_rows();
+            $this->load->view("mensual_keys", $datos);
+        } else {
+            if ($tipo == "a") {
+                $datos["mensual_aumentos"] = $this->modelo->mensual_aumentos($mes, $ano)->result();
+                $datos["cantidad"] = $this->modelo->mensual_aumentos($mes, $ano)->num_rows();
+                $this->load->view("mensual_aumentos", $datos);
+            } else {
+                if ($tipo == "p") {
+                    $datos["mensual_pagos"] = $this->modelo->mensual_pagos($mes, $ano)->result();
+                    $datos["cantidad"] = $this->modelo->mensual_pagos($mes, $ano)->num_rows();
+                    $this->load->view("mensual_pagos", $datos);
+                } else {
+                    if ($tipo == "g") {
+                        $datos["mensual_gastos"] = $this->modelo->mensual_gastos($mes, $ano)->result();
+                        $datos["cantidad"] = $this->modelo->mensual_gastos($mes, $ano)->num_rows();
+                        $this->load->view("mensual_gastos", $datos);
+                    } else {
+                        $datos["mensual_cierres"] = $this->modelo->mensual_cierres($mes, $ano)->result();
+                        $datos["cantidad"] = $this->modelo->mensual_cierres($mes, $ano)->num_rows();
+                        $this->load->view("mensual_cierres", $datos);
+                    }
+                }
+            }
+        }
+    }
+
+    function informe_anual() {
+        $tipo = $this->input->post('tipo');
+        $fecha = $this->input->post('fecha');
+        list($mes, $dia, $ano) = explode("/", $fecha);
+        if ($tipo == "k") {
+            $datos["anual_keys"] = $this->modelo->anual_keys($ano)->result();
+            $datos["cantidad"] = $this->modelo->anual_keys($ano)->num_rows();
+            $this->load->view("anual_keys", $datos);
+        } else {
+            if ($tipo == "a") {
+                $datos["anual_aumentos"] = $this->modelo->anual_aumentos($ano)->result();
+                $datos["cantidad"] = $this->modelo->anual_aumentos($ano)->num_rows();
+                $this->load->view("anual_aumentos", $datos);
+            } else {
+                if ($tipo == "p") {
+                    $datos["anual_pagos"] = $this->modelo->anual_pagos($ano)->result();
+                    $datos["cantidad"] = $this->modelo->anual_pagos($ano)->num_rows();
+                    $this->load->view("anual_pagos", $datos);
+                } else {
+                    if ($tipo == "g") {
+                        $datos["anual_gastos"] = $this->modelo->anual_gastos($ano)->result();
+                        $datos["cantidad"] = $this->modelo->anual_gastos($ano)->num_rows();
+                        $this->load->view("anual_gastos", $datos);
+                    } else {
+                        $datos["anual_cierres"] = $this->modelo->anual_cierres($ano)->result();
+                        $datos["cantidad"] = $this->modelo->anual_cierres($ano)->num_rows();
+                        $this->load->view("anual_cierres", $datos);
+                    }
+                }
+            }
+        }
     }
 
 //MANTENEDOR PAGO
@@ -383,7 +484,3 @@ class Controlador extends CI_Controller {
     }
 
 }
-
-/* End of file controlador.php */
-    /* Location: ./application/controllers/controlador.php */
-    

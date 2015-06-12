@@ -789,16 +789,35 @@ function ingresar_aumento()
 }
 
 //ESTADISTICAS ADMIN
-function generar_informe(){
-    var tipo = $("#estad_select").val();
-    var tiempo = $("#estad_datepicker_1").val;
-    var dia1 = tiempo.getDate();
-    var mes1 = tiempo.getMonth();
-    var ano1 = tiempo.getFullYear();
-    var tiempo = $("#estad_datepicker_2").val;
-    var dia2 = tiempo.getDate();
-    var mes2 = tiempo.getMonth();
-    var ano2 = tiempo.getFullYear();
+function generar_informe() {
+    var tipo = $("#tipo_select").val();
+    var rango = $("#rango_select").val();
+    var fecha = $("#estad_datepicker").val();
+    if (fecha != "") {
+        if (rango == "d") {
+            $.post(base_url + "controlador/informe_diario", {tipo: tipo, fecha: fecha},
+            function (ruta, datos) {
+                $("#informe").html(ruta, datos);
+            });
+        } else {
+            if (rango == "m") {
+                $.post(base_url + "controlador/informe_mensual", {tipo: tipo, fecha: fecha},
+                function (ruta, datos) {
+                    $("#informe").html(ruta, datos);
+                });
+            } else {
+                $.post(base_url + "controlador/informe_anual", {tipo: tipo, fecha: fecha},
+                function (ruta, datos) {
+                    $("#informe").html(ruta, datos);
+                });
+            }
+        }
+    } else {
+        $("#msj_est").hide();
+        $("#msj_est").html("<label>Debe Seleccionar una Fecha</label>");
+        $("#msj_est").css("color", "#FF0000").show('drop', 'slow').delay(3000).hide('drop', 'slow');
+    }
+
 }
 //MANTENEDOR PAGOS
 function guardar_cpago()
