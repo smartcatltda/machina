@@ -64,12 +64,6 @@ $(document).ready(function () {
     mostrar_maquinas();
     cargar_maquinas();
     cargar_maquinas_activas();
-    $("#btguardarmaquina").button().click(function () {
-        guardar_maquina();
-    });
-    $("#btseleccionarmaquina").button().click(function () {
-        seleccionar_maquina();
-    });
     $("#bteditarmaquina").button().click(function () {
         editar_maquina();
     });
@@ -455,68 +449,22 @@ function cargar_maquinas_activas()
                 $("#c_maq").html(ruta, datos);
             });
 }
-function guardar_maquina()
-{
-    var num_maquina = $("#man_nummaquina").val();
-    var estado = $("#man_estado").val();
-    var obs = $("#man_obs").val();
-    if (num_maquina != "" && estado != "") {
-        if (isNumeric(num_maquina) != false) {
-            $.post(base_url + "controlador/guardar_maquina", {num_maquina: num_maquina, estado: estado,
-                obs: obs},
-            function (data) {
-                $("#msj_man_maquinas").hide();
-                $("#msj_man_maquinas").html("<label>" + data.msg + "</label>");
-                if (data.valor == 1) {
-                    mostrar_maquinas();
-                    $("#msj_man_maquinas").css("color", "#55FF00").show('drop', 'slow').delay(3000).hide('drop', 'slow');
-                    $("#man_nummaquina").val("");
-                    $("#man_estado").val("");
-                    $("#man_obs").val("");
-                } else {
-                    $("#msj_man_maquinas").css("color", "#FF0000").show('drop', 'slow').delay(3000).hide('drop', 'slow');
-                }
-            }, "json"
-                    );
-        } else {
-            $("#msj_man_maquinas").hide();
-            $("#msj_man_maquinas").html("<label>Ingrese solo Numeros en el Campo NUMERO DE MAQUINA</label>");
-            $("#msj_man_maquinas").css("color", "#FF0000").show('drop', 'slow').delay(3000).hide('drop', 'slow');
-        }
-    } else {
-        $("#msj_man_maquinas").hide();
-        $("#msj_man_maquinas").html("<label>Faltan Datos por ingresar</label>");
-        $("#msj_man_maquinas").css("color", "#FF0000").show('drop', 'slow').delay(3000).hide('drop', 'slow');
-    }
-}
 function  seleccionar_maquina()
 {
     var num_maquina = $("#man_nummaquina").val();
-    if (num_maquina != "") {
-        if (isNumeric(num_maquina) != false) {
-            $.post(base_url + "controlador/seleccionar_maquina", {num_maquina: num_maquina},
-            function (datos) {
-                if (datos.valor == 1) {
-                    $("#msj_man_maquinas").hide();
-                    $("#msj_man_maquinas").html("<label>Maquina No Registrada</label>");
-                    $("#msj_man_maquinas").css("color", "#FF0000").show('drop', 'slow').delay(3000).hide('drop', 'slow');
-                } else {
-                    $("#man_nummaquina").val(datos.num_maquina);
-                    $("#man_estado").val(datos.estado);
-                    $("#man_obs").val(datos.obs);
-                }
-            }, "json"
-                    );
-        } else {
+    $.post(base_url + "controlador/seleccionar_maquina", {num_maquina: num_maquina},
+    function (datos) {
+        if (datos.valor == 1) {
             $("#msj_man_maquinas").hide();
-            $("#msj_man_maquinas").html("<label>Ingrese solo Numeros en el Campo Numero de Maquina</label>");
+            $("#msj_man_maquinas").html("<label>Maquina No Registrada</label>");
             $("#msj_man_maquinas").css("color", "#FF0000").show('drop', 'slow').delay(3000).hide('drop', 'slow');
+        } else {
+            $("#man_nummaquina").val(datos.num_maquina);
+            $("#man_estado").val(datos.estado);
+            $("#man_obs").val(datos.obs);
         }
-    } else {
-        $("#msj_man_maquinas").hide();
-        $("#msj_man_maquinas").html("<label>Debe Ingresar el Número de la Maquina a Seleccionar</label>");
-        $("#msj_man_maquinas").css("color", "#FF0000").show('drop', 'slow').delay(3000).hide('drop', 'slow');
-    }
+    }, "json"
+            );
 }
 function editar_maquina()
 {
@@ -1118,4 +1066,3 @@ function validar_texto(e)
     tecla_final = String.fromCharCode(tecla);
     return patron.test(tecla_final);
 }
-

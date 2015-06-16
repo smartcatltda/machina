@@ -24,7 +24,7 @@
                 <table>
                     <tr>
                         <td>Numero Maquina </td>
-                        <td><select class="rounded" id="man_nummaquina" style="width: 200px;"/></td>
+                        <td><select onclick="seleccionar_maquina()" class="rounded" id="man_nummaquina" style="width: 200px;"/></td>
                     <tr>
                         <td>Estado </td>
                         <td>
@@ -42,17 +42,17 @@
                     </tr>
                     <tr>
                         <td></td>
-                        <td align="right"><button id="btguardarmaquina" >Guardar</button></td>
+                        <td align="right"><button id="bteditarmaquina" style="width: 130px;">Editar</button></td>
                     </tr>
                 </table>
                 <br>
-                <button id="btseleccionarmaquina" style="width: 150px;">Seleccionar</button>
-                <button id="bteditarmaquina" style="width: 100px;">Editar</button>
+
+
 
             </div>
             <div class="rounded" id="lista_maquinas"></div>
         </div>
-        <!--MANTENEDOR GASTOS-->
+        <!--MANTENEDOR GASTOS-->  
         <div id="cat_gastos">
             <div id="msj_man_gastos"></div>
             <div style="titulo"><h1>Administración de Gastos</h1></div>
@@ -118,10 +118,11 @@
                     <tr>
                         <td>Tipo :</td>
                         <td>
-                            <select class="rounded" id="man_tipo" style="width: 200px;" >
+                            <select  class="rounded" id="man_tipo" style="width: 200px;" >
                                 <option value="" selected="">Seleccione</option>
                                 <option value='2'>Cajero</option>
                                 <option value='1'>Administrador</option>
+                                <option value='0'>Inactivo</option>
                             </select>
                         </td>
                     </tr>
@@ -219,6 +220,7 @@
                     <td style="width: 650px; text-align: right"><button id="btestad">Generar Informe</button></td>
                 </tr>
             </table>
+            <br>
             <div id="informe"></div>
             <!--<div id="alto"></div>-->
         </div>
@@ -332,19 +334,52 @@
         <!--    CUADRATURA CAJA-->
         <div id="cuadratura">
             <div style=""id="dialog-cuadratura" title="Advertencia">
-                <p><span style="display: none; float:left; margin:0 7px 20px 0; text-justify: auto"></span>Una vez realizado el Cierre de Caja no podrá ejecutar ninguna otra operación en el sistema.</p>
+                <p><span style="display: none; float:left; margin:0 7px 20px 0; text-justify: auto"></span>Una vez realizado el Cierre de Caja no podrá.</p>
                 <p>¿ Está seguro que desea continuar ?</p>          
             </div>
             <div style="titulo"><h1>Resumen Diario</h1></div>
             <div></div>
             <br>
-            <br>
             <div class="rounded" id="lista_cuadratura"></div>
             <div id='bt_cuadratura'>
-                <table style="width: 900px;">
-                    <tr align='center'>
-                        <td colspan="2"><button class="rounded"style="width: 250px; height: 50px; margin-top: 10%; font-weight: bold;" id="btcuadrar">Cierre Caja</button></td>
-                    </tr>
+                <table>
+                    <caption style="height: 50px; font-size: 24px; font-family: arial; font-weight: bold;">TOTAL CAJA</caption>
+                    <thead align='center'>
+                    <th>BILLETES</th>
+                    <th></th>
+                    <th>MONTO</th>
+                    </thead>
+                    <tbody>
+                        <tr style="height: 15px;"></tr>
+                        <tr align='center'>
+                            <td>20.000 :</td>
+                            <td style="width: 40px;"></td>
+                            <td>$<input class="rounded" type="text" id="txt_20000" value="0" onkeyup="formatNumeros(this)" onclick="if(this.value=='0') this.value=''" onblur = "if(this.value=='') this.value='0'"/></td>
+                        </tr><tr style="height: 10px;"></tr>
+                        <tr align='center'>
+                            <td>10.000 :</td>
+                            <td style="width: 40px;"></td>
+                            <td>$<input class="rounded" type="text" id="txt_10000" value="0" onkeyup="formatNumeros(this)" onclick="if(this.value=='0') this.value=''" onblur = "if(this.value=='') this.value='0'"/></td>
+                        </tr><tr style="height: 10px;"></tr>
+                        <tr align='center'>
+                            <td>5.000 :</td>
+                            <td style="width: 40px;"></td>
+                            <td>$<input class="rounded" type="text" id="txt_5000" value="0" onkeyup="formatNumeros(this)" onclick="if(this.value=='0') this.value=''" onblur = "if(this.value=='') this.value='0'"/></td>
+                        </tr><tr style="height: 10px;"></tr>
+                        <tr align='center'>
+                            <td>1.000 :</td>
+                            <td style="width: 40px;"></td>
+                            <td>$<input class="rounded" type="text" id="txt_1000" value="0" onkeyup="formatNumeros(this)" onclick="if(this.value=='0') this.value=''" onblur = "if(this.value=='') this.value='0'"/></td>
+                        </tr><tr style="height: 10px;"></tr>
+                        <tr align='center'>
+                            <td>Monedas :</td>
+                            <td style="width: 40px;"></td>
+                            <td>$<input class="rounded" type="text" id="txt_monedas" value="0" onkeyup="formatNumeros(this)" onclick="if(this.value=='0') this.value=''" onblur = "if(this.value=='') this.value='0'"/></td>
+                        </tr><tr style="height: 40px;"></tr>
+                        <tr align='center'>
+                            <td colspan="3"><button class="rounded" style="width: 250px; height: 50px;" id="btcuadrar">Cierre Caja</button></td>
+                        </tr>
+                    </tbody>
                 </table>
             </div>
             <div id="alto"></div>

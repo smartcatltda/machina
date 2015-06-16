@@ -96,23 +96,6 @@ class modelo extends CI_Model {
         return $this->db->get();
     }
 
-    function guardar_maquina($num_maquina, $estado, $obs) {
-        $this->db->select('num_maquina');
-        $this->db->where('num_maquina', $num_maquina);
-        $cantidad = $this->db->get('maquina')->num_rows();
-        if ($cantidad == 0):
-            $data = array(
-                "num_maquina" => $num_maquina,
-                "estado" => $estado,
-                "obs" => $obs,
-            );
-            $this->db->insert("maquina", $data);
-            return 0;
-        else:
-            return 1;
-        endif;
-    }
-
     function ver_maquinas($num_maquina) {
         $this->db->select('*');
         $this->db->where('num_maquina', $num_maquina);
@@ -379,7 +362,7 @@ class modelo extends CI_Model {
         $this->db->group_by('nombre_categoria');
         return $this->db->get();
     }
-    
+
     function anual_cierres($ano) {
         $this->db->select('mes_cuadratura');
         $this->db->select_avg('total_aumentos');

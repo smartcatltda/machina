@@ -36,7 +36,7 @@ class Controlador extends CI_Controller {
                 $apellido = $fila->apellido;
             }
             if ($permiso == 0) {
-                $mensaje = "El usuario no tiene los permisos necesarios para acceder al sistema";
+                $mensaje = "EL usuario no cuenta con los permisos necesarios para acceder al Sistema";
                 $valor = 0;
             } else {
                 $cookie = array('user' => $user, 'permiso' => $permiso, 'nombre' => $nombre, 'apellido' => $apellido, 'id_user' => $id_user, 'esta logeado' => true);
@@ -146,19 +146,6 @@ class Controlador extends CI_Controller {
     function cargar_maquinas_activas() {
         $datos["maquinas"] = $this->modelo->mostrar_maquinas()->result();
         $this->load->view("maquinas_activas", $datos);
-    }
-
-    function guardar_maquina() {
-        $num_maquina = $this->input->post('num_maquina');
-        $estado = $this->input->post('estado');
-        $obs = $this->input->post('obs');
-        $valor = 0;
-        $msg = "Maquina Ya Registrada en el Sistema";
-        if ($this->modelo->guardar_maquina($num_maquina, $estado, $obs) == 0) {
-            $msg = "Maquina Guardada Correctamente";
-            $valor = 1;
-        }
-        echo json_encode(array("valor" => $valor, "msg" => $msg));
     }
 
     function seleccionar_maquina() {
