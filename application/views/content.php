@@ -282,7 +282,6 @@
             <td></td>
             <tr></tr>
         </div>
-
         <!--EDITAR PAGO CAJA-->
         <div id="cierrecaja">
             <div id="msj_cierrecaja"></div>
@@ -334,7 +333,7 @@
         <!--    CUADRATURA CAJA-->
         <div id="cuadratura">
             <div style=""id="dialog-cuadratura" title="Advertencia">
-                <p><span style="display: none; float:left; margin:0 7px 20px 0; text-justify: auto"></span>Una vez realizado el Cierre de Caja no podrá.</p>
+                <p><span style="display: none; float:left; margin:0 7px 20px 0; text-justify: auto"></span>Una vez realizado el Cierre de Caja no podrá cambiar la información ingresada en el Total Caja.</p>
                 <p>¿ Está seguro que desea continuar ?</p>          
             </div>
             <div style="titulo"><h1>Resumen Diario</h1></div>

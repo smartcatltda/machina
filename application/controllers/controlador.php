@@ -476,27 +476,33 @@ class Controlador extends CI_Controller {
         $ano = $this->input->post('ano');
         $hora = $this->input->post('hora');
         $min = $this->input->post('min');
+        $b_20 = $this->input->post('b_20');
+        $b_10 = $this->input->post('b_10');
+        $b_5 = $this->input->post('b_5');
+        $b_1 = $this->input->post('b_1');
+        $monedas = $this->input->post('monedas');
         $id_user = $this->session->userdata('id_user');
 
-        if ($this->modelo->caja_anterior($dia, $mes, $ano, $id_user)->num_rows() == 0):
+        if ($this->modelo->caja_anterior()->num_rows() == 0):
             $caja_anterior = 0;
         else:
-            $arr = $this->modelo->caja_anterior($dia, $mes, $ano, $id_user)->result();
-            $sum = 0;
-            foreach ($arr as $fila) {
-                $sum += intval($fila->total_caja);
-            }
-            $caja_anterior = $sum;
+            $arr = $this->modelo->caja_anterior()->result();
+            $caja = 0;
+            foreach ($arr as $fila) :
+                $caja = intval($fila->total_caja);
+            endforeach;
+            $caja_anterior = $caja;
         endif;
 
         if ($this->modelo->aumento_cuadratura($dia, $mes, $ano)->num_rows() == 0):
             $total_aumentos = 0;
         else:
             $data = $this->modelo->aumento_cuadratura($dia, $mes, $ano)->result();
-            foreach ($data as $fila) {
-                $acum = 0;
-                $acum+=intval($fila->monto_aumento);
-            }
+            $acum = 0;
+            foreach ($data as $fila) :
+
+                $acum +=intval($fila->monto_aumento);
+            endforeach;
             $total_aumentos = $acum;
         endif;
 
@@ -505,13 +511,15 @@ class Controlador extends CI_Controller {
         else:
             $dat = $this->modelo->pagos_cuadratura($dia, $mes, $ano, $id_user)->result();
             $suma = 0;
-            foreach ($dat as $fila) {
+            foreach ($dat as $fila) :
                 $suma+=intval($fila->monto_pago);
-            }
+            endforeach;
             $total_pagos = $suma;
         endif;
         $total_caja = $caja_anterior + $total_aumentos - $total_pagos;
-        $this->modelo->guarda_cuadratura($total_caja, $total_aumentos, $total_pagos, $caja_anterior, $dia, $mes, $ano, $min, $hora, $id_user);
+        $total_cajero = $b_20 + $b_10 + $b_5 + $b_1 + $monedas;
+        $diferencia = $total_cajero - $total_caja;
+        $this->modelo->guarda_cuadratura($total_caja, $total_aumentos, $total_pagos, $caja_anterior, $dia, $mes, $ano, $min, $hora, $id_user, $b_20, $b_10, $b_5, $b_1, $monedas, $total_cajero, $diferencia);
         $datos['totales'] = $this->modelo->ver_cuadratura($id_user, $dia, $mes, $ano)->result();
         $this->load->view("ListaCuadratura", $datos);
     }

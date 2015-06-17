@@ -223,6 +223,7 @@ class modelo extends CI_Model {
             "dia_aumento" => $dia,
             "mes_aumento" => $mes,
             "ano_aumento" => $ano,
+            "cierre_aumento" => '0',
         );
         $this->db->insert("aumento", $data);
         return 0;
@@ -386,6 +387,7 @@ class modelo extends CI_Model {
             "mes_pago" => $mes,
             "ano_pago" => $ano,
             "id_usuario" => $id_user,
+            "cierre_pago" => '0',
         );
         $this->db->insert("pago", $data);
         return 0;
@@ -462,6 +464,7 @@ class modelo extends CI_Model {
         $this->db->where('mes_pago', $mes);
         $this->db->where('ano_pago', $ano);
         $this->db->where('id_usuario', $id_user);
+        $this->db->where('cierre_pago', '0');
         return $this->db->get('pago');
     }
 
@@ -470,19 +473,19 @@ class modelo extends CI_Model {
         $this->db->where('dia_aumento', $dia);
         $this->db->where('mes_aumento', $mes);
         $this->db->where('ano_aumento', $ano);
+        $this->db->where('cierre_aumento', '0');
         return $this->db->get('aumento');
     }
 
-    function caja_anterior($dia, $mes, $ano, $id_user) {
+    function caja_anterior() {
         $this->db->select('total_caja');
-        $this->db->where('dia_cuadratura', $dia);
-        $this->db->where('mes_cuadratura', $mes);
-        $this->db->where('ano_cuadratura', $ano);
-        $this->db->where('id_usuario', $id_user);
-        return $this->db->get('cuadratura_caja');
+        $this->db->from('cuadratura_caja');
+        $this->db->order_by('id_caja', 'DESC');
+        $this->db->limit(1);
+        return $this->db->get();
     }
 
-    function guarda_cuadratura($total_caja, $total_aumentos, $total_pagos, $caja_anterior, $dia, $mes, $ano, $min, $hora, $id_user) {
+    function guarda_cuadratura($total_caja, $total_aumentos, $total_pagos, $caja_anterior, $dia, $mes, $ano, $min, $hora, $id_user, $b_20, $b_10, $b_5, $b_1, $monedas, $total_cajero, $diferencia) {
         $data = array(
             "total_aumentos" => $total_aumentos,
             "total_pagos" => $total_pagos,
@@ -494,8 +497,27 @@ class modelo extends CI_Model {
             "mes_cuadratura" => $mes,
             "ano_cuadratura" => $ano,
             "id_usuario" => $id_user,
+            "b_20000" => $b_20,
+            "b_10000" => $b_10,
+            "b_5000" => $b_5,
+            "b_1000" => $b_1,
+            "monedas" => $monedas,
+            "total_cajero" => $total_cajero,
+            "diferencia_caja" => $diferencia,
         );
         $this->db->insert("cuadratura_caja", $data);
+        $dato = array(
+            "cierre_aumento" => '1',
+        );
+        $this->db->where('cierre_aumento', '0');
+        $this->db->update("aumento", $dato);
+
+        $dat = array(
+            "cierre_pago" => '1',
+        );
+        $this->db->where('id_usuario', $id_user);
+        $this->db->where('cierre_pago', '0');
+        $this->db->update("pago", $dat);
     }
 
     function ver_cuadratura($id_user, $dia, $mes, $ano) {

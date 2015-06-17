@@ -947,6 +947,11 @@ function informe_cuadratura()
     var dia = time.getDate();
     var mes = time.getMonth();
     var ano = time.getFullYear();
+    var b_20 = $("#txt_20000").val().replace(/\./g, '');
+    var b_10 = $("#txt_10000").val().replace(/\./g, '');
+    var b_5 = $("#txt_5000").val().replace(/\./g, '');
+    var b_1 = $("#txt_1000").val().replace(/\./g, '');
+    var monedas = $("#txt_monedas").val().replace(/\./g, '');
     $(function () {
         $("#dialog-cuadratura").dialog({
             resizable: true,
@@ -959,10 +964,9 @@ function informe_cuadratura()
                     $(this).dialog("close");
                     $.post(
                             base_url + "controlador/informe_cuadratura",
-                            {dia: dia, mes: mes, ano: ano, hora: hora, min: min},
+                            {dia: dia, mes: mes, ano: ano, hora: hora, min: min, b_20: b_20, b_10: b_10, b_5: b_5, b_1: b_1, monedas: monedas},
                     function (ruta, datos) {
                         $("#lista_cuadratura").html(ruta, datos);
-                        $("#bt_cuadratura").hide();
                         $("#bt_cuadratura").hide();
                     }
                     );

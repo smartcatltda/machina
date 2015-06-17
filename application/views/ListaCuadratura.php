@@ -26,12 +26,28 @@
                 <td align="center" width="120">$   <?= number_format($fila->total_pagos, 0, ",", ".") ?></td>
             <?php endforeach; ?>
         </tr>
-        <tr >
+        <tr>
             <td style="font-weight: bold;">TOTAL CAJA   ( = )</td>
             <?php
             foreach ($totales as $fila):
                 ?>
                 <td align="center" width="120">$   <?= number_format($fila->total_caja, 0, ",", ".") ?></td>
+            <?php endforeach; ?>
+        </tr>
+        <tr>
+            <td style="font-weight: bold;">CAJA INGRESADA   ( = )</td>
+            <?php
+            foreach ($totales as $fila):
+                ?>
+                <td align="center" width="120">$ <?= number_format($fila->total_cajero, 0, ",", ".") ?></td>
+            <?php endforeach; ?>
+        </tr>
+        <tr>
+            <td style="font-weight: bold;">DIFERENCIA CAJAS   ( = )</td>
+            <?php
+            foreach ($totales as $fila):
+                ?>
+                <td align="center" width="120">$ <?= number_format($fila->diferencia_caja, 0, ",", ".") ?></td>
             <?php endforeach; ?>
         </tr>
     </tbody>
