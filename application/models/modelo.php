@@ -458,21 +458,14 @@ class modelo extends CI_Model {
         return 0;
     }
 
-    function pagos_cuadratura($dia, $mes, $ano, $id_user) {
+    function pagos_cuadratura() {
         $this->db->select('monto_pago');
-        $this->db->where('dia_pago', $dia);
-        $this->db->where('mes_pago', $mes);
-        $this->db->where('ano_pago', $ano);
-        $this->db->where('id_usuario', $id_user);
         $this->db->where('cierre_pago', '0');
         return $this->db->get('pago');
     }
 
-    function aumento_cuadratura($dia, $mes, $ano) {
+    function aumento_cuadratura() {
         $this->db->select('monto_aumento');
-        $this->db->where('dia_aumento', $dia);
-        $this->db->where('mes_aumento', $mes);
-        $this->db->where('ano_aumento', $ano);
         $this->db->where('cierre_aumento', '0');
         return $this->db->get('aumento');
     }
@@ -515,7 +508,7 @@ class modelo extends CI_Model {
         $dat = array(
             "cierre_pago" => '1',
         );
-        $this->db->where('id_usuario', $id_user);
+
         $this->db->where('cierre_pago', '0');
         $this->db->update("pago", $dat);
     }

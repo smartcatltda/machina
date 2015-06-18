@@ -494,10 +494,10 @@ class Controlador extends CI_Controller {
             $caja_anterior = $caja;
         endif;
 
-        if ($this->modelo->aumento_cuadratura($dia, $mes, $ano)->num_rows() == 0):
+        if ($this->modelo->aumento_cuadratura()->num_rows() == 0):
             $total_aumentos = 0;
         else:
-            $data = $this->modelo->aumento_cuadratura($dia, $mes, $ano)->result();
+            $data = $this->modelo->aumento_cuadratura()->result();
             $acum = 0;
             foreach ($data as $fila) :
 
@@ -506,10 +506,10 @@ class Controlador extends CI_Controller {
             $total_aumentos = $acum;
         endif;
 
-        if ($this->modelo->pagos_cuadratura($dia, $mes, $ano, $id_user)->num_rows() == 0):
+        if ($this->modelo->pagos_cuadratura()->num_rows() == 0):
             $total_pagos = 0;
         else:
-            $dat = $this->modelo->pagos_cuadratura($dia, $mes, $ano, $id_user)->result();
+            $dat = $this->modelo->pagos_cuadratura()->result();
             $suma = 0;
             foreach ($dat as $fila) :
                 $suma+=intval($fila->monto_pago);
