@@ -1,6 +1,6 @@
 <?php ?>
-<table id="tabla_users" border="2">
-    <thead>
+<table id="tabla_users" class="ui-widget"style="border-radius: 10px;" border="2">
+    <thead class="ui-widget-header" >
         <tr>
             <th>USUARIO</th>
             <th>TIPO</th>
@@ -21,7 +21,7 @@
             endif;
         endif;
         ?>
-        <tbody>
+    <tbody class="table-content">
             <tr align="center">
                 <td id="td_user"width="120"><?= $fila->user ?></td>
                 <td width="120"><?= $fila->tipo ?></td>

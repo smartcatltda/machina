@@ -21,7 +21,7 @@
         <div id="menuadmin" class="ui-widget-header ui-corner-all" hidden>
             <button id="bthome">Home</button>
             <button onclick="foco('man_user')"id="btusuarios">Usuarios</button>
-            <button id="btmaquinas">Maquinas</button>
+            <button onclick="seleccionar_maquina()" id="btmaquinas">Maquinas</button>
             <button onclick="foco('man_nombre_gasto')"id="btgastos">Gastos</button>
             <button onclick="foco('ac_keyin')" id="btcaja">Caja</button>
             <button id="btestadisticas">Estadisticas</button>

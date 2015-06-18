@@ -1,6 +1,6 @@
 <?php ?>
-<table id="tabla_gastos"  border="2">
-    <thead>
+<table id="tabla_gastos" class="ui-widget"style="border-radius: 10px;" border="2">
+    <thead class="ui-widget-header">
         <tr>
             <th>NOMBRE</th>
             <th>DESCRIPCION</th>
@@ -18,7 +18,7 @@
             endif;
         endif;
         ?>
-        <tbody>
+        <tbody class="table-content">
             <tr align="center">
                 <td width="120"><?= $fila->nombre_categoria ?></td>
                 <td width="120"><?= $fila->descripcion_categoria ?></td>

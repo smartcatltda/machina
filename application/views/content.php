@@ -24,7 +24,7 @@
                 <table>
                     <tr>
                         <td>Numero Maquina </td>
-                        <td><select onclick="seleccionar_maquina()" class="rounded" id="man_nummaquina" style="width: 200px;"/></td>
+                        <td><select onchange="seleccionar_maquina()" class="rounded" id="man_nummaquina" style="width: 200px;"/></td>
                     <tr>
                         <td>Estado </td>
                         <td>
@@ -353,27 +353,37 @@
                         <tr align='center'>
                             <td>20.000 :</td>
                             <td style="width: 40px;"></td>
-                            <td>$<input class="rounded" type="text" id="txt_20000" value="0" onkeyup="formatNumeros(this)" onclick="if(this.value=='0') this.value=''" onblur = "if(this.value=='') this.value='0'"/></td>
+                            <td>$<input class="rounded" type="text" id="txt_20000" value="0" onkeyup="formatNumeros(this)" onclick="if (this.value == '0')
+                                        this.value = ''" onblur = "if (this.value == '')
+                                                    this.value = '0'"/></td>
                         </tr><tr style="height: 10px;"></tr>
                         <tr align='center'>
                             <td>10.000 :</td>
                             <td style="width: 40px;"></td>
-                            <td>$<input class="rounded" type="text" id="txt_10000" value="0" onkeyup="formatNumeros(this)" onclick="if(this.value=='0') this.value=''" onblur = "if(this.value=='') this.value='0'"/></td>
+                            <td>$<input class="rounded" type="text" id="txt_10000" value="0" onkeyup="formatNumeros(this)" onclick="if (this.value == '0')
+                                        this.value = ''" onblur = "if (this.value == '')
+                                                    this.value = '0'"/></td>
                         </tr><tr style="height: 10px;"></tr>
                         <tr align='center'>
                             <td>5.000 :</td>
                             <td style="width: 40px;"></td>
-                            <td>$<input class="rounded" type="text" id="txt_5000" value="0" onkeyup="formatNumeros(this)" onclick="if(this.value=='0') this.value=''" onblur = "if(this.value=='') this.value='0'"/></td>
+                            <td>$<input class="rounded" type="text" id="txt_5000" value="0" onkeyup="formatNumeros(this)" onclick="if (this.value == '0')
+                                        this.value = ''" onblur = "if (this.value == '')
+                                                    this.value = '0'"/></td>
                         </tr><tr style="height: 10px;"></tr>
                         <tr align='center'>
                             <td>1.000 :</td>
                             <td style="width: 40px;"></td>
-                            <td>$<input class="rounded" type="text" id="txt_1000" value="0" onkeyup="formatNumeros(this)" onclick="if(this.value=='0') this.value=''" onblur = "if(this.value=='') this.value='0'"/></td>
+                            <td>$<input class="rounded" type="text" id="txt_1000" value="0" onkeyup="formatNumeros(this)" onclick="if (this.value == '0')
+                                        this.value = ''" onblur = "if (this.value == '')
+                                                    this.value = '0'"/></td>
                         </tr><tr style="height: 10px;"></tr>
                         <tr align='center'>
                             <td>Monedas :</td>
                             <td style="width: 40px;"></td>
-                            <td>$<input class="rounded" type="text" id="txt_monedas" value="0" onkeyup="formatNumeros(this)" onclick="if(this.value=='0') this.value=''" onblur = "if(this.value=='') this.value='0'"/></td>
+                            <td>$<input class="rounded" type="text" id="txt_monedas" value="0" onkeyup="formatNumeros(this)" onclick="if (this.value == '0')
+                                        this.value = ''" onblur = "if (this.value == '')
+                                                    this.value = '0'"/></td>
                         </tr><tr style="height: 40px;"></tr>
                         <tr align='center'>
                             <td colspan="3"><button class="rounded" style="width: 250px; height: 50px;" id="btcuadrar">Cierre Caja</button></td>

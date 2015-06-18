@@ -3,7 +3,7 @@
     <caption style="font-weight: bold; font-family: calibri; font-size: 28px" align="top">CIERRE DE CAJA</caption>
     <tbody>
         <tr>
-            <td style="font-weight: bold;">CAJA ANTERIOR</td>
+            <td class="ui-widget-header" style="font-weight: bold;">CAJA ANTERIOR</td>
             <?php
             foreach ($totales as $fila):
                 ?>
