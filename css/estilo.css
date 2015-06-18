@@ -4,7 +4,7 @@
 .table-content{
     margin: -7px 0 0 -7px;
     padding: 7px;
-    background: #cccccc url("images/tb1.png") 50% 50% repeat;
+    background: #cccccc url("images/tbs.png") 50% 50% repeat;
     filter: Alpha(Opacity=60); /* support: IE8 */
     border-radius: 8px;
     color: black;
