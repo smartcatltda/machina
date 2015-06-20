@@ -156,6 +156,10 @@
     height: 430px;
     z-index: -1;
 }
+#alto_login{
+    height: 160px;
+    z-index: -1;
+}
 titulo{
     width: 1024px;
     text-align: center;

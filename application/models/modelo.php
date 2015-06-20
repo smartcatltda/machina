@@ -404,6 +404,7 @@ class modelo extends CI_Model {
             "dia_gasto" => $dia,
             "mes_gasto" => $mes,
             "ano_gasto" => $ano,
+            "cierre_gasto" => '0',
         );
         $this->db->insert("gastos", $data);
         return 0;
@@ -470,6 +471,12 @@ class modelo extends CI_Model {
         return $this->db->get('aumento');
     }
 
+    function gastos_cuadratura() {
+        $this->db->select('monto_gasto');
+        $this->db->where('cierre_gasto', '0');
+        return $this->db->get('gastos');
+    }
+
     function caja_anterior() {
         $this->db->select('total_caja');
         $this->db->from('cuadratura_caja');
@@ -478,10 +485,11 @@ class modelo extends CI_Model {
         return $this->db->get();
     }
 
-    function guarda_cuadratura($total_caja, $total_aumentos, $total_pagos, $caja_anterior, $dia, $mes, $ano, $min, $hora, $id_user, $b_20, $b_10, $b_5, $b_1, $monedas, $total_cajero, $diferencia) {
+    function guarda_cuadratura($total_caja, $total_aumentos, $total_pagos, $caja_anterior,$total_gastos, $dia, $mes, $ano, $min, $hora, $id_user, $b_20, $b_10, $b_5, $b_1, $monedas, $total_cajero, $diferencia) {
         $data = array(
             "total_aumentos" => $total_aumentos,
             "total_pagos" => $total_pagos,
+            "total_gastos" => $total_gastos,
             "caja_anterior" => $caja_anterior,
             "total_caja" => $total_caja,
             "hora_cuadratura" => $hora,
@@ -499,6 +507,7 @@ class modelo extends CI_Model {
             "diferencia_caja" => $diferencia,
         );
         $this->db->insert("cuadratura_caja", $data);
+        
         $dato = array(
             "cierre_aumento" => '1',
         );
@@ -511,6 +520,13 @@ class modelo extends CI_Model {
 
         $this->db->where('cierre_pago', '0');
         $this->db->update("pago", $dat);
+        
+          $data = array(
+            "cierre_gasto" => '1',
+        );
+
+        $this->db->where('cierre_gasto', '0');
+        $this->db->update("gastos", $data);
     }
 
     function ver_cuadratura($id_user, $dia, $mes, $ano) {

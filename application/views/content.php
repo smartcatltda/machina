@@ -6,6 +6,7 @@
     <input class="ui-corner-all" placeholder="Contraseña" type="password" size="30" id="pass" style="font-size: 20px;" required onkeypress="enter_conectar(event)"/><br>
     <br>
     <button id="conectar">Conectar</button>
+    <div id="alto_login"></div>
 </div>
 
 
