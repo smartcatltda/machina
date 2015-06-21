@@ -189,7 +189,7 @@ class modelo extends CI_Model {
     }
 
 //ADMINISTRACION DE CAJA
-    function registrar_key($num_maquina, $key_in, $key_out, $total_key, $hora, $min, $dia, $mes, $ano) {
+    function registrar_key($num_maquina, $key_base, $key_out, $total_key, $hora, $min, $dia, $mes, $ano) {
         $this->db->select('*');
         $this->db->where('num_maquina', $num_maquina);
         $this->db->where('dia_key', $dia);
@@ -199,7 +199,7 @@ class modelo extends CI_Model {
         if ($cantidad == 0):
             $data = array(
                 "num_maquina" => $num_maquina,
-                "key_in" => $key_in,
+                "key_base" => $key_base,
                 "key_out" => $key_out,
                 "total_key" => $total_key,
                 "hora_key" => $hora,
@@ -326,7 +326,7 @@ class modelo extends CI_Model {
     //ESTADISTICAS ADMIN ANUAL
     function anual_keys($ano) {
         $this->db->select('num_maquina');
-        $this->db->select_sum('key_in');
+        $this->db->select_sum('key_base');
         $this->db->select_sum('key_out');
         $this->db->select_sum('total_key');
         $this->db->where('ano_key', $ano);

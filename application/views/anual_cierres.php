@@ -28,7 +28,7 @@
             <tbody>
                 <tr align="center">
                     <td width="120"><?= $fila->mes_cuadratura ?></td>
-                    <td width="120"><?= $fila->total_aumentos ?></td>
+                    <td width="120">$<?= $fila->total_aumentos ?></td>
                     <td width="120">$<?= $fila->total_pagos ?></td>
                     <td width="120">$<?= $fila->caja_anterior ?></td>
                     <td width="120">$<?= $fila->total_caja ?></td>

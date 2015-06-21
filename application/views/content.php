@@ -1,4 +1,4 @@
-<div id="msg01"></div>
+<div id="msg01" class="msj"></div>
 <!--//Login-->
 <div id="login" hidden>
     <div style="titulo"><h1>Inicio de Sesión</h1></div>
@@ -19,7 +19,7 @@
         </div>
         <!--MANTENEDOR MAQUINAS-->
         <div id="maquinas">
-            <div id="msj_man_maquinas"></div>
+            <div id="msj_man_maquinas" class="msj"></div>
             <div style="titulo"><h1>Administración de Maquinas</h1></div>
             <br>
             <div id="Man_maquinas">
@@ -56,7 +56,7 @@
         </div>
         <!--MANTENEDOR GASTOS-->  
         <div id="cat_gastos">
-            <div id="msj_man_gastos"></div>
+            <div id="msj_man_gastos" class="msj"></div>
             <div style="titulo"><h1>Administración de Gastos</h1></div>
             <div id="Man_gastos">
                 <br>
@@ -94,7 +94,7 @@
         </div>
         <!--MANTENEDOR USUARIOS-->
         <div id="usuarios">
-            <div id="msj_man_user"></div>
+            <div id="msj_man_user" class="msj"></div>
             <div style="titulo"><h1>Administración de Usuarios</h1></div>
             <br>
             <div id="Man_usuarios">
@@ -142,30 +142,30 @@
         </div>
         <!--ADMINISTRACION CAJA-->
         <div id="caja">
-            <div id="msj_keys"></div>
+            <div id="msj_keys" class="msj"></div>
             <div style="titulo"><h1>Administración de Caja</h1></div>
             <br>
             <table style="width: 800px;">
                 <tr>
-                    <td>Maquina :</td><td style="width: 10px;"></td><td>Key In :</td><td style="width: 10px;"></td><td>Key Out :</td><td style="width: 10px;"></td><td>Total Maquina:</td>
+                    <td>Maquina :</td><td style="width: 10px;"></td><td>Key Base :</td><td style="width: 10px;"></td><td>Key Out :</td><td style="width: 10px;"></td><td>Total Maquina:</td>
                 </tr>
                 <tr>
                     <td>
-                        <select onchange="foco('ac_keyin')" class="rounded" id="ac_maq" style="width: 160px;" ></select>
+                        <select onchange="foco('ac_keybase')" class="rounded" id="ac_maq" style="width: 160px;" ></select>
                     </td>
-                    <td>$</td><td><input class="rounded" id="ac_keyin" placeholder="Key In" type="text" style="width: 260px;" maxlength="50" onkeypress="return validar_texto(event)" autofocus onkeydown="enter_keyin(event)" onkeyup="formatNumeros(this);
+                    <td>$</td><td><input class="rounded" id="ac_keybase" placeholder="Key Base" type="text" style="width: 260px;" maxlength="50" onkeypress="return validar_texto(event)" autofocus onkeydown="enter_keybase(event)" onkeyup="diferencia_keys(this);
                             formatNumeros(this)"/></td>
                     <td>$</td><td><input class="rounded" id="ac_keyout" placeholder="Key Out" type="text" style="width: 260px;" maxlength="50" onkeypress="return validar_texto(event)" onkeyup="diferencia_keys(this);
                             formatNumeros(this)"/></td>
-                    <td>$</td><td><input class="rounded" id="ac_total" type="text" style="width: 260px;" disabled="true" onload="formatNumeros(this)"/></td>
+                    <td>$</td><td><input class="rounded" id="ac_total" placeholder="0" type="text" style="width: 260px;" disabled="true" onload="formatNumeros(this)"/></td>
                     <td><button id="btregistrarkey" >Registrar</button></td>
                 </tr>
                 <tr>
-                    <td></td><td></td><td> Total Key In :</td><td></td><td> Total Key Out :</td><td></td><td> Total Acumulado :</td>
+                    <td></td><td></td><td> Total Key Base :</td><td></td><td> Total Key Out :</td><td></td><td> Total Acumulado :</td>
                 </tr>
                 <tr>
                     <td></td>
-                    <td>$</td><td><input class="rounded" id="ac_totalin" placeholder="0" type="text" style="width: 260px;" disabled="true" /></td>
+                    <td>$</td><td><input class="rounded" id="ac_totalbase" placeholder="0" type="text" style="width: 260px;" disabled="true" /></td>
                     <td>$</td><td><input class="rounded" id="ac_totalout" placeholder="0" type="text" style="width: 260px;" disabled="true" /></td>
                     <td>$</td><td><input class="rounded" id="ac_acumulado" placeholder="0" type="text" style="width: 260px;" disabled="true" /></td>
                     <td><button id="btreiniciarkeys" >Resetear</button></td>
@@ -182,7 +182,7 @@
         </div>
         <!--REPORTES-->
         <div id="estadisticas">
-            <div id="msj_est"></div>
+            <div id="msj_est" class="msj"></div>
             <div style="titulo"><h1>Estadísticas</h1></div>
             <br>
             <table border="1">
@@ -198,20 +198,19 @@
                 <tbody>
                     <tr>
                         <td>
-                            <select class="rounded" id="tipo_select" style="width: 200px;">
+                            <select class="rounded" id="tipo_select" onchange="cargar_rangos()" style="width: 200px;">
                                 <option value="k">Keys</option>
                                 <option value="a">Aumentos</option>
-                                <option value="p">Pagos</option>
-                                <option value="g">Gastos</option>
+                                <option value="p">Lista Pagos</option>
+                                <option value="rp">Resumen Pagos</option>
+                                <option value="g">Lista Gastos</option>
+                                <option value="rg">Resumen Gastos</option>
                                 <option value="c">Cierres de Caja</option>
+                                <option value="rc">Resumen Cierres</option>
                             </select>
                         </td>
                         <td>
-                            <select class="rounded" id="rango_select" style="width: 200px;">
-                                <option value="d">Diario</option>
-                                <option value="m">Mensual</option>
-                                <option value="a">Anual</option>
-                            </select>
+                            <select class="rounded" id="rango_select" style="width: 200px;"></select>
                         </td>
                         <td><input type="text" id="estad_datepicker" class="rounded"></td>
                     </tr>
@@ -224,7 +223,7 @@
             </table>
             <br>
             <div id="informe"></div>
-            <!--<div id="alto"></div>-->
+            <div id="alto"></div>
         </div>
     </div>
 
@@ -236,7 +235,7 @@
         </div>
         <!--CAJA-->
         <div id="cajac">
-            <div id="msj_cajac"></div>
+            <div id="msj_cajac" class="msj"></div>
             <div style="titulo"><h1>Caja</h1></div>
             <br>
             <div style="titulo" id="titulo_caja" style="width: 900px;" ><h3>Ingreso de Pagos</h3></div>
@@ -250,8 +249,9 @@
                 <tr>
                     <td>
                         <select class="rounded" onchange="foco('c_pago')" id="c_maq" style="width: 150px;" ></select>
-                    <td style="width: 150px;"></td>
                     </td>
+                    <td style="width: 150px;"></td>
+                    
                     <td><input class="rounded" id="c_pago" placeholder="pago" type="text" style="width: 290px;" onkeydown="enter_pago(event)" maxlength="50" onkeypress="return validar_texto(event)" onkeyup="formatNumeros(this)" onchange="formatNumeros(this)"/></td>
                     <td style="width: 150px;"></td> <td><button style="width: 150px;" id="btingresarpago" >Ingresar</button></td>
                 </tr>
@@ -286,7 +286,7 @@
         </div>
         <!--EDITAR PAGO CAJA-->
         <div id="cierrecaja">
-            <div id="msj_cierrecaja"></div>
+            <div id="msj_cierrecaja" class="msj"></div>
             <div style=""id="dialog-confirm" title="Confirmación">
                 <p><span style="display: none; float:left; margin:0 7px 20px 0;"></span>Realmente Desea Modificar el Registro?</p>
             </div>
@@ -301,8 +301,7 @@
                     <td style="width: 50px;"></td>
                     <td>Maquina :</td>
                     <td></td>
-                    <td><input disabled="" type="text" placeholder="Numero Maquina" readonly="readonly" class="rounded" id="c_maq_cierre" style="width: 210px;" /></td>
-
+                    <td><select class="rounded" id="c_maq_cierre" style="width: 210px;" /></select></td>
                 </tr>
                 <tr></tr><tr></tr>
                 <tr></tr><tr></tr>

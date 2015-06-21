@@ -9,7 +9,9 @@
                 <th>AUMENTOS</th>
                 <th>PAGOS</th>
                 <th>CAJA ANTERIOR</th>
-                <th>TOTAL CAJA</th>
+                <th>TOTAL SISTEMA</th>
+                <th>TOTAL CAJERO</th>
+                <th>DIFERENCIA CAJA</th>
                 <th>HORA</th>
                 <th>USUARIO</th>
             </tr>
@@ -26,14 +28,18 @@
             $fila->total_pagos = number_format($fila->total_pagos, 0, ",", ".");
             $fila->caja_anterior = number_format($fila->caja_anterior, 0, ",", ".");
             $fila->total_caja = number_format($fila->total_caja, 0, ",", ".");
+            $fila->diferencia_caja = number_format($fila->diferencia_caja, 0, ",", ".");
+            $fila->total_cajero = number_format($fila->total_cajero, 0, ",", ".");
             ?>
             <tbody>
                 <tr align="center">
                     <td width="120"><?= $fila->id_caja ?></td>
-                    <td width="120"><?= $fila->total_aumentos ?></td>
+                    <td width="120">$<?= $fila->total_aumentos ?></td>
                     <td width="120">$<?= $fila->total_pagos ?></td>
                     <td width="120">$<?= $fila->caja_anterior ?></td>
                     <td width="120">$<?= $fila->total_caja ?></td>
+                    <td width="120">$<?= $fila->total_cajero ?></td>
+                    <td width="120">$<?= $fila->diferencia_caja ?></td>
                     <td width="120"><?= $fila->hora_cuadratura ?>:<?= $fila->min_cuadratura ?></td>
                     <td width="120"><?= $fila->nombre ?> <?= $fila->apellido ?></td>
                 </tr>

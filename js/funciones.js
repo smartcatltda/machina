@@ -1,8 +1,10 @@
 $(document).ready(function () {
     foco('user');
+//LOGIN    
     $("#conectar").button().click(function () {
         conectar();
     });
+//MENU ADMIN
     $("#bthome").button().click(function () {
         home();
     });
@@ -19,7 +21,7 @@ $(document).ready(function () {
     });
     $("#btcaja").button().click(function () {
         caja();
-        foco('ac_keyin');
+        foco('ac_keybase');
     });
     $("#btestadisticas").button().click(function () {
         estadisticas();
@@ -28,6 +30,7 @@ $(document).ready(function () {
         salir();
         location.reload();
     });
+//MENU CAJERO
     $("#bthomec").button().click(function () {
         homec();
     });
@@ -45,10 +48,12 @@ $(document).ready(function () {
         salir();
         location.reload();
     });
+//FORMATO VISTAS
     $("#admin").tabs();
     $("#cajero").tabs();
     verificalogin();
 //MANTENEDOR DE USUARIOS
+//por qué este evento aquí?
     validar_texto(event);
     mostrar_user();
     $("#btguardaruser").button().click(function () {
@@ -60,14 +65,14 @@ $(document).ready(function () {
     $("#bteditaruser").button().click(function () {
         editar_user();
     });
-    //MANTENEDOR MAQUINAS
+//MANTENEDOR MAQUINAS
     mostrar_maquinas();
     cargar_maquinas();
     cargar_maquinas_activas();
     $("#bteditarmaquina").button().click(function () {
         editar_maquina();
     });
-    //CAJA ADMIN
+//CAJA ADMIN
     $("#btregistrarkey").button().click(function () {
         registrar_key();
     });
@@ -77,12 +82,13 @@ $(document).ready(function () {
     $("#btaumento").button().click(function () {
         ingresar_aumento();
     });
-    //ESTADISTICAS ADMIN
+//ESTADISTICAS ADMIN
+    cargar_rangos();
     $("#estad_datepicker").datepicker();
     $("#btestad").button().click(function () {
         generar_informe();
     });
-    //MANTENEDOR GASTOS
+//MANTENEDOR GASTOS
     cargar_cat_gastos();
     cargar_gastos_activos();
     $("#btguardargasto").button().click(function () {
@@ -91,14 +97,14 @@ $(document).ready(function () {
     $("#bteditargastos").button().click(function () {
         editar_cat_gasto();
     });
-    //CAJA CAJERO
+//CAJA CAJERO
     $("#btingresarpago").button().click(function () {
         guardar_cpago();
     });
     $("#btregistrargasto").button().click(function () {
         guardar_cgasto();
     });
-    //CIERRE DE CAJA
+//CIERRE DE CAJA
     cargar_pagos();
     $("#bteditarpago").button().click(function () {
         editar_pago();
@@ -447,6 +453,7 @@ function cargar_maquinas_activas()
             function (ruta, datos) {
                 $("#ac_maq").html(ruta, datos);
                 $("#c_maq").html(ruta, datos);
+                $("#c_maq_cierre").html(ruta, datos);
             });
 }
 function  seleccionar_maquina()
@@ -657,10 +664,10 @@ function editar_cat_gasto()
 
 function diferencia_keys()
 {
-    var key_in = $("#ac_keyin").val().replace(/\./g, '');
+    var key_base = $("#ac_keybase").val().replace(/\./g, '');
     var key_out = $("#ac_keyout").val().replace(/\./g, '');
-    if (key_in != "" && key_out != "") {
-        $.post(base_url + "controlador/diferencia_keys", {key_in: key_in, key_out: key_out},
+    if (key_base != "" && key_out != "") {
+        $.post(base_url + "controlador/diferencia_keys", {key_base: key_base, key_out: key_out},
         function (data) {
             var num = data.total;
             num = num.toString().split('').reverse().join('').replace(/(?=\d*\.?)(\d{3})/g, '$1.');
@@ -672,31 +679,31 @@ function diferencia_keys()
 }
 function sumatoria_keys()
 {
-    var key_in = $("#ac_keyin").val().replace(/\./g, '');
+    var key_base = $("#ac_keybase").val().replace(/\./g, '');
     var key_out = $("#ac_keyout").val().replace(/\./g, '');
     var total_key = $("#ac_total").val().replace(/\./g, '');
-    var total_in = $("#ac_totalin").val().replace(/\./g, '');
+    var total_base = $("#ac_totalbase").val().replace(/\./g, '');
     var total_out = $("#ac_totalout").val().replace(/\./g, '');
     var acumulado = $("#ac_acumulado").val().replace(/\./g, '');
-    $.post(base_url + "controlador/sumatoria_keys", {key_in: key_in, key_out: key_out, total_key: total_key, total_in: total_in, total_out: total_out, acumulado: acumulado},
+    $.post(base_url + "controlador/sumatoria_keys", {key_base: key_base, key_out: key_out, total_key: total_key, total_base: total_base, total_out: total_out, acumulado: acumulado},
     function (data) {
-        var total_in = data.total_in;
+        var total_base = data.total_base;
         var total_out = data.total_out;
         var acumulado = data.acumulado;
-        total_in = total_in.toString().split('').reverse().join('').replace(/(?=\d*\.?)(\d{3})/g, '$1.');
+        total_base = total_base.toString().split('').reverse().join('').replace(/(?=\d*\.?)(\d{3})/g, '$1.');
         total_out = total_out.toString().split('').reverse().join('').replace(/(?=\d*\.?)(\d{3})/g, '$1.');
         acumulado = acumulado.toString().split('').reverse().join('').replace(/(?=\d*\.?)(\d{3})/g, '$1.');
-        total_in = total_in.split('').reverse().join('').replace(/^[\.]/, '');
+        total_base = total_base.split('').reverse().join('').replace(/^[\.]/, '');
         total_out = total_out.split('').reverse().join('').replace(/^[\.]/, '');
         acumulado = acumulado.split('').reverse().join('').replace(/^[\.]/, '');
-        $("#ac_totalin").val(total_in);
+        $("#ac_totalbase").val(total_base);
         $("#ac_totalout").val(total_out);
         $("#ac_acumulado").val(acumulado);
     }, "json"
             );
 }
 function reiniciar_keys() {
-    $("#ac_totalin").val("");
+    $("#ac_totalbase").val("");
     $("#ac_totalout").val("");
     $("#ac_acumulado").val("");
     $("#ac_total").val("");
@@ -704,7 +711,7 @@ function reiniciar_keys() {
 function registrar_key()
 {
     var num_maquina = $("#ac_maq").val();
-    var key_in = $("#ac_keyin").val().replace(/\./g, '');
+    var key_base = $("#ac_keybase").val().replace(/\./g, '');
     var key_out = $("#ac_keyout").val().replace(/\./g, '');
     var total_key = $("#ac_total").val().replace(/\./g, '');
     var tiempo = new Date();
@@ -713,17 +720,21 @@ function registrar_key()
     var dia = tiempo.getDate();
     var mes = tiempo.getMonth();
     var ano = tiempo.getFullYear();
-    if (key_in != "" && key_out != "") {
-        $.post(base_url + "controlador/registrar_key", {num_maquina: num_maquina, key_in: key_in, key_out: key_out, total_key: total_key, hora: hora, min: min, dia: dia, mes: mes, ano: ano},
+    if (key_base != "" && key_out != "") {
+        $.post(base_url + "controlador/registrar_key", {num_maquina: num_maquina, key_base: key_base, key_out: key_out, total_key: total_key, hora: hora, min: min, dia: dia, mes: mes, ano: ano},
         function (data) {
             $("#msj_keys").hide();
             $("#msj_keys").html("<label>" + data.msg + "</label>");
             if (data.valor == 1) {
                 sumatoria_keys();
-                $("#ac_keyin").val("");
+                $("#ac_keybase").val("");
                 $("#ac_keyout").val("");
+                $("#ac_total").val("");
+                $("#msj_keys").css("color", "#55FF00").show('drop', 'slow').delay(3000).hide('drop', 'slow');
+            } else {
+                $("#msj_keys").css("color", "#FF0000").show('drop', 'slow').delay(3000).hide('drop', 'slow');
             }
-            $("#msj_keys").css("color", "#55FF00").show('drop', 'slow').delay(3000).hide('drop', 'slow');
+
         }, "json"
                 );
     } else {
@@ -761,6 +772,23 @@ function ingresar_aumento()
 }
 
 //ESTADISTICAS ADMIN
+
+function cargar_rangos()
+{
+    var tipo = $("#tipo_select").val();
+    if (tipo == "p" || tipo == "g") {
+        $("#rango_select").html("<option value='d'>Diario</option>");
+    } else {
+        if (tipo == "rp" || tipo == "rg" || tipo == "rc") {
+            $("#rango_select").html("<option value='d'>Diario</option><option value='s'>Ultimos 7 días</option><option value='m'>Mensual</option>");
+        } else {
+            $("#rango_select").html("<option value='d'>Diario</option><option value='m'>Mensual</option>");
+        }
+    }
+//<option value='d'>Diario</option>
+//<option value='m'>Mensual</option>
+//<option value='s'>Ultimos 7 días</option>
+}
 function generar_informe() {
     var tipo = $("#tipo_select").val();
     var rango = $("#rango_select").val();
@@ -778,7 +806,7 @@ function generar_informe() {
                     $("#informe").html(ruta, datos);
                 });
             } else {
-                $.post(base_url + "controlador/informe_anual", {tipo: tipo, fecha: fecha},
+                $.post(base_url + "controlador/informe_semanal", {tipo: tipo, fecha: fecha},
                 function (ruta, datos) {
                     $("#informe").html(ruta, datos);
                 });
@@ -1031,7 +1059,7 @@ function enter_mantipo(e)
         guardar_user();
 }
 //FOCUS MANTENEDOR KEYS
-function enter_keyin(e)
+function enter_keybase(e)
 {
     tecla = (document.all) ? e.keyCode : e.which;
     if (tecla == 13)

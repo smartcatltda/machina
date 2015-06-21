@@ -25,7 +25,16 @@
             endif;
             if ($fila->estado_pago == 1):
                 $fila->estado_pago = "EDITADO";
+            else:
+                $fila->estado_pago = "-";
             endif;
+            if ($fila->edit_pago == 0):
+                $fila->edit_pago = "-";
+            endif;
+            if ($fila->coment_edit == ""):
+                $fila->coment_edit = "-";
+            endif;
+            
             $fila->monto_pago = number_format($fila->monto_pago, 0, ",", ".");
             ?>
             <tbody>

@@ -21,10 +21,10 @@
         <div id="menuadmin" class="ui-widget-header ui-corner-all" hidden>
             <button id="bthome">Home</button>
             <button onclick="foco('man_user')"id="btusuarios">Usuarios</button>
-            <button onclick="seleccionar_maquina()" id="btmaquinas">Maquinas</button>
+            <button onclick="seleccionar_maquina()" id="btmaquinas">Máquinas</button>
             <button onclick="foco('man_nombre_gasto')"id="btgastos">Gastos</button>
             <button onclick="foco('ac_keyin')" id="btcaja">Caja</button>
-            <button id="btestadisticas">Estadisticas</button>
+            <button id="btestadisticas">Estadísticas</button>
             <button style="float: right" id="salir"> Cerrar Sesión</button>
         </div>
         <div id="menucajero" class="ui-widget-header ui-corner-all" hidden>
