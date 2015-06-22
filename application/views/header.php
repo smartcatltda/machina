@@ -8,12 +8,12 @@
         <script src="js/jquery-ui.js" type="text/javascript"></script>
         <script src="js/jquery-ui.min.js" type="text/javascript"></script>
         <script src="js/funciones.js" type="text/javascript"></script>
-
+        
         <link type="text/css" rel="stylesheet"href="css/estilo.css"/>
         <link type="text/css" rel="stylesheet" href="css/jquery-ui.css">
         <link type="text/css" rel="stylesheet" href="css/jquery-ui.structure.css">
         <link type="text/css" rel="stylesheet" href="css/jquery-ui.theme.css">
-
+       
         <script type="text/javascript">var base_url = "<?= base_url(); ?>";</script>
 
     </head>
@@ -30,7 +30,7 @@
         <div id="menucajero" class="ui-widget-header ui-corner-all" hidden>
             <button id="bthomec">Home</button>
             <button onclick="foco('c_pago')" id="btcajac">Caja</button>
-            <button onclick="cargar_pagos(), foco('c_pago_cierre')"id="btcierrecaja">Pagos</button>
+            <button onclick="cargar_pagos(), foco('c_pago_cierre')"id="btcierrecaja">Editar</button>
             <button id="btcuadratura">Cierre Caja</button>
             <button style="float: right" id="salirc">Cerrar Sesión</button>
         </div>

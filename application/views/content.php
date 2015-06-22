@@ -1,14 +1,15 @@
 <div id="msg01"></div>
 <!--//Login-->
 <div id="login" hidden>
-    <div style="titulo"><h1>Inicio de Sesión</h1></div>
+    <div style="font-size: 20px;"><h1>Inicio de Sesión</h1></div>
+    <hr style="width: 35%;"><br>
     <input class="ui-corner-all" placeholder="Usuario" size="30" id="user" maxlength="30" style="font-size: 20px;" required onkeypress="enter_user(event)" autofocus/><br>
     <input class="ui-corner-all" placeholder="Contraseña" type="password" size="30" id="pass" style="font-size: 20px;" required onkeypress="enter_conectar(event)"/><br>
     <br>
     <button id="conectar">Conectar</button>
+    <hr style="width: 35%;"><br>
     <div id="alto_login"></div>
 </div>
-
 
 <div id="contenido" align="center" hidden>
 
@@ -24,12 +25,12 @@
             <div style="titulo"><h1>Administración de Maquinas</h1></div>
             <br>
             <div id="Man_maquinas">
-                <table>
+                <table style="margin-left: 5%;">
                     <tr>
-                        <td>Numero Maquina </td>
+                        <td>N° Maquina: </td>
                         <td><select onchange="seleccionar_maquina()" class="rounded" id="man_nummaquina" style="width: 200px;"/></td>
                     <tr>
-                        <td>Estado </td>
+                        <td>Estado: </td>
                         <td>
                             <select class="rounded" id="man_estado" style="width: 200px;" >
                                 <option value="" selected="">Seleccione</option>
@@ -39,9 +40,8 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>Observaciones </td>
-                        <td><textarea rows="10" cols="30" class="rounded" id="man_obs" style="width: 200px;"></textarea></td>
-
+                        <td>Observaciones: </td>
+                        <td><textarea maxlength="150" rows="10" cols="30" class="rounded" id="man_obs" style="width: 200px;"></textarea></td>
                     </tr>
                     <tr>
                         <td></td>
@@ -49,11 +49,9 @@
                     </tr>
                 </table>
                 <br>
-
-
-
             </div>
-            <div class="rounded" id="lista_maquinas"></div>
+            <div style="padding-right: 10%;" class="rounded" id="lista_maquinas"></div>
+            <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
         </div>
         <!--MANTENEDOR GASTOS-->  
         <div id="cat_gastos">
@@ -67,7 +65,7 @@
                     <tr>
                     <tr>
                         <td>Nombre Gasto :</td>
-                        <td><input class="rounded" id="man_nombre_gasto" placeholder="Nombre Gasto" style="width: 200px;"/></td>
+                        <td><input maxlength="30" class="rounded" id="man_nombre_gasto" placeholder="Nombre Gasto" style="width: 200px;"/></td>
                     </tr>
                     <tr>
                         <td>Estado :</td>
@@ -81,17 +79,19 @@
                     </tr><tr></tr><tr></tr>
                     <tr>
                         <td>Descripción :</td>
-                        <td><textarea rows="10" cols="30" class="rounded" id="man_desc_gasto" style="width: 300px;"></textarea></td>
+                        <td><textarea required="" maxlength="150" placeholder="Descripción"rows="10" cols="30" class="rounded" id="man_desc_gasto" style="width: 250px;"></textarea></td>
                     </tr>
                     <tr>
                         <td></td>
-                        <td align="right"><button id="bteditargastos" style="width: 150px;">Editar</button>
+                        <td align="right"><button id="bteditargastos" style="width: 130px;">Editar</button>
                             <button id="btguardargasto" >Guardar</button></td>
                     </tr>
                 </table>
-                <br><br>
+
             </div>
-            <div class="rounded" id="lista_gastos"></div>
+            <br>
+            <div style="padding-right: 5%" class="rounded" id="lista_gastos"></div>
+            <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
         </div>
         <!--MANTENEDOR USUARIOS-->
         <div id="usuarios">
@@ -105,23 +105,23 @@
                     <tr>
                     <tr>
                         <td style="width: 150px;">Usuario :</td>
-                        <td><input class="rounded" id="man_user" placeholder="Usuario" type="text" style="width: 200px;" maxlength="50" onkeypress="enter_manusuario(event)" autofocus/></td>
+                        <td><input maxlength="30" class="rounded" id="man_user" placeholder="Usuario" type="text" style="width: 200px;" maxlength="50" onkeypress="enter_manusuario(event)"/></td>
                     <tr>
                         <td>Contraseña :</td>
-                        <td><input class="rounded" id="man_pass" placeholder="Contraseña" type="password" style="width: 200px;" maxlength="50" onkeypress="enter_manpass(event)"/></td>
+                        <td><input maxlength="20" class="rounded" id="man_pass" placeholder="Contraseña" type="password" style="width: 200px;" maxlength="50" onkeypress="enter_manpass(event)"/></td>
                     </tr>
                     <tr>
                         <td>Nombre :</td>
-                        <td><input class="rounded" id="man_nombre" placeholder="Nombre" type="text" style="width: 200px;" maxlength="20" onkeypress="enter_mannombre(event)" /></td>
+                        <td><input maxlength="30" class="rounded" id="man_nombre" placeholder="Nombre" type="text" style="width: 200px;" maxlength="20" onkeypress="enter_mannombre(event)" /></td>
                     </tr>
                     <tr>
                         <td>Apellido :</td>
-                        <td><input class="rounded" id="man_apellido" placeholder="Apellido" type="text" style="width: 200px;" maxlength="20" onkeypress="enter_manapellido(event)"/></td>
+                        <td><input maxlength="30" class="rounded" id="man_apellido" placeholder="Apellido" type="text" style="width: 200px;" maxlength="20" onkeypress="enter_manapellido(event)"/></td>
                     </tr>
                     <tr>
                         <td>Tipo :</td>
                         <td>
-                            <select  class="rounded" id="man_tipo" style="width: 200px;" >
+                            <select class="rounded" id="man_tipo" style="width: 200px;" >
                                 <option value="" selected="">Seleccione</option>
                                 <option value='2'>Cajero</option>
                                 <option value='1'>Administrador</option>
@@ -135,11 +135,8 @@
                             <button id="btguardaruser" style="width: 100px;">Guardar</button></td>
                     </tr>
                 </table>
-                <br>
-                <br>
-                <br>  
             </div>
-            <div class="rounded" id="lista_usuarios" float="right"></div>
+            <div style="padding-right: 5%" class="rounded" id="lista_usuarios" float="right"></div>
         </div>
         <!--ADMINISTRACION CAJA-->
         <div id="caja">
@@ -158,7 +155,7 @@
                             formatNumeros(this)"/></td>
                     <td>$</td><td><input class="rounded" id="ac_keyout" placeholder="Key Out" type="text" style="width: 260px;" maxlength="50" onkeypress="return validar_texto(event)" onkeyup="diferencia_keys(this);
                             formatNumeros(this)"/></td>
-                    <td>$</td><td><input class="rounded" id="ac_total" type="text" style="width: 260px;" disabled="true" onload="formatNumeros(this)"/></td>
+                    <td>$</td><td><input class="rounded" id="ac_total" placeholder="0" type="text" style="width: 260px;" disabled="true" onload="formatNumeros(this)"/></td>
                     <td><button id="btregistrarkey" >Registrar</button></td>
                 </tr>
                 <tr>
@@ -186,8 +183,8 @@
             <div id="msj_est"></div>
             <div style="titulo"><h1>Estadísticas</h1></div>
             <br>
-            <table border="1">
-                <thead>
+            <table style="border-radius: 8px;" border="2">
+                <thead class="ui-widget-header" >
                     <tr>
                         <th rowspan="2">Tipo de Informe</th>
                         <th rowspan="2">Rango de Tiempo</th>
@@ -196,7 +193,7 @@
                     <tr>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody class="table-content">
                     <tr>
                         <td>
                             <select class="rounded" id="tipo_select" style="width: 200px;">
@@ -239,7 +236,6 @@
         <div id="cajac">
             <div id="msj_cajac"></div>
             <div style="titulo"><h1>Caja</h1></div>
-            <br>
             <div style="titulo" id="titulo_caja" style="width: 900px;" ><h3>Ingreso de Pagos</h3></div>
             <br>
             <table style="width: 900px;">
@@ -281,7 +277,6 @@
                 </tr>
             </table>
             <br><br>
-
             <td></td>
             <tr></tr>
         </div>
@@ -291,10 +286,10 @@
             <div style=""id="dialog-confirm" title="Confirmación">
                 <p><span style="display: none; float:left; margin:0 7px 20px 0;"></span>Realmente Desea Modificar el Registro?</p>
             </div>
-            <br><br>
-            <div style="margin-left: 5%" align="left"><h1>Editar Pagos</h1></div>
             <br>
-            <table align="left" style="width: 400px">
+            <div style="titulo"><h1>Editar Pagos</h1></div>
+            <br><br>
+            <table align="left" style="width: 400px; margin-left: 6%">
                 <tr>
                     <td><input hidden="true" readonly="readonly" id="id_pago" type="text" /></td>
                 </tr>
@@ -331,7 +326,7 @@
                 </tr>
             </table>
             <div class="rounded" id="lista_pagos"></div>
-            <div id="alto"></div>
+            <br><br><br><br><br><br><br><br><br><br>
         </div>
         <!--    CUADRATURA CAJA-->
         <div id="cuadratura">
@@ -341,7 +336,6 @@
             </div>
             <div style="titulo"><h1>Resumen Diario</h1></div>
             <div></div>
-            <br>
             <div class="rounded" id="lista_cuadratura"></div>
             <div id='bt_cuadratura'>
                 <table>
@@ -358,43 +352,50 @@
                             <td style="width: 40px;"></td>
                             <td>$<input class="rounded" type="text" id="txt_20000" value="0" onkeyup="formatNumeros(this)" onclick="if (this.value == '0')
                                         this.value = ''" onblur = "if (this.value == '')
-                                                    this.value = '0'"/></td>
+                                                    this.value = '0'" onkeypress="enter_b20(event)"/></td>
                         </tr><tr style="height: 10px;"></tr>
                         <tr align='center'>
                             <td>10.000 :</td>
                             <td style="width: 40px;"></td>
                             <td>$<input class="rounded" type="text" id="txt_10000" value="0" onkeyup="formatNumeros(this)" onclick="if (this.value == '0')
                                         this.value = ''" onblur = "if (this.value == '')
-                                                    this.value = '0'"/></td>
+                                                    this.value = '0'" onkeypress="enter_b10(event)"/></td>
                         </tr><tr style="height: 10px;"></tr>
                         <tr align='center'>
                             <td>5.000 :</td>
                             <td style="width: 40px;"></td>
                             <td>$<input class="rounded" type="text" id="txt_5000" value="0" onkeyup="formatNumeros(this)" onclick="if (this.value == '0')
                                         this.value = ''" onblur = "if (this.value == '')
-                                                    this.value = '0'"/></td>
+                                                    this.value = '0'" onkeypress="enter_b5(event)"/></td>
+                        </tr><tr style="height: 10px;"></tr>
+                        <tr align='center'>
+                            <td>2.000 :</td>
+                            <td style="width: 40px;"></td>
+                            <td>$<input class="rounded" type="text" id="txt_2000" value="0" onkeyup="formatNumeros(this)" onclick="if (this.value == '0')
+                                        this.value = ''" onblur = "if (this.value == '')
+                                                    this.value = '0'" onkeypress="enter_b2(event)"/></td>
                         </tr><tr style="height: 10px;"></tr>
                         <tr align='center'>
                             <td>1.000 :</td>
                             <td style="width: 40px;"></td>
                             <td>$<input class="rounded" type="text" id="txt_1000" value="0" onkeyup="formatNumeros(this)" onclick="if (this.value == '0')
                                         this.value = ''" onblur = "if (this.value == '')
-                                                    this.value = '0'"/></td>
+                                                    this.value = '0'" onkeypress="enter_b1(event)"/></td>
                         </tr><tr style="height: 10px;"></tr>
                         <tr align='center'>
                             <td>Monedas :</td>
                             <td style="width: 40px;"></td>
                             <td>$<input class="rounded" type="text" id="txt_monedas" value="0" onkeyup="formatNumeros(this)" onclick="if (this.value == '0')
                                         this.value = ''" onblur = "if (this.value == '')
-                                                    this.value = '0'"/></td>
-                        </tr><tr style="height: 40px;"></tr>
+                                                    this.value = '0'" onkeypress="enter_monedas(event)"/></td>
+                        </tr><tr style="height: 15px;"></tr>
                         <tr align='center'>
                             <td colspan="3"><button class="rounded" style="width: 250px; height: 50px;" id="btcuadrar">Cierre Caja</button></td>
                         </tr>
                     </tbody>
                 </table>
+                <br>
             </div>
-            <div id="alto"></div>
         </div>
     </div>
     <!--PIE DE PAGINA-->

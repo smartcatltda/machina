@@ -2,8 +2,8 @@
     <label>No Se Han Registrado Pagos Hoy</label>
 <?php else:
     ?>
-    <table id="tabla_pagos"  border="2">
-        <thead>
+    <table style="border-radius: 10px; width: 700px;" id="tabla_pagos"  border="2">
+        <thead class="ui-widget-header">
             <tr>
                 <th>FECHA</th>
                 <th>HORA</th>
@@ -29,7 +29,7 @@
                 endif;
                 $fila->monto_pago = number_format($fila->monto_pago, 0, ",", ".");
                 ?>
-                <tbody>
+                <tbody class="table-content">
                     <tr align="center">
                         <td width="150"><?= $fila->dia_pago ?>/<?= $fila->mes_pago ?>/<?= $fila->ano_pago ?></td>
                         <td width="150"><?= $fila->hora_pago ?>:<?= $fila->min_pago ?></td>

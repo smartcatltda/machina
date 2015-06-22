@@ -479,6 +479,7 @@ class Controlador extends CI_Controller {
         $b_20 = $this->input->post('b_20');
         $b_10 = $this->input->post('b_10');
         $b_5 = $this->input->post('b_5');
+        $b_2 = $this->input->post('b_2');
         $b_1 = $this->input->post('b_1');
         $monedas = $this->input->post('monedas');
         $id_user = $this->session->userdata('id_user');
@@ -536,7 +537,7 @@ class Controlador extends CI_Controller {
             $diferencia = $total_cajero + $total_caja;
         endif;
 
-        $this->modelo->guarda_cuadratura($total_caja, $total_aumentos, $total_pagos, $caja_anterior, $total_gastos, $dia, $mes, $ano, $min, $hora, $id_user, $b_20, $b_10, $b_5, $b_1, $monedas, $total_cajero, $diferencia);
+        $this->modelo->guarda_cuadratura($total_caja, $total_aumentos, $total_pagos, $caja_anterior, $total_gastos, $dia, $mes, $ano, $min, $hora, $id_user, $b_20, $b_10, $b_5,$b_2 ,$b_1, $monedas, $total_cajero, $diferencia);
         $datos['totales'] = $this->modelo->ver_cuadratura($id_user, $dia, $mes, $ano)->result();
         $this->load->view("ListaCuadratura", $datos);
     }
