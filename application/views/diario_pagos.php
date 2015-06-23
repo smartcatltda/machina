@@ -12,7 +12,7 @@
                 <th>USUARIO</th>
                 <th>ESTADO</th>
                 <th>COMENTARIO</th>
-                <th>EDITADO</th>
+                <th>REFERENCIA</th>
             </tr>
         </thead>
         <?php

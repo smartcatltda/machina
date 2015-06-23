@@ -211,7 +211,7 @@
                             </select>
                         </td>
                         <td>
-                            <select class="rounded" id="rango_select" style="width: 200px;"></select>
+                            <select class="rounded" id="rango_select" onchange="bloquear_dp()" style="width: 200px;"></select>
                         </td>
                         <td><input type="text" id="estad_datepicker" class="rounded"></td>
                     </tr>

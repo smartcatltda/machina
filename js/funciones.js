@@ -53,8 +53,6 @@ $(document).ready(function () {
     $("#cajero").tabs();
     verificalogin();
 //MANTENEDOR DE USUARIOS
-//por qué este evento aquí?
-    validar_texto(event);
     mostrar_user();
     $("#btguardaruser").button().click(function () {
         guardar_user();
@@ -773,7 +771,22 @@ function ingresar_aumento()
 
 //ESTADISTICAS ADMIN
 
+function bloquear_dp()
+//bloquea el datepicker en caso de que el rango seleccionado sea "últimos 7 días"
+//lo reactiva en caso contrario
+{
+    var rango = $("#rango_select").val();
+    if (rango == "s"){
+        $("#estad_datepicker").val("");
+        $("#estad_datepicker").datepicker("disable");
+    }else{
+        $("#estad_datepicker").datepicker("enable");
+    }
+}
+
 function cargar_rangos()
+//carga el selector de rangos dependiendo de la opción seleccionada en el
+//selector de tipos de informe
 {
     var tipo = $("#tipo_select").val();
     if (tipo == "p" || tipo == "g") {
@@ -785,15 +798,15 @@ function cargar_rangos()
             $("#rango_select").html("<option value='d'>Diario</option><option value='m'>Mensual</option>");
         }
     }
-//<option value='d'>Diario</option>
-//<option value='m'>Mensual</option>
-//<option value='s'>Ultimos 7 días</option>
+    $("#estad_datepicker").datepicker("enable");
 }
-function generar_informe() {
+
+function generar_informe()
+{
     var tipo = $("#tipo_select").val();
     var rango = $("#rango_select").val();
     var fecha = $("#estad_datepicker").val();
-    if (fecha != "") {
+    if (fecha != "" || rango == "s") {
         if (rango == "d") {
             $.post(base_url + "controlador/informe_diario", {tipo: tipo, fecha: fecha},
             function (ruta, datos) {
@@ -837,7 +850,6 @@ function guardar_cpago()
             $("#msj_cajac").html("<label>" + data.msg + "</label>");
             if (data.valor == 1) {
                 $("#msj_cajac").css("color", "#55FF00").show('drop', 'slow').delay(3000).hide('drop', 'slow');
-                $("#c_maq").val("");
                 $("#c_pago").val("");
                 cargar_pagos();
             }

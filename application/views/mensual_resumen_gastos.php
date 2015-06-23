@@ -5,24 +5,21 @@
     <table border="2">
         <thead>
             <tr>
-                <th colspan="4">RESUMEN ANUAL</th>
+                <th colspan="2">RESUMEN DEL MES</th>
             </tr>
             <tr>
-                <th>MES</th>
+                <th>CATEGORIA</th>
                 <th>MONTO</th>
             </tr>
         </thead>
         <?php
-        foreach ($anual_aumentos as $fila):
-            if ($fila->mes_aumento < 10):
-                $fila->mes_aumento = "0" . $fila->mes_aumento;
-            endif;
-            $fila->monto_aumento = number_format($fila->monto_aumento, 0, ",", ".");
+        foreach ($mensual_resumen_gastos as $fila):
+            $fila->monto_gasto = number_format($fila->monto_gasto, 0, ",", ".");
             ?>
             <tbody>
                 <tr align="center">
-                    <td width="120"><?= $fila->mes_aumento ?></td>
-                    <td width="120">$<?= $fila->monto_aumento ?></td>
+                    <td width="120"><?= $fila->nombre_categoria ?></td>
+                    <td width="120">$<?= $fila->monto_gasto ?></td>
                 </tr>
             </tbody>
             <?php

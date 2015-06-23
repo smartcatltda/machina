@@ -5,7 +5,7 @@
     <table border="2">
         <thead>
             <tr>
-                <th colspan="2">RESUMEN ANUAL</th>
+                <th colspan="2">RESUMEN DEL DIA</th>
             </tr>
             <tr>
                 <th>CATEGORIA</th>
@@ -13,7 +13,7 @@
             </tr>
         </thead>
         <?php
-        foreach ($anual_gastos as $fila):
+        foreach ($diario_resumen_gastos as $fila):
             $fila->monto_gasto = number_format($fila->monto_gasto, 0, ",", ".");
             ?>
             <tbody>

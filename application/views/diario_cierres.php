@@ -8,6 +8,7 @@
                 <th>ID</th>
                 <th>AUMENTOS</th>
                 <th>PAGOS</th>
+                <th>GASTOS</th>
                 <th>CAJA ANTERIOR</th>
                 <th>TOTAL SISTEMA</th>
                 <th>TOTAL CAJERO</th>
@@ -26,6 +27,7 @@
             endif;
             $fila->total_aumentos = number_format($fila->total_aumentos, 0, ",", ".");
             $fila->total_pagos = number_format($fila->total_pagos, 0, ",", ".");
+            $fila->total_gastos = number_format($fila->total_gastos, 0, ",", ".");
             $fila->caja_anterior = number_format($fila->caja_anterior, 0, ",", ".");
             $fila->total_caja = number_format($fila->total_caja, 0, ",", ".");
             $fila->diferencia_caja = number_format($fila->diferencia_caja, 0, ",", ".");
@@ -36,6 +38,7 @@
                     <td width="120"><?= $fila->id_caja ?></td>
                     <td width="120">$<?= $fila->total_aumentos ?></td>
                     <td width="120">$<?= $fila->total_pagos ?></td>
+                    <td width="120">$<?= $fila->total_gastos ?></td>
                     <td width="120">$<?= $fila->caja_anterior ?></td>
                     <td width="120">$<?= $fila->total_caja ?></td>
                     <td width="120">$<?= $fila->total_cajero ?></td>

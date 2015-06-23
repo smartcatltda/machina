@@ -62,7 +62,7 @@ class Controlador extends CI_Controller {
 
     function salir() {
         $valor = 0;
-        $cookie = array('user' => '', 'permiso' => '', 'esta logeado' => false);
+        $cookie = array('user' => '', 'permiso' => '', 'nombre' => $nombre, 'apellido' => $apellido, 'id_user' => $id_user, 'esta logeado' => false);
         $this->session->set_userdata($cookie);
         echo json_encode(array('valor' => $valor));
     }
@@ -314,15 +314,32 @@ class Controlador extends CI_Controller {
                     $datos["cantidad"] = $this->modelo->diario_pagos($dia, $mes, $ano)->num_rows();
                     $this->load->view("diario_pagos", $datos);
                 } else {
-                    if ($tipo == "g") {
-                        $datos["diario_gastos"] = $this->modelo->diario_gastos($dia, $mes, $ano)->result();
-                        $datos["cantidad"] = $this->modelo->diario_gastos($dia, $mes, $ano)->num_rows();
-                        $this->load->view("diario_gastos", $datos);
+                    if ($tipo == "rp") {
+                        $datos["diario_resumen_pagos"] = $this->modelo->diario_resumen_pagos($dia, $mes, $ano)->result();
+                        $datos["cantidad"] = $this->modelo->diario_resumen_pagos($dia, $mes, $ano)->num_rows();
+                        $this->load->view("diario_resumen_pagos", $datos);
                     } else {
-
-                        $datos["diario_cierres"] = $this->modelo->diario_cierres($dia, $mes, $ano)->result();
-                        $datos["cantidad"] = $this->modelo->diario_cierres($dia, $mes, $ano)->num_rows();
-                        $this->load->view("diario_cierres", $datos);
+                        if ($tipo == "g") {
+                            $datos["diario_gastos"] = $this->modelo->diario_gastos($dia, $mes, $ano)->result();
+                            $datos["cantidad"] = $this->modelo->diario_gastos($dia, $mes, $ano)->num_rows();
+                            $this->load->view("diario_gastos", $datos);
+                        } else {
+                            if ($tipo == "rg") {
+                                $datos["diario_resumen_gastos"] = $this->modelo->diario_resumen_gastos($dia, $mes, $ano)->result();
+                                $datos["cantidad"] = $this->modelo->diario_resumen_gastos($dia, $mes, $ano)->num_rows();
+                                $this->load->view("diario_resumen_gastos", $datos);
+                            } else {
+                                if ($tipo == "c") {
+                                    $datos["diario_cierres"] = $this->modelo->diario_cierres($dia, $mes, $ano)->result();
+                                    $datos["cantidad"] = $this->modelo->diario_cierres($dia, $mes, $ano)->num_rows();
+                                    $this->load->view("diario_cierres", $datos);
+                                } else {
+                                    $datos["diario_resumen_cierres"] = $this->modelo->diario_resumen_cierres($dia, $mes, $ano)->result();
+                                    $datos["cantidad"] = $this->modelo->diario_resumen_cierres($dia, $mes, $ano)->num_rows();
+                                    $this->load->view("diario_resumen_cierres", $datos);
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -344,53 +361,59 @@ class Controlador extends CI_Controller {
                 $this->load->view("mensual_aumentos", $datos);
             } else {
                 if ($tipo == "rp") {
-                    $datos["mensual_pagos"] = $this->modelo->mensual_pagos($mes, $ano)->result();
-                    $datos["cantidad"] = $this->modelo->mensual_pagos($mes, $ano)->num_rows();
-                    $this->load->view("mensual_pagos", $datos);
+                    $datos["mensual_resumen_pagos"] = $this->modelo->mensual_resumen_pagos($mes, $ano)->result();
+                    $datos["cantidad"] = $this->modelo->mensual_resumen_pagos($mes, $ano)->num_rows();
+                    $this->load->view("mensual_resumen_pagos", $datos);
                 } else {
                     if ($tipo == "rg") {
-                        $datos["mensual_gastos"] = $this->modelo->mensual_gastos($mes, $ano)->result();
-                        $datos["cantidad"] = $this->modelo->mensual_gastos($mes, $ano)->num_rows();
-                        $this->load->view("mensual_gastos", $datos);
+                        $datos["mensual_resumen_gastos"] = $this->modelo->mensual_resumen_gastos($mes, $ano)->result();
+                        $datos["cantidad"] = $this->modelo->mensual_resumen_gastos($mes, $ano)->num_rows();
+                        $this->load->view("mensual_resumen_gastos", $datos);
                     } else {
-                        $datos["mensual_cierres"] = $this->modelo->mensual_cierres($mes, $ano)->result();
-                        $datos["cantidad"] = $this->modelo->mensual_cierres($mes, $ano)->num_rows();
-                        $this->load->view("mensual_cierres", $datos);
+                        if ($tipo == "c") {
+                            $datos["mensual_cierres"] = $this->modelo->mensual_cierres($mes, $ano)->result();
+                            $datos["cantidad"] = $this->modelo->mensual_cierres($mes, $ano)->num_rows();
+                            $this->load->view("mensual_cierres", $datos);
+                        } else {
+                            $datos["mensual_resumen_cierres"] = $this->modelo->mensual_resumen_cierres($mes, $ano)->result();
+                            $datos["cantidad"] = $this->modelo->mensual_resumen_cierres($mes, $ano)->num_rows();
+                            $this->load->view("mensual_resumen_cierres", $datos);
+                        }
                     }
                 }
             }
         }
     }
 
-    function informe_anual() {
+    function informe_semanal() {
         $tipo = $this->input->post('tipo');
-        $fecha = $this->input->post('fecha');
-        list($mes, $dia, $ano) = explode("/", $fecha);
-        if ($tipo == "k") {
-            $datos["anual_keys"] = $this->modelo->anual_keys($ano)->result();
-            $datos["cantidad"] = $this->modelo->anual_keys($ano)->num_rows();
-            $this->load->view("anual_keys", $datos);
+        $fecha1= date('m-d-Y');
+        $fecha2= date('m-d-Y', strtotime('-1 day'));
+        $fecha3= date('m-d-Y', strtotime('-2 day'));
+        $fecha4= date('m-d-Y', strtotime('-3 day'));
+        $fecha5= date('m-d-Y', strtotime('-4 day'));
+        $fecha6= date('m-d-Y', strtotime('-5 day'));
+        $fecha7= date('m-d-Y', strtotime('-6 day'));
+        list($mes1, $dia1, $ano1) = explode("-", $fecha1);
+        list($mes2, $dia2, $ano2) = explode("-", $fecha2);
+        list($mes3, $dia3, $ano3) = explode("-", $fecha3);
+        list($mes4, $dia4, $ano4) = explode("-", $fecha4);
+        list($mes5, $dia5, $ano5) = explode("-", $fecha5);
+        list($mes6, $dia6, $ano6) = explode("-", $fecha6);
+        list($mes7, $dia7, $ano7) = explode("-", $fecha7);
+        if ($tipo == "rp") {
+            $datos["semanal_resumen_pagos"] = $this->modelo->semanal_resumen_pagos($mes1, $dia1, $ano1, $mes2, $dia2, $ano2, $mes3, $dia3, $ano3, $mes4, $dia4, $ano4, $mes5, $dia5, $ano5, $mes6, $dia6, $ano6, $mes7, $dia7, $ano7)->result();
+            $datos["cantidad"] = $this->modelo->semanal_resumen_pagos($mes1, $dia1, $ano1, $mes2, $dia2, $ano2, $mes3, $dia3, $ano3, $mes4, $dia4, $ano4, $mes5, $dia5, $ano5, $mes6, $dia6, $ano6, $mes7, $dia7, $ano7)->num_rows();
+            $this->load->view("semanal_resumen_pagos", $datos);
         } else {
-            if ($tipo == "a") {
-                $datos["anual_aumentos"] = $this->modelo->anual_aumentos($ano)->result();
-                $datos["cantidad"] = $this->modelo->anual_aumentos($ano)->num_rows();
-                $this->load->view("anual_aumentos", $datos);
+            if ($tipo == "rg") {
+                $datos["semanal_resumen_gastos"] = $this->modelo->semanal_resumen_gastos($mes1, $dia1, $ano1, $mes2, $dia2, $ano2, $mes3, $dia3, $ano3, $mes4, $dia4, $ano4, $mes5, $dia5, $ano5, $mes6, $dia6, $ano6, $mes7, $dia7, $ano7)->result();
+                $datos["cantidad"] = $this->modelo->semanal_resumen_gastos($mes1, $dia1, $ano1, $mes2, $dia2, $ano2, $mes3, $dia3, $ano3, $mes4, $dia4, $ano4, $mes5, $dia5, $ano5, $mes6, $dia6, $ano6, $mes7, $dia7, $ano7)->num_rows();
+                $this->load->view("semanal_resumen_gastos", $datos);
             } else {
-                if ($tipo == "p") {
-                    $datos["anual_pagos"] = $this->modelo->anual_pagos($ano)->result();
-                    $datos["cantidad"] = $this->modelo->anual_pagos($ano)->num_rows();
-                    $this->load->view("anual_pagos", $datos);
-                } else {
-                    if ($tipo == "g") {
-                        $datos["anual_gastos"] = $this->modelo->anual_gastos($ano)->result();
-                        $datos["cantidad"] = $this->modelo->anual_gastos($ano)->num_rows();
-                        $this->load->view("anual_gastos", $datos);
-                    } else {
-                        $datos["anual_cierres"] = $this->modelo->anual_cierres($ano)->result();
-                        $datos["cantidad"] = $this->modelo->anual_cierres($ano)->num_rows();
-                        $this->load->view("anual_cierres", $datos);
-                    }
-                }
+                $datos["semanal_resumen_cierres"] = $this->modelo->semanal_resumen_cierres($mes1, $dia1, $ano1, $mes2, $dia2, $ano2, $mes3, $dia3, $ano3, $mes4, $dia4, $ano4, $mes5, $dia5, $ano5, $mes6, $dia6, $ano6, $mes7, $dia7, $ano7)->result();
+                $datos["cantidad"] = $this->modelo->semanal_resumen_cierres($mes1, $dia1, $ano1, $mes2, $dia2, $ano2, $mes3, $dia3, $ano3, $mes4, $dia4, $ano4, $mes5, $dia5, $ano5, $mes6, $dia6, $ano6, $mes7, $dia7, $ano7)->num_rows();
+                $this->load->view("semanal_resumen_cierres", $datos);
             }
         }
     }
@@ -489,7 +512,7 @@ class Controlador extends CI_Controller {
             $arr = $this->modelo->caja_anterior()->result();
             $caja = 0;
             foreach ($arr as $fila) :
-                $caja = intval($fila->total_caja);
+                $caja = intval($fila->total_cajero);
             endforeach;
             $caja_anterior = $caja;
         endif;
@@ -537,7 +560,7 @@ class Controlador extends CI_Controller {
         endif;
 
         $this->modelo->guarda_cuadratura($total_caja, $total_aumentos, $total_pagos, $caja_anterior, $total_gastos, $dia, $mes, $ano, $min, $hora, $id_user, $b_20, $b_10, $b_5, $b_1, $monedas, $total_cajero, $diferencia);
-        $datos['totales'] = $this->modelo->ver_cuadratura($id_user, $dia, $mes, $ano)->result();
+        $datos['totales'] = $this->modelo->ver_cuadratura($dia, $mes, $ano)->result();
         $this->load->view("ListaCuadratura", $datos);
     }
 
