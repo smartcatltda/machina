@@ -50,8 +50,8 @@
                 </table>
                 <br>
             </div>
-            <div style="padding-right: 10%;" class="rounded" id="lista_maquinas"></div>
-            <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+            <div style="padding-right: 6%;" class="rounded" id="lista_maquinas"></div>
+            <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
         </div>
         <!--MANTENEDOR GASTOS-->  
         <div id="cat_gastos">
