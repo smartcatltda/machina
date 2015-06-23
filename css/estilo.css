@@ -2,8 +2,12 @@
     border-radius: 10px;
 }
 .table-content{
-    background: #cccccc url("images/tbs.png") 50% 50% repeat;
-    color: black;
+    margin: -7px 0 0 -7px;
+    padding: 7px;
+    background: url("images/other.png") center top repeat;
+    /*filter: Alpha(Opacity=60);  support: IE8 */
+    border-radius: 8px;
+    color: white;
 }
 .home{
     width: 800px;
@@ -38,7 +42,7 @@
     height: 520px;
 }
 #estadisticas{
-    height: 520px;
+    height: 100%;
 }
 #cuadratura{
     height: 520px;
@@ -46,73 +50,7 @@
 #nombrelogin{
     font-weight: bold;
 }
-#msg01{
-    display: none;
-    width: 1024px;
-    font-size: 50px; 
-    text-align: center;
-    margin: 0 auto;
-    background-color: #000000; 
-    border-radius: 10px;
-    position:absolute; 
-    z-index:1
-}
-#msj_man_user{
-    display: none;
-    width: 1024px;
-    font-size: 50px; 
-    text-align: center;
-    margin: 0 auto;
-    background-color: #000000; 
-    border-radius: 10px;
-    position:absolute; 
-    z-index:1
-}
-#msj_cierrecaja{
-    display: none;
-    width: 1024px;
-    font-size: 50px; 
-    text-align: center;
-    margin: 0 auto;
-    background-color: #000000; 
-    border-radius: 10px;
-    position:absolute; 
-    z-index:1
-}
-#msj_cuadratura{
-    display: none;
-    width: 1024px;
-    font-size: 50px; 
-    text-align: center;
-    margin: 0 auto;
-    background-color: #000000; 
-    border-radius: 10px;
-    position:absolute; 
-    z-index:1
-}
-#msj_man_maquinas{
-    display: none;
-    width: 1024px;
-    font-size: 50px; 
-    text-align: center;
-    margin: 0 auto;
-    background-color: #000000; 
-    border-radius: 10px;
-    position:absolute; 
-    z-index:1
-}
-#msj_man_gastos{
-    display: none;
-    width: 1024px;
-    font-size: 50px; 
-    text-align: center;
-    margin: 0 auto;
-    background-color: #000000; 
-    border-radius: 10px;
-    position:absolute; 
-    z-index:1
-}
-#msj_cajac{
+.msj{
     display: none;
     width: 1024px;
     font-size: 50px; 
