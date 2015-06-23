@@ -493,10 +493,10 @@ function editar_maquina()
                         $("#msj_man_maquinas").hide();
                         $("#msj_man_maquinas").html("<label>Maquina Modificada Correctamente</label>");
                         $("#msj_man_maquinas").css("color", "#55FF00").show('drop', 'slow').delay(3000).hide('drop', 'slow');
-                        $("#man_id_maquina").val("");
-                        $("#man_nummaquina").val("");
-                        $("#man_estado").val("");
-                        $("#man_obs").val("");
+//                        $("#man_id_maquina").val("");
+////                      $("#man_nummaquina").val("");
+//                        $("#man_estado").val("");
+//                        $("#man_obs").val("");
                         mostrar_maquinas();
                     }
                 }
@@ -509,7 +509,7 @@ function editar_maquina()
         }
     } else {
         $("#msj_man_maquinas").hide();
-        $("#msj_man_maquinas").html("<label>Debe Seleccionar una Maquina para Editar</label>");
+        $("#msj_man_maquinas").html("<label>Debe Seleccionar un Estado para la Maquina</label>");
         $("#msj_man_maquinas").css("color", "#FF0000").show('drop', 'slow').delay(3000).hide('drop', 'slow');
     }
 }
@@ -990,6 +990,7 @@ function informe_cuadratura()
     var b_20 = $("#txt_20000").val().replace(/\./g, '');
     var b_10 = $("#txt_10000").val().replace(/\./g, '');
     var b_5 = $("#txt_5000").val().replace(/\./g, '');
+    var b_2 = $("#txt_2000").val().replace(/\./g, '');
     var b_1 = $("#txt_1000").val().replace(/\./g, '');
     var monedas = $("#txt_monedas").val().replace(/\./g, '');
     $(function () {
@@ -1004,16 +1005,21 @@ function informe_cuadratura()
                     $(this).dialog("close");
                     $.post(
                             base_url + "controlador/informe_cuadratura",
-                            {dia: dia, mes: mes, ano: ano, hora: hora, min: min, b_20: b_20, b_10: b_10, b_5: b_5, b_1: b_1, monedas: monedas},
+                            {dia: dia, mes: mes, ano: ano, hora: hora, min: min, b_20: b_20, b_10: b_10, b_5: b_5, b_2: b_2, b_1: b_1, monedas: monedas},
                     function (ruta, datos) {
                         $("#lista_cuadratura").html(ruta, datos);
                         $("#bt_cuadratura").hide();
+                        document.getElementById("bthomec").disabled = true;
+                        document.getElementById("btcajac").disabled = true;
+                        document.getElementById("btcierrecaja").disabled = true;
+                        document.getElementById("btcuadratura").disabled = true;
                     }
                     );
                 },
                 Cancel: function () {
-                    $(this).dialog("close");
                     $("#dialog-cuadratura").show();
+                    $(this).dialog("close");
+
                 }
             }
         });
@@ -1039,6 +1045,12 @@ function enter_conectar(e)
         conectar();
 }
 
+function enter_pago(e)
+{
+    tecla = (document.all) ? e.keyCode : e.which;
+    if (tecla == 13)
+        guardar_cpago();
+}
 //FOCUS MANTENEDOR USUARIO
 function enter_manusuario(e)
 {
@@ -1068,7 +1080,7 @@ function enter_mantipo(e)
 {
     tecla = (document.all) ? e.keyCode : e.which;
     if (tecla == 13)
-        guardar_user();
+        foco('btguardaruser')
 }
 //FOCUS MANTENEDOR KEYS
 function enter_keybase(e)
@@ -1077,13 +1089,44 @@ function enter_keybase(e)
     if (tecla == 13)
         foco('ac_keyout');
 }
-
-function enter_pago(e)
+//FOCUS CIERRE CAJA
+function enter_b20(e)
 {
     tecla = (document.all) ? e.keyCode : e.which;
     if (tecla == 13)
-        guardar_cpago();
+        foco('txt_10000');
 }
+function enter_b10(e)
+{
+    tecla = (document.all) ? e.keyCode : e.which;
+    if (tecla == 13)
+        foco('txt_5000');
+}
+function enter_b5(e)
+{
+    tecla = (document.all) ? e.keyCode : e.which;
+    if (tecla == 13)
+        foco('txt_2000');
+}
+function enter_b2(e)
+{
+    tecla = (document.all) ? e.keyCode : e.which;
+    if (tecla == 13)
+        foco('txt_1000');
+}
+function enter_b1(e)
+{
+    tecla = (document.all) ? e.keyCode : e.which;
+    if (tecla == 13)
+        foco('txt_monedas');
+}
+function enter_monedas(e)
+{
+    tecla = (document.all) ? e.keyCode : e.which;
+    if (tecla == 13)
+        foco('btcuadrar');
+}
+
 function formatNumeros(input)
 {
     var num = input.value.replace(/\./g, '');

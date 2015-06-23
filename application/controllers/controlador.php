@@ -502,6 +502,7 @@ class Controlador extends CI_Controller {
         $b_20 = $this->input->post('b_20');
         $b_10 = $this->input->post('b_10');
         $b_5 = $this->input->post('b_5');
+        $b_2 = $this->input->post('b_2');
         $b_1 = $this->input->post('b_1');
         $monedas = $this->input->post('monedas');
         $id_user = $this->session->userdata('id_user');

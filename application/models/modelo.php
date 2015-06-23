@@ -570,7 +570,7 @@ class modelo extends CI_Model {
         return $this->db->get();
     }
 
-    function guarda_cuadratura($total_caja, $total_aumentos, $total_pagos, $caja_anterior,$total_gastos, $dia, $mes, $ano, $min, $hora, $id_user, $b_20, $b_10, $b_5, $b_1, $monedas, $total_cajero, $diferencia) {
+    function guarda_cuadratura($total_caja, $total_aumentos, $total_pagos, $caja_anterior,$total_gastos, $dia, $mes, $ano, $min, $hora, $id_user, $b_20, $b_10, $b_5,$b_2, $b_1, $monedas, $total_cajero, $diferencia) {
         $data = array(
             "total_aumentos" => $total_aumentos,
             "total_pagos" => $total_pagos,
@@ -586,6 +586,7 @@ class modelo extends CI_Model {
             "b_20000" => $b_20,
             "b_10000" => $b_10,
             "b_5000" => $b_5,
+            "b_2000" => $b_2,
             "b_1000" => $b_1,
             "monedas" => $monedas,
             "total_cajero" => $total_cajero,
