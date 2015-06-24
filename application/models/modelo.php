@@ -47,7 +47,7 @@ class modelo extends CI_Model {
         return $this->db->get('usuario');
     }
 
-    function modificar_user($id, $nombre, $apellido, $user, $pass, $tipo) {
+    function modificar_user_pass($id, $nombre, $apellido, $user, $pass, $tipo) {
         $this->db->select('*');
         $this->db->where('user', $user);
         $datos = $this->db->get('usuario');
@@ -77,6 +77,46 @@ class modelo extends CI_Model {
                         "apellido" => $apellido,
                         "user" => $user,
                         "pass" => $pass,
+                        "tipo" => $tipo,
+                    );
+                    $this->db->where('id_usuario', $id);
+                    $this->db->update('usuario', $data);
+                    return 0;
+                else:
+                    return 2;
+                endif;
+            }
+        endif;
+    }
+
+    function modificar_user($id, $nombre, $apellido, $user, $tipo) {
+        $this->db->select('*');
+        $this->db->where('user', $user);
+        $datos = $this->db->get('usuario');
+        if ($datos->num_rows() == 0):
+            $this->db->select('*');
+            $this->db->where('id_usuario', $id);
+            $cantidad = $this->db->get('usuario')->num_rows();
+            if ($cantidad > 0):
+                $data = array(
+                    "nombre" => $nombre,
+                    "apellido" => $apellido,
+                    "user" => $user,
+                    "tipo" => $tipo,
+                );
+                $this->db->where('id_usuario', $id);
+                $this->db->update('usuario', $data);
+                return 0;
+            else:
+                return 1;
+            endif;
+        else:
+            foreach ($datos->result() as $fila) {
+                if ($fila->id_usuario == $id):
+                    $data = array(
+                        "nombre" => $nombre,
+                        "apellido" => $apellido,
+                        "user" => $user,
                         "tipo" => $tipo,
                     );
                     $this->db->where('id_usuario', $id);
@@ -255,7 +295,7 @@ class modelo extends CI_Model {
         $this->db->where('ano_pago', $ano);
         return $this->db->get();
     }
-    
+
     function diario_resumen_pagos($dia, $mes, $ano) {
         $this->db->select('num_maquina');
         $this->db->select_sum('monto_pago');
@@ -278,7 +318,7 @@ class modelo extends CI_Model {
         $this->db->where('ano_gasto', $ano);
         return $this->db->get();
     }
-    
+
     function diario_resumen_gastos($dia, $mes, $ano) {
         $this->db->select('nombre_categoria');
         $this->db->select_sum('monto_gasto');
@@ -300,7 +340,7 @@ class modelo extends CI_Model {
         $this->db->where('ano_cuadratura', $ano);
         return $this->db->get();
     }
-    
+
     function diario_resumen_cierres($dia, $mes, $ano) {
         $this->db->select('*');
         $this->db->select_sum('diferencia_caja');
@@ -358,7 +398,7 @@ class modelo extends CI_Model {
         $this->db->where('ano_cuadratura', $ano);
         return $this->db->get();
     }
-    
+
     function mensual_resumen_cierres($mes, $ano) {
         $this->db->select('*');
         $this->db->select_sum('diferencia_caja');
@@ -570,7 +610,7 @@ class modelo extends CI_Model {
         return $this->db->get();
     }
 
-    function guarda_cuadratura($total_caja, $total_aumentos, $total_pagos, $caja_anterior,$total_gastos, $dia, $mes, $ano, $min, $hora, $id_user, $b_20, $b_10, $b_5,$b_2, $b_1, $monedas, $total_cajero, $diferencia) {
+    function guarda_cuadratura($total_caja, $total_aumentos, $total_pagos, $caja_anterior, $total_gastos, $dia, $mes, $ano, $min, $hora, $id_user, $b_20, $b_10, $b_5, $b_2, $b_1, $monedas, $total_cajero, $diferencia) {
         $data = array(
             "total_aumentos" => $total_aumentos,
             "total_pagos" => $total_pagos,
@@ -593,7 +633,7 @@ class modelo extends CI_Model {
             "diferencia_caja" => $diferencia,
         );
         $this->db->insert("cuadratura_caja", $data);
-        
+
         $dato = array(
             "cierre_aumento" => '1',
         );
@@ -606,8 +646,8 @@ class modelo extends CI_Model {
 
         $this->db->where('cierre_pago', '0');
         $this->db->update("pago", $dat);
-        
-          $data = array(
+
+        $data = array(
             "cierre_gasto" => '1',
         );
 

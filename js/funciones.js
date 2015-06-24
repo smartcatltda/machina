@@ -366,7 +366,7 @@ function  seleccionar_user(user)
             } else {
                 $("#man_id").val(datos.id);
                 $("#man_user").val(datos.user);
-                $("#man_pass").val(datos.pass);
+//                $("#man_pass").val(datos.pass);
                 $("#man_tipo").val(datos.tipo);
                 $("#man_nombre").val(datos.nombre);
                 $("#man_apellido").val(datos.apellido);
@@ -387,7 +387,7 @@ function editar_user()
     var user = $("#man_user").val();
     var pass = $("#man_pass").val();
     var tipo = $("#man_tipo").val();
-    if (nombre != "" && apellido != "" && user != "" && pass != "" && tipo != "") {
+    if (nombre != "" && apellido != "" && user != "" && tipo != "") {
         $.post(base_url + "controlador/modificar_user", {id: id, nombre: nombre, apellido: apellido, user: user, pass: pass, tipo: tipo},
         function (datos) {
             if (datos.valor == 1) {

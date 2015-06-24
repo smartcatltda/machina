@@ -3,8 +3,8 @@
 <div id="login" hidden>
     <div style="font-size: 20px;"><h1>Inicio de Sesión</h1></div>
     <hr style="width: 35%;"><br>
-    <input class="ui-corner-all" placeholder="Usuario" size="30" id="user" maxlength="30" style="font-size: 20px;" required onkeypress="enter_user(event)" autofocus/><br>
-    <input class="ui-corner-all" placeholder="Contraseña" type="password" size="30" id="pass" style="font-size: 20px;" required onkeypress="enter_conectar(event)"/><br>
+    <input class="user_icon" placeholder="Usuario" size="30" id="user" maxlength="30" style="font-size: 20px;" required onkeypress="enter_user(event)" autofocus/><br>
+    <input class="pass_icon" placeholder="Contraseña" type="password" size="30" id="pass" style="font-size: 20px;" required onkeypress="enter_conectar(event)"/><br>
     <br>
     <button id="conectar">Conectar</button>
     <hr style="width: 35%;"><br>
@@ -101,7 +101,7 @@
             <div id="Man_usuarios">
                 <table>
                     <tr>
-                        <td><input hidden="true" id="man_id" type="text" /></td>
+                        <td><input hidden id="man_id" type="text" /></td>
                     <tr>
                     <tr>
                         <td style="width: 150px;">Usuario :</td>

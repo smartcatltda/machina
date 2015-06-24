@@ -99,13 +99,13 @@ class Controlador extends CI_Controller {
             foreach ($data as $fila) {
                 $id = $fila->id_usuario;
                 $user = $fila->user;
-                $pass = $fila->pass;
+//                $pass = $fila->pass;
                 $tipo = $fila->tipo;
                 $nombre = $fila->nombre;
                 $apellido = $fila->apellido;
             }
             $valor = 0;
-            echo json_encode(array("id" => $id, "valor" => $valor, "nombre" => $nombre, "apellido" => $apellido, "user" => $user, "pass" => $pass, "tipo" => $tipo));
+            echo json_encode(array("id" => $id, "valor" => $valor, "nombre" => $nombre, "apellido" => $apellido, "user" => $user, "tipo" => $tipo));
         } else {
             $valor = 1;
             echo json_encode(array("valor" => $valor));
@@ -120,11 +120,21 @@ class Controlador extends CI_Controller {
         $pass = $this->input->post('pass');
         $tipo = $this->input->post('tipo');
         $valor = 1;
-        if ($this->modelo->modificar_user($id, $nombre, $apellido, $user, $pass, $tipo) == 0) {
-            $valor = 0;
+        if ($pass == "") {
+            if ($this->modelo->modificar_user($id, $nombre, $apellido, $user, $tipo) == 0) {
+                $valor = 0;
+            } else {
+                if ($this->modelo->modificar_user($id, $nombre, $apellido, $user, $tipo) == 2) {
+                    $valor = 2;
+                }
+            }
         } else {
-            if ($this->modelo->modificar_user($id, $nombre, $apellido, $user, $pass, $tipo) == 2) {
-                $valor = 2;
+            if ($this->modelo->modificar_user_pass($id, $nombre, $apellido, $user, md5($pass), $tipo) == 0) {
+                $valor = 0;
+            } else {
+                if ($this->modelo->modificar_user_pass($id, $nombre, $apellido, $user, md5($pass), $tipo) == 2) {
+                    $valor = 2;
+                }
             }
         }
         echo json_encode(array("valor" => $valor));
