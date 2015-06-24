@@ -109,6 +109,7 @@
                     <tr>
                         <td>Contraseña :</td>
                         <td><input maxlength="20" class="rounded" id="man_pass" placeholder="Contraseña" type="password" style="width: 200px;" maxlength="50" onkeypress="enter_manpass(event)"/></td>
+                        <td><input type="checkbox" id="checkpass"><label style="font-size: 11px; font-weight: bold;" for="checkpass">ver</label></td>
                     </tr>
                     <tr>
                         <td>Nombre :</td>

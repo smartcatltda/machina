@@ -1,5 +1,12 @@
 $(document).ready(function () {
+    verificalogin();
     foco('user');
+    $("#checkpass").button({icons: {primary: "ui-icon-check"}}).click(function () {
+        mostrarPass();
+    });
+    //FORMATO VISTAS
+    $("#admin").tabs();
+    $("#cajero").tabs();
 //LOGIN    
     $("#conectar").button().click(function () {
         conectar();
@@ -28,7 +35,7 @@ $(document).ready(function () {
     });
     $("#salir").button().click(function () {
         salir();
-        location.reload();
+
     });
 //MENU CAJERO
     $("#bthomec").button().click(function () {
@@ -48,10 +55,6 @@ $(document).ready(function () {
         salir();
         location.reload();
     });
-//FORMATO VISTAS
-    $("#admin").tabs();
-    $("#cajero").tabs();
-    verificalogin();
 //MANTENEDOR DE USUARIOS
     mostrar_user();
     $("#btguardaruser").button().click(function () {
@@ -209,13 +212,7 @@ function salir()
             {
                 if (datos.valor == 0)
                 {
-                    $("#contenido").hide('fast');
-                    $("#menuadmin").hide();
-                    $("#menucajero").hide();
-                    $("#login").show('fast');
-                    $("#user").val("");
-                    $("#pass").val("");
-                    $("#nombrelogin").html('<label>' + "" + '</label>');
+                    location.reload();
                 }
             },
             'json'
@@ -776,10 +773,10 @@ function bloquear_dp()
 //lo reactiva en caso contrario
 {
     var rango = $("#rango_select").val();
-    if (rango == "s"){
+    if (rango == "s") {
         $("#estad_datepicker").val("");
         $("#estad_datepicker").datepicker("disable");
-    }else{
+    } else {
         $("#estad_datepicker").datepicker("enable");
     }
 }
@@ -1152,4 +1149,16 @@ function validar_texto(e)
     patron = /[0-9]/;
     tecla_final = String.fromCharCode(tecla);
     return patron.test(tecla_final);
+}
+
+function mostrarPass() {
+    var checkbox = document.getElementById("checkpass");
+    var contenido = document.getElementById("man_pass");
+    if (checkbox.checked) {
+        contenido.setAttribute("type", "text");
+        foco('man_pass')
+    } else {
+        contenido.setAttribute("type", "password");
+        foco('man_pass');
+    }
 }

@@ -18,7 +18,7 @@ class Controlador extends CI_Controller {
 
     function conectar() {
         $user = $this->input->post('user');
-        $pass = $this->input->post('pass');
+        $pass = md5($this->input->post('pass'));
         $valor = 0;
         $permiso = "";
         $nombre = "";
@@ -62,7 +62,7 @@ class Controlador extends CI_Controller {
 
     function salir() {
         $valor = 0;
-        $cookie = array('user' => '', 'permiso' => '', 'nombre' => $nombre, 'apellido' => $apellido, 'id_user' => $id_user, 'esta logeado' => false);
+        $cookie = array('user' => '', 'permiso' => '', 'nombre' => '', 'apellido' => '', 'id_user' => '', 'esta logeado' => false);
         $this->session->set_userdata($cookie);
         echo json_encode(array('valor' => $valor));
     }
@@ -77,7 +77,7 @@ class Controlador extends CI_Controller {
 
     function guardar_user() {
         $user = $this->input->post('user');
-        $pass = $this->input->post('pass');
+        $pass = md5($this->input->post('pass'));
         $tipo = $this->input->post('tipo');
         $nombre = $this->input->post('nombre');
         $apellido = $this->input->post('apellido');
@@ -387,13 +387,13 @@ class Controlador extends CI_Controller {
 
     function informe_semanal() {
         $tipo = $this->input->post('tipo');
-        $fecha1= date('m-d-Y');
-        $fecha2= date('m-d-Y', strtotime('-1 day'));
-        $fecha3= date('m-d-Y', strtotime('-2 day'));
-        $fecha4= date('m-d-Y', strtotime('-3 day'));
-        $fecha5= date('m-d-Y', strtotime('-4 day'));
-        $fecha6= date('m-d-Y', strtotime('-5 day'));
-        $fecha7= date('m-d-Y', strtotime('-6 day'));
+        $fecha1 = date('m-d-Y');
+        $fecha2 = date('m-d-Y', strtotime('-1 day'));
+        $fecha3 = date('m-d-Y', strtotime('-2 day'));
+        $fecha4 = date('m-d-Y', strtotime('-3 day'));
+        $fecha5 = date('m-d-Y', strtotime('-4 day'));
+        $fecha6 = date('m-d-Y', strtotime('-5 day'));
+        $fecha7 = date('m-d-Y', strtotime('-6 day'));
         list($mes1, $dia1, $ano1) = explode("-", $fecha1);
         list($mes2, $dia2, $ano2) = explode("-", $fecha2);
         list($mes3, $dia3, $ano3) = explode("-", $fecha3);
