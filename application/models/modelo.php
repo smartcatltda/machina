@@ -502,7 +502,7 @@ class modelo extends CI_Model {
     }
 
 //MANTENEDOR PAGO
-    function guardar_pago($num_maquina, $monto_pago, $min, $horas, $dia, $mes, $ano, $id_user) {
+    function guardar_pago($num_maquina, $monto_pago, $min, $horas, $dia, $mes, $ano, $id_user,$b_tragado) {
         $data = array(
             "num_maquina" => $num_maquina,
             "monto_pago" => $monto_pago,
@@ -513,6 +513,7 @@ class modelo extends CI_Model {
             "ano_pago" => $ano,
             "id_usuario" => $id_user,
             "cierre_pago" => '0',
+            "b_tragado" => $b_tragado,
         );
         $this->db->insert("pago", $data);
         return 0;

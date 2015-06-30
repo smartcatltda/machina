@@ -238,26 +238,26 @@
             <div style="titulo"><h1>Caja</h1></div>
             <div style="titulo" id="titulo_caja" style="width: 900px;" ><h3>Ingreso de Pagos</h3></div>
             <br>
-            <table style="width: 900px;">
+            <table style="width: 1000px;">
                 <tr>
                     <td>Maquina :</td>
                     <td style="width: 150px;"></td>
-                    <td>Pago : $</td>
+                    <td style="padding-left: 2%;">Pago : $</td>
                 </tr>
                 <tr>
                     <td>
                         <select class="rounded" onchange="foco('c_pago')" id="c_maq" style="width: 150px;" ></select>
                     </td>
                     <td style="width: 150px;"></td>
-                    
-                    <td><input class="rounded" id="c_pago" placeholder="pago" type="text" style="width: 290px;" onkeydown="enter_pago(event)" maxlength="50" onkeypress="return validar_texto(event)" onkeyup="formatNumeros(this)" onchange="formatNumeros(this)"/></td>
-                    <td style="width: 150px;"></td> <td><button style="width: 150px;" id="btingresarpago" >Ingresar</button></td>
+                    <td align="center"><input class="rounded" id="c_pago" placeholder="pago" type="text" style="width: 290px;" onkeydown="enter_pago(event)" maxlength="50" onkeypress="return validar_texto(event)" onkeyup="formatNumeros(this)" onchange="formatNumeros(this)"/></td>
+                    <td align="center"><input type="checkbox" id="checkpago" onclick="foco('btingresarpago')"><label style="font-size: 11px; font-weight: bold;" for="checkpago">Billette Tragado</label></td>
+                    <td align="right"><button style="width: 150px;" id="btingresarpago" onkeypress="enter_ingresarpago(event)" >Ingresar</button></td>
                 </tr>
             </table>
             <br>
             <div id="titulo_gasto" style="titulo" style="width: 900px;"><h3>Registro de Gastos</h3></div>
             <br>
-            <table style="width: 900px;">
+            <table style="width: 1000px;">
                 <tr>
                     <td style="width: 290px;">Categoría :</td><td style="width: 10px;"></td><td style="width: 290px;">Gasto :</td><td></td>
                 </tr>
@@ -272,9 +272,9 @@
                     <td> Detalle :</td><td></td><td></td><td></td>
                 </tr>
                 <tr>
-                    <td colspan="3"><input rows="2" type="text" placeholder="Detalle" class="rounded" id="c_detalle" style="width: 600px;"></td>
+                    <td colspan="3"><input rows="2" type="text" placeholder="Detalle" class="rounded" id="c_detalle" style="width: 635px;"></td>
                     <td style="width: 150px;"></td>
-                    <td><button id="btregistrargasto" style="width: 150px;">Registrar</button></td>
+                    <td align="right"><button id="btregistrargasto" style="width: 150px;">Registrar</button></td>
                 </tr>
             </table>
             <br><br>

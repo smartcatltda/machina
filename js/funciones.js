@@ -4,7 +4,8 @@ $(document).ready(function () {
     $("#checkpass").button({icons: {primary: "ui-icon-check"}}).click(function () {
         mostrarPass();
     });
-    //FORMATO VISTAS
+    $("#checkpago").button({icons: {secondary: "ui-icon-check"}});
+//FORMATO VISTAS
     $("#admin").tabs();
     $("#cajero").tabs();
 //LOGIN    
@@ -35,7 +36,6 @@ $(document).ready(function () {
     });
     $("#salir").button().click(function () {
         salir();
-
     });
 //MENU CAJERO
     $("#bthomec").button().click(function () {
@@ -43,7 +43,6 @@ $(document).ready(function () {
     });
     $("#btcajac").button().click(function () {
         cajac();
-        foco('c_pago');
     });
     $("#btcierrecaja").button().click(function () {
         cierrecaja();
@@ -101,6 +100,7 @@ $(document).ready(function () {
 //CAJA CAJERO
     $("#btingresarpago").button().click(function () {
         guardar_cpago();
+        foco('c_pago')
     });
     $("#btregistrargasto").button().click(function () {
         guardar_cgasto();
@@ -490,10 +490,6 @@ function editar_maquina()
                         $("#msj_man_maquinas").hide();
                         $("#msj_man_maquinas").html("<label>Maquina Modificada Correctamente</label>");
                         $("#msj_man_maquinas").css("color", "#55FF00").show('drop', 'slow').delay(3000).hide('drop', 'slow');
-//                        $("#man_id_maquina").val("");
-////                      $("#man_nummaquina").val("");
-//                        $("#man_estado").val("");
-//                        $("#man_obs").val("");
                         mostrar_maquinas();
                     }
                 }
@@ -834,6 +830,8 @@ function guardar_cpago()
 {
     var num_maquina = $("#c_maq").val();
     var monto_pago = $("#c_pago").val().replace(/\./g, '');
+    var check = document.getElementById("checkpago");
+    var b_tragado = "0";
     var tiempo = new Date();
     var min = tiempo.getMinutes();
     var horas = tiempo.getHours();
@@ -841,13 +839,18 @@ function guardar_cpago()
     var mes = tiempo.getMonth();
     var ano = tiempo.getFullYear();
     if (num_maquina != "" && monto_pago != "") {
-        $.post(base_url + "controlador/guardar_pago", {num_maquina: num_maquina, monto_pago: monto_pago, min: min, horas: horas, dia: dia, mes: mes, ano: ano},
+        if (check.checked) {
+            b_tragado = "1";
+        }
+        $.post(base_url + "controlador/guardar_pago", {num_maquina: num_maquina, monto_pago: monto_pago, min: min, horas: horas, dia: dia, mes: mes, ano: ano, b_tragado: b_tragado},
         function (data) {
             $("#msj_cajac").hide();
             $("#msj_cajac").html("<label>" + data.msg + "</label>");
             if (data.valor == 1) {
                 $("#msj_cajac").css("color", "#55FF00").show('drop', 'slow').delay(3000).hide('drop', 'slow');
                 $("#c_pago").val("");
+                $("#checkpago").prop("checked", false);
+                $("#checkpago").button("refresh");
                 cargar_pagos();
             }
         }, "json"
@@ -856,6 +859,8 @@ function guardar_cpago()
         $("#msj_cajac").hide();
         $("#msj_cajac").html("<label>Ingrese Monto del Pago</label>");
         $("#msj_cajac").css("color", "#FF0000").show('drop', 'slow').delay(3000).hide('drop', 'slow');
+        $("#checkpago").prop("checked", false);
+        $("#checkpago").button("refresh");
     }
 }
 function guardar_cgasto()
@@ -1016,14 +1021,10 @@ function informe_cuadratura()
                 Cancel: function () {
                     $("#dialog-cuadratura").show();
                     $(this).dialog("close");
-
                 }
             }
         });
     });
-
-
-
 }
 
 //VALIDACIONES

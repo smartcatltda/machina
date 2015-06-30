@@ -432,6 +432,7 @@ class Controlador extends CI_Controller {
     function guardar_pago() {
         $num_maquina = $this->input->post('num_maquina');
         $monto_pago = $this->input->post('monto_pago');
+        $b_tragado = $this->input->post('b_tragado');
         $min = $this->input->post('min');
         $horas = $this->input->post('horas');
         $dia = $this->input->post('dia');
@@ -439,7 +440,7 @@ class Controlador extends CI_Controller {
         $ano = $this->input->post('ano');
         $id_user = $this->session->userdata('id_user');
         $valor = 0;
-        if ($this->modelo->guardar_pago($num_maquina, $monto_pago, $min, $horas, $dia, $mes, $ano, $id_user) == 0) {
+        if ($this->modelo->guardar_pago($num_maquina, $monto_pago, $min, $horas, $dia, $mes, $ano, $id_user,$b_tragado) == 0) {
             $msg = "Pago Guardado Correctamente";
             $valor = 1;
         }

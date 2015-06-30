@@ -1,8 +1,8 @@
 <?php if ($cantidad == 0): ?>
-<div>No hay datos que coincidan con los parametros seleccionados</div>
+    <div>No hay datos que coincidan con los parametros seleccionados</div>
 <?php else:
     ?>
-    <table border="2">
+    <table width="1000" border="2">
         <thead>
             <tr>
                 <th>ID</th>
@@ -13,7 +13,7 @@
                 <th>ESTADO</th>
                 <th>COMENTARIO</th>
                 <th>REFERENCIA</th>
-            </tr>
+                <th>BILLETE TRAGADO</th>
         </thead>
         <?php
         foreach ($diario_pagos as $fila):
@@ -34,7 +34,11 @@
             if ($fila->coment_edit == ""):
                 $fila->coment_edit = "-";
             endif;
-            
+            if ($fila->b_tragado == 1):
+                $fila->b_tragado = "Si";
+            else:
+                $fila->b_tragado = "-";
+            endif;
             $fila->monto_pago = number_format($fila->monto_pago, 0, ",", ".");
             ?>
             <tbody>
@@ -47,9 +51,10 @@
                     <td width="120"><?= $fila->estado_pago ?></td>
                     <td width="120"><?= $fila->coment_edit ?></td>
                     <td width="120"><?= $fila->edit_pago ?></td>
+                    <td width="120"><?= $fila->b_tragado ?></td>
                 </tr>
             </tbody>
-        <?php
+            <?php
         endforeach;
     endif;
     ?>
