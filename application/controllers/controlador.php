@@ -279,12 +279,17 @@ class Controlador extends CI_Controller {
         $dia = $this->input->post('dia');
         $mes = $this->input->post('mes') + 1;
         $ano = $this->input->post('ano');
-        if ($this->modelo->registrar_key($num_maquina, $key_base, $key_out, $total_key, $hora, $min, $dia, $mes, $ano) == 0) {
-            $msg = "Key Registrada Correctamente";
-            $valor = 1;
-        } else {
-            $msg = "Hoy ya ha Ingresado las Keys de esta Maquina";
+        if ($key_base > $key_out) {
+            $msg = "El Key out no puede ser menor que el Key base";
             $valor = 0;
+        } else {
+            if ($this->modelo->registrar_key($num_maquina, $key_base, $key_out, $total_key, $hora, $min, $dia, $mes, $ano) == 0) {
+                $msg = "Key Registrada Correctamente";
+                $valor = 1;
+            } else {
+                $msg = "Hoy ya ha Ingresado las Keys de esta Maquina";
+                $valor = 0;
+            }
         }
         echo json_encode(array("valor" => $valor, "msg" => $msg));
     }
