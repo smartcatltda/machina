@@ -387,38 +387,45 @@ function editar_user()
     var user = $("#man_user").val();
     var pass = $("#man_pass").val();
     var tipo = $("#man_tipo").val();
-    if (nombre != "" && apellido != "" && user != "" && tipo != "") {
-        $.post(base_url + "controlador/modificar_user", {id: id, nombre: nombre, apellido: apellido, user: user, pass: pass, tipo: tipo},
-        function (datos) {
-            if (datos.valor == 1) {
-                $("#msj_man_user").hide();
-                $("#msj_man_user").html("<label>Usuario No Registrado</label>");
-                $("#msj_man_user").css("color", "#FF0000").show('drop', 'slow').delay(3000).hide('drop', 'slow');
-            } else {
-                if (datos.valor == 2) {
+    if (id != "") {
+        if (nombre != "" && apellido != "" && user != "" && tipo != "") {
+            $.post(base_url + "controlador/modificar_user", {id: id, nombre: nombre, apellido: apellido, user: user, pass: pass, tipo: tipo},
+            function (datos) {
+                if (datos.valor == 1) {
                     $("#msj_man_user").hide();
-                    $("#msj_man_user").html("<label>Nombre de Usuario No Disponible</label>");
+                    $("#msj_man_user").html("<label>Usuario No Registrado</label>");
                     $("#msj_man_user").css("color", "#FF0000").show('drop', 'slow').delay(3000).hide('drop', 'slow');
                 } else {
-                    $("#msj_man_user").hide();
-                    $("#msj_man_user").html("<label>Usuario Modificado Correctamente</label>");
-                    $("#msj_man_user").css("color", "#55FF00").show('drop', 'slow').delay(3000).hide('drop', 'slow');
-                    $("#man_id").val("");
-                    $("#man_nombre").val("");
-                    $("#man_apellido").val("");
-                    $("#man_user").val("");
-                    $("#man_pass").val("");
-                    $("#man_tipo").val("");
-                    mostrar_user();
+                    if (datos.valor == 2) {
+                        $("#msj_man_user").hide();
+                        $("#msj_man_user").html("<label>Nombre de Usuario No Disponible</label>");
+                        $("#msj_man_user").css("color", "#FF0000").show('drop', 'slow').delay(3000).hide('drop', 'slow');
+                    } else {
+                        $("#msj_man_user").hide();
+                        $("#msj_man_user").html("<label>Usuario Modificado Correctamente</label>");
+                        $("#msj_man_user").css("color", "#55FF00").show('drop', 'slow').delay(3000).hide('drop', 'slow');
+                        $("#man_id").val("");
+                        $("#man_nombre").val("");
+                        $("#man_apellido").val("");
+                        $("#man_user").val("");
+                        $("#man_pass").val("");
+                        $("#man_tipo").val("");
+                        mostrar_user();
+                    }
                 }
-            }
-        }, "json"
-                );
+            }, "json"
+                    );
+        } else {
+            $("#msj_man_user").hide();
+            $("#msj_man_user").html("<label>Complete todos los Campos</label>");
+            $("#msj_man_user").css("color", "#FF0000").show('drop', 'slow').delay(3000).hide('drop', 'slow');
+        }
     } else {
         $("#msj_man_user").hide();
         $("#msj_man_user").html("<label>Debe Selecciona un Usuario para Editar</label>");
         $("#msj_man_user").css("color", "#FF0000").show('drop', 'slow').delay(3000).hide('drop', 'slow');
     }
+
 }
 //MANTENERDOR MAQUINAS
 function mostrar_maquinas()
@@ -937,47 +944,54 @@ function editar_pago()
     var dia = time.getDate();
     var mes = time.getMonth();
     var ano = time.getFullYear();
-    if (id_pago != "" && num_maquina != "" && monto_pago != "" && coment != "") {
-        $(function () {
-            $("#dialog-confirm").dialog({
-                resizable: true,
-                height: 240,
-                modal: true,
-                buttons: {
-                    "Continuar": function () {
-                        $("#dialog-confirm").show();
-                        $(this).dialog("close");
-                        $.post(base_url + "controlador/editar_pago", {id_pago: id_pago, num_maquina: num_maquina, monto_pago: monto_pago, coment: coment, horas: horas, min: min, dia: dia, mes: mes, ano: ano},
-                        function (datos) {
-                            if (datos.valor == 0) {
-                                $("#msj_cierrecaja").hide();
-                                $("#msj_cierrecaja").html("<label>Pago Modificado Correctamente</label>");
-                                $("#msj_cierrecaja").css("color", "#55FF00").show('drop', 'slow').delay(3000).hide('drop', 'slow');
-                                $("#id_pago").val("");
-                                $("#c_maq_cierre").val("");
-                                $("#c_pago_cierre").val("");
-                                $("#c_coment").val("");
-                                cargar_pagos();
-                            }
-                        }, "json"
-                                );
-                    },
-                    Cancel: function () {
-                        $(this).dialog("close");
-                        $("#dialog-confirm").show();
-                        $("#msj_cierrecaja").hide();
-                        $("#id_pago").val("");
-                        $("#c_maq_cierre").val("");
-                        $("#c_pago_cierre").val("");
-                        $("#c_coment").val("");
+    if (id_pago != "") {
+        if (num_maquina != "" && monto_pago != "" && coment != "") {
+            $(function () {
+                $("#dialog-confirm").dialog({
+                    resizable: true,
+                    height: 240,
+                    modal: true,
+                    buttons: {
+                        "Continuar": function () {
+                            $("#dialog-confirm").show();
+                            $(this).dialog("close");
+                            $.post(base_url + "controlador/editar_pago", {id_pago: id_pago, num_maquina: num_maquina, monto_pago: monto_pago, coment: coment, horas: horas, min: min, dia: dia, mes: mes, ano: ano},
+                            function (datos) {
+                                if (datos.valor == 0) {
+                                    $("#msj_cierrecaja").hide();
+                                    $("#msj_cierrecaja").html("<label>Pago Modificado Correctamente</label>");
+                                    $("#msj_cierrecaja").css("color", "#55FF00").show('drop', 'slow').delay(3000).hide('drop', 'slow');
+                                    $("#id_pago").val("");
+                                    $("#c_maq_cierre").val("");
+                                    $("#c_pago_cierre").val("");
+                                    $("#c_coment").val("");
+                                    cargar_pagos();
+                                }
+                            }, "json"
+                                    );
+                        },
+                        Cancel: function () {
+                            $(this).dialog("close");
+                            $("#dialog-confirm").show();
+                            $("#msj_cierrecaja").hide();
+                            $("#id_pago").val("");
+                            $("#c_maq_cierre").val("");
+                            $("#c_pago_cierre").val("");
+                            $("#c_coment").val("");
+                        }
                     }
-                }
+                });
             });
-        });
+        } else {
+            $("#msj_cierrecaja").hide();
+            $("#msj_cierrecaja").html("<label>Complete Todos los Campos</label>");
+            $("#msj_cierrecaja").css("color", "#FF0000").show('drop', 'slow').delay(3000).hide('drop', 'slow');
+        }
     } else {
         $("#msj_cierrecaja").hide();
-        $("#msj_cierrecaja").html("<label>Complete Todos los Campos</label>");
+        $("#msj_cierrecaja").html("<label>Seleccione Pago a Editar</label>");
         $("#msj_cierrecaja").css("color", "#FF0000").show('drop', 'slow').delay(3000).hide('drop', 'slow');
+
     }
 }
 

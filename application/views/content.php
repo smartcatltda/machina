@@ -250,7 +250,7 @@
                     </td>
                     <td style="width: 150px;"></td>
                     <td align="center"><input class="rounded" id="c_pago" placeholder="pago" type="text" style="width: 290px;" onkeydown="enter_pago(event)" maxlength="50" onkeypress="return validar_texto(event)" onkeyup="formatNumeros(this)" onchange="formatNumeros(this)"/></td>
-                    <td align="center"><input type="checkbox" id="checkpago" onclick="foco('btingresarpago')"><label style="font-size: 11px; font-weight: bold;" for="checkpago">Billette Tragado</label></td>
+                    <td align="center"><input type="checkbox" id="checkpago" onclick="foco('c_pago')"><label style="font-size: 11px; font-weight: bold;" for="checkpago">Billette Tragado</label></td>
                     <td align="right"><button style="width: 150px;" id="btingresarpago" onkeypress="enter_ingresarpago(event)" >Ingresar</button></td>
                 </tr>
             </table>
