@@ -9,7 +9,7 @@
                         <th width="145">NOMBRE</th>
                         <th width="228">DESCRIPCION</th>
                         <th width="146">ESTADO</th>
-                        <th>CARGAR</th>
+                        <th width="100">CARGAR</th>
                     </tr>
                 </table>
             </td>
@@ -29,10 +29,10 @@
                             endif;
                             ?>
                             <tr align="center">
-                                <td width="120"><?= $fila->nombre_categoria ?></td>
-                                <td width="120"><?= $fila->descripcion_categoria ?></td>
-                                <td width="120"><?= $fila->estado_cat_gasto ?></td>
-                                <td width="120"><input type="image" src="css/images/check-icon.png" onclick="foco('man_nombre_gasto'), seleccionar_cat_gasto('<?= $fila->nombre_categoria ?>')"/></td>
+                                <td width="145"><?= $fila->nombre_categoria ?></td>
+                                <td width="228"><?= $fila->descripcion_categoria ?></td>
+                                <td width="146"><?= $fila->estado_cat_gasto ?></td>
+                                <td width="100"><input type="image" src="css/images/check-icon.png" onclick="foco('man_nombre_gasto'), seleccionar_cat_gasto('<?= $fila->nombre_categoria ?>')"/></td>
                             </tr>
                         <?php endforeach;
                     endif;
