@@ -1,30 +1,39 @@
 <?php if ($cantidad == 0): ?>
-<div>No hay datos que coincidan con los parametros seleccionados</div>
+    <div>No hay datos que coincidan con los parametros seleccionados</div>
 <?php else:
     ?>
-    <table border="2">
-        <thead>
-            <tr>
-                <th colspan="2">RESUMEN DEL MES</th>
-            </tr>
-            <tr>
-                <th>MAQUINA</th>
-                <th>MONTO</th>
-            </tr>
-        </thead>
-        <?php
-        foreach ($mensual_resumen_pagos as $fila):
-            $fila->monto_pago = number_format($fila->monto_pago, 0, ",", ".");
-            ?>
-            <tbody>
-                <tr align="center">
-                    <td width="120"><?= $fila->num_maquina ?></td>
-                    <td width="120">$<?= $fila->monto_pago ?></td>
-                </tr>
-            </tbody>
-        <?php
-        endforeach;
-    endif;
-    ?>
-</table>
-<?php ?>
+    <table cellspacing="0" cellpadding="0" border="0" style="border-radius: 10px; width: 683px; text-align: center;">
+        <tr>
+            <td>
+                <table cellspacing="0" cellpadding="1" border="1" width="683">
+                    <tr class="ui-widget-header" >
+                        <th width="150">MAQUINA</th>
+                        <th width="300">MONTO</th>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div style="width:700px; height:315px; overflow:auto;">
+                    <table class="table-content" cellspacing="0" cellpadding="1" border="1" width="683">
+                        <tr>
+                            <?php
+                            foreach ($mensual_resumen_pagos as $fila):
+                                $fila->monto_pago = number_format($fila->monto_pago, 0, ",", ".");
+                                ?>
+                            <tr>
+                                <td width="150"><?= $fila->num_maquina ?></td>
+                                <td width="300">$<?= $fila->monto_pago ?></td>
+                            </tr>
+                            <?php
+                        endforeach;
+                        ?>
+                    </table>
+                </div>
+            </td>
+        </tr>
+    </table>
+<?php
+endif;
+?>

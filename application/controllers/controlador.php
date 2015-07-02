@@ -564,14 +564,14 @@ class Controlador extends CI_Controller {
         endif;
 
         $total_caja = $caja_anterior + $total_aumentos - $total_pagos - $total_gastos;
-        $total_cajero = $b_20 + $b_10 + $b_5 + $b_1 + $monedas;
+        $total_cajero = $b_20 + $b_10 + $b_5 + $b_2 + $b_1 + $monedas;
         if ($total_caja > 0):
             $diferencia = $total_cajero - $total_caja;
         else :
             $diferencia = $total_cajero + $total_caja;
         endif;
 
-        $this->modelo->guarda_cuadratura($total_caja, $total_aumentos, $total_pagos, $caja_anterior, $total_gastos, $dia, $mes, $ano, $min, $hora, $id_user, $b_20, $b_10, $b_5, $b_1, $monedas, $total_cajero, $diferencia);
+        $this->modelo->guarda_cuadratura($total_caja, $total_aumentos, $total_pagos, $caja_anterior, $total_gastos, $dia, $mes, $ano, $min, $hora, $id_user, $b_20, $b_10, $b_5, $b_2, $b_1, $monedas, $total_cajero, $diferencia);
         $datos['totales'] = $this->modelo->ver_cuadratura($dia, $mes, $ano)->result();
         $this->load->view("ListaCuadratura", $datos);
     }

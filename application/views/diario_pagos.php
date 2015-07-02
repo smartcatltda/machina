@@ -2,61 +2,72 @@
     <div>No hay datos que coincidan con los parametros seleccionados</div>
 <?php else:
     ?>
-    <table width="1000" border="2">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>MAQUINA</th>
-                <th>MONTO</th>
-                <th>HORA</th>
-                <th>USUARIO</th>
-                <th>ESTADO</th>
-                <th>COMENTARIO</th>
-                <th>REFERENCIA</th>
-                <th>BILLETE TRAGADO</th>
-        </thead>
-        <?php
-        foreach ($diario_pagos as $fila):
-            if ($fila->hora_pago < 10):
-                $fila->hora_pago = "0" . $fila->hora_pago;
-            endif;
-            if ($fila->min_pago < 10):
-                $fila->min_pago = "0" . $fila->min_pago;
-            endif;
-            if ($fila->estado_pago == 1):
-                $fila->estado_pago = "EDITADO";
-            else:
-                $fila->estado_pago = "-";
-            endif;
-            if ($fila->edit_pago == 0):
-                $fila->edit_pago = "-";
-            endif;
-            if ($fila->coment_edit == ""):
-                $fila->coment_edit = "-";
-            endif;
-            if ($fila->b_tragado == 1):
-                $fila->b_tragado = "Si";
-            else:
-                $fila->b_tragado = "-";
-            endif;
-            $fila->monto_pago = number_format($fila->monto_pago, 0, ",", ".");
-            ?>
-            <tbody>
-                <tr align="center">
-                    <td width="120"><?= $fila->id_pago ?></td>
-                    <td width="120"><?= $fila->num_maquina ?></td>
-                    <td width="120">$<?= $fila->monto_pago ?></td>
-                    <td width="120"><?= $fila->hora_pago ?>:<?= $fila->min_pago ?></td>
-                    <td width="120"><?= $fila->nombre ?> <?= $fila->apellido ?></td>
-                    <td width="120"><?= $fila->estado_pago ?></td>
-                    <td width="120"><?= $fila->coment_edit ?></td>
-                    <td width="120"><?= $fila->edit_pago ?></td>
-                    <td width="120"><?= $fila->b_tragado ?></td>
-                </tr>
-            </tbody>
-            <?php
-        endforeach;
-    endif;
-    ?>
+    <table cellspacing="0" cellpadding="0" border="0" style="border-radius: 10px; width: 1130px; ">
+        <tr>
+            <td>
+                <table cellspacing="0" cellpadding="1" border="1" width="1130">
+                    <tr class="ui-widget-header" >
+                        <th width="100">ID</th>
+                        <th width="60">MAQ</th>
+                        <th width="150">MONTO</th>
+                        <th width="70">HORA</th>
+                        <th width="200">USUARIO</th>
+                        <th width="120">ESTADO</th>
+                        <th width="180">COMENTARIO</th>
+                        <th width="100">REFE RENCIA</th>
+                        <th width="100">BILLETE TRAGADO</th>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div style="width:1147px; height:250px; overflow:auto;">
+                    <table class="table-content" cellspacing="0" cellpadding="1" border="1" width="1130">
+                        <?php
+                        foreach ($diario_pagos as $fila):
+                            if ($fila->hora_pago < 10):
+                                $fila->hora_pago = "0" . $fila->hora_pago;
+                            endif;
+                            if ($fila->min_pago < 10):
+                                $fila->min_pago = "0" . $fila->min_pago;
+                            endif;
+                            if ($fila->estado_pago == 1):
+                                $fila->estado_pago = "EDITADO";
+                            else:
+                                $fila->estado_pago = "-";
+                            endif;
+                            if ($fila->edit_pago == 0):
+                                $fila->edit_pago = "-";
+                            endif;
+                            if ($fila->coment_edit == ""):
+                                $fila->coment_edit = "-";
+                            endif;
+                            if ($fila->b_tragado == 1):
+                                $fila->b_tragado = "Si";
+                            else:
+                                $fila->b_tragado = "-";
+                            endif;
+                            $fila->monto_pago = number_format($fila->monto_pago, 0, ",", ".");
+                            ?>
+                            <tr align="center">
+                                <td width="100"><?= $fila->id_pago ?></td>
+                                <td width="60"><?= $fila->num_maquina ?></td>
+                                <td width="150">$<?= $fila->monto_pago ?></td>
+                                <td width="70"><?= $fila->hora_pago ?>:<?= $fila->min_pago ?></td>
+                                <td width="200"><?= $fila->nombre ?> <?= $fila->apellido ?></td>
+                                <td width="120"><?= $fila->estado_pago ?></td>
+                                <td width="180"><?= $fila->coment_edit ?></td>
+                                <td width="100"><?= $fila->edit_pago ?></td>
+                                <td width="100"><?= $fila->b_tragado ?></td>
+                            </tr>
+                            <?php
+                        endforeach;
+                    endif;
+                    ?>
+                </table>
+            </div>
+        </td>
+    </tr>
 </table>
 <?php ?>
