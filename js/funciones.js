@@ -85,6 +85,7 @@ $(document).ready(function () {
 //ESTADISTICAS ADMIN
     cargar_rangos();
     $("#estad_datepicker").datepicker();
+    $("#estad_datepicker").datepicker('setDate', '+0');
     $("#btestad").button().click(function () {
         generar_informe();
     });
