@@ -3,8 +3,8 @@
 <div id="login" hidden>
     <div style="font-size: 20px;"><h1>Inicio de Sesión</h1></div>
     <hr style="width: 35%;"><br>
-    <input class="user_icon" placeholder="Usuario" size="30" id="user" maxlength="30" style="font-size: 20px;" required onkeypress="enter_user(event)" autofocus/><br>
-    <input class="pass_icon" placeholder="Contraseña" type="password" size="30" id="pass" style="font-size: 20px;" required onkeypress="enter_conectar(event)"/><br>
+    <input class="user_icon" placeholder="Usuario" size="30" id="user" maxlength="30" required onkeypress="enter_user(event)" autofocus/><br>
+    <input class="pass_icon" placeholder="Contraseña" type="password" size="30" id="pass" required onkeypress="enter_conectar(event)"/><br>
     <br>
     <button id="conectar">Conectar</button>
     <hr style="width: 35%;"><br>
@@ -250,7 +250,7 @@
                     </td>
                     <td style="width: 150px;"></td>
                     <td align="center"><input class="rounded" id="c_pago" placeholder="pago" type="text" style="width: 290px;" onkeydown="enter_pago(event)" maxlength="50" onkeypress="return validar_texto(event)" onkeyup="formatNumeros(this)" onchange="formatNumeros(this)"/></td>
-                    <td align="center"><input type="checkbox" id="checkpago" onclick="foco('btingresarpago')"><label style="font-size: 11px; font-weight: bold;" for="checkpago">Billette Tragado</label></td>
+                    <td align="center"><input type="checkbox" id="checkpago" onclick="foco('c_pago')"><label style="font-size: 11px; font-weight: bold;" for="checkpago">Billette Tragado</label></td>
                     <td align="right"><button style="width: 150px;" id="btingresarpago" onkeypress="enter_ingresarpago(event)" >Ingresar</button></td>
                 </tr>
             </table>
