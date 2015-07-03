@@ -84,7 +84,9 @@ $(document).ready(function () {
     });
 //ESTADISTICAS ADMIN
     cargar_rangos();
-    $("#estad_datepicker").datepicker();
+    $("#estad_datepicker").datepicker({
+        dateFormat: "dd/mm/yy"
+    });
     $("#estad_datepicker").datepicker('setDate', '+0');
     $("#btestad").button().click(function () {
         generar_informe();
@@ -782,6 +784,7 @@ function bloquear_dp()
         $("#estad_datepicker").datepicker("disable");
     } else {
         $("#estad_datepicker").datepicker("enable");
+        $("#estad_datepicker").datepicker('setDate', '+0');
     }
 }
 

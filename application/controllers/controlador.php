@@ -313,7 +313,7 @@ class Controlador extends CI_Controller {
     function informe_diario() {
         $tipo = $this->input->post('tipo');
         $fecha = $this->input->post('fecha');
-        list($mes, $dia, $ano) = explode("/", $fecha);
+        list($dia, $mes, $ano) = explode("/", $fecha);
         if ($tipo == "k") {
             $datos["diario_keys"] = $this->modelo->diario_keys($dia, $mes, $ano)->result();
             $datos["cantidad"] = $this->modelo->diario_keys($dia, $mes, $ano)->num_rows();
@@ -364,7 +364,7 @@ class Controlador extends CI_Controller {
     function informe_mensual() {
         $tipo = $this->input->post('tipo');
         $fecha = $this->input->post('fecha');
-        list($mes, $dia, $ano) = explode("/", $fecha);
+        list($dia, $mes, $ano) = explode("/", $fecha);
         if ($tipo == "k") {
             $datos["mensual_keys"] = $this->modelo->mensual_keys($mes, $ano)->result();
             $datos["cantidad"] = $this->modelo->mensual_keys($mes, $ano)->num_rows();
