@@ -73,6 +73,7 @@ $(document).ready(function () {
         editar_maquina();
     });
 //CAJA ADMIN
+    cargar_cajeros();
     $("#btregistrarkey").button().click(function () {
         registrar_key();
     });
@@ -662,6 +663,16 @@ function editar_cat_gasto()
 }
 
 //ADMINISTRACION DE CAJA
+
+function cargar_cajeros()
+{
+    $.post(
+            base_url + "controlador/cargar_cajeros",
+            {},
+            function (ruta, datos) {
+                $("#ac_usuarios").html(ruta, datos);
+            });
+}
 
 function diferencia_keys()
 {

@@ -144,39 +144,98 @@
             <div id="msj_keys" class="msj"></div>
             <div style="titulo"><h1>Administración de Caja</h1></div>
             <br>
-            <table style="width: 800px;">
-                <tr>
-                    <td>Maquina :</td><td style="width: 10px;"></td><td>Key Base :</td><td style="width: 10px;"></td><td>Key Out :</td><td style="width: 10px;"></td><td>Total Maquina:</td>
-                </tr>
-                <tr>
-                    <td>
-                        <select onchange="foco('ac_keybase')" class="rounded" id="ac_maq" style="width: 160px;" ></select>
-                    </td>
-                    <td>$</td><td><input class="rounded" id="ac_keybase" placeholder="Key Base" type="text" style="width: 260px;" maxlength="50" onkeypress="return validar_texto(event)" autofocus onkeydown="enter_keybase(event)" onkeyup="diferencia_keys(this);
-                            formatNumeros(this)"/></td>
-                    <td>$</td><td><input class="rounded" id="ac_keyout" placeholder="Key Out" type="text" style="width: 260px;" maxlength="50" onkeypress="return validar_texto(event)" onkeyup="diferencia_keys(this);
-                            formatNumeros(this)"/></td>
-                    <td>$</td><td><input class="rounded" id="ac_total" placeholder="0" type="text" style="width: 260px;" disabled="true" onload="formatNumeros(this)"/></td>
-                    <td><button id="btregistrarkey" >Registrar</button></td>
-                </tr>
-                <tr>
-                    <td></td><td></td><td> Total Key Base :</td><td></td><td> Total Key Out :</td><td></td><td> Total Acumulado :</td>
-                </tr>
+            <table style="width: 750px;">
+                
                 <tr>
                     <td></td>
-                    <td>$</td><td><input class="rounded" id="ac_totalbase" placeholder="0" type="text" style="width: 260px;" disabled="true" /></td>
-                    <td>$</td><td><input class="rounded" id="ac_totalout" placeholder="0" type="text" style="width: 260px;" disabled="true" /></td>
-                    <td>$</td><td><input class="rounded" id="ac_acumulado" placeholder="0" type="text" style="width: 260px;" disabled="true" /></td>
-                    <td><button id="btreiniciarkeys" >Resetear</button></td>
+                    <td>Maquina :</td>
                 </tr>
+                
                 <tr>
-                    <td></td><td></td><td></td><td></td><td></td><td></td><td> Ingrese Monto del Aumento :</td>
+                    <td></td>
+                    <td>
+                        <select onchange="foco('ac_keybase')" class="rounded" id="ac_maq" style="width: 80px;" ></select>
+                    </td>
                 </tr>
+
                 <tr>
-                    <td></td><td></td><td></td><td></td><td></td>
-                    <td>$</td><td><input class="rounded" id="ac_aumento" placeholder="Aumento" type="text" style="width: 260px;" maxlength="50" onkeypress="return validar_texto(event)" onkeyup="formatNumeros(this)" onchange="formatNumeros(this)"/></td>
-                    <td><button id="btaumento">Ingresar</button></td>
+                    <td style="width: 15px;"></td>
+                    <td>Key Base :</td>
+                    <td style="width: 20px;"></td>
+                    <td style="width: 15px;"></td>
+                    <td>Key Out :</td>
+                    <td style="width: 20px;"></td>
+                    <td style="width: 15px;"></td>
+                    <td>Total Maquina:</td>
+                    <td style="width: 20px;"></td>
                 </tr>
+
+                <tr>
+                    <td>$</td>
+                    <td><input class="rounded" id="ac_keybase" placeholder="Key Base" type="text" style="width: 160px;" 
+                               maxlength="50" onkeypress="return validar_texto(event)" autofocus 
+                               onkeydown="enter_keybase(event)" onkeyup="diferencia_keys(this);
+                                       formatNumeros(this)"/></td>
+                    <td></td>
+                    <td>$</td>
+                    <td><input class="rounded" id="ac_keyout" placeholder="Key Out" type="text" style="width: 160px;" 
+                               maxlength="50" onkeypress="return validar_texto(event)" onkeyup="diferencia_keys(this);
+                                       formatNumeros(this)"/></td>
+                    <td></td>
+                    <td>$</td>
+                    <td><input class="rounded" id="ac_total" placeholder="0" type="text" style="width: 160px;" 
+                               disabled="true" onload="formatNumeros(this)"/></td>
+                    <td></td>
+                    <td><button id="btregistrarkey" style="width: 140px;">Registrar</button></td>
+                </tr>
+
+                <tr>
+                    <td></td>
+                    <td> Total Key Base :</td>
+                    <td colspan="2"></td>
+                    <td> Total Key Out :</td>
+                    <td colspan="2"></td>
+                    <td> Total Acumulado :</td>
+                </tr>
+                
+                <tr>
+                    <td>$</td>
+                    <td><input class="rounded" id="ac_totalbase" placeholder="0" type="text" style="width: 160px;" disabled="true" /></td>
+                    <td></td>
+                    <td>$</td>
+                    <td><input class="rounded" id="ac_totalout" placeholder="0" type="text" style="width: 160px;" disabled="true" /></td>
+                    <td></td>
+                    <td>$</td>
+                    <td><input class="rounded" id="ac_acumulado" placeholder="0" type="text" style="width: 160px;" disabled="true" /></td>
+                    <td></td>
+                    <td><button id="btreiniciarkeys" style="width: 140px;">Resetear</button></td>
+                </tr>
+                
+                <tr style="height: 60px"></tr>
+                <tr style="height: 60px">
+                    <td colspan="8" style="font-size: 1.3em; font-weight: bold; ">Realizar Aumento</td>
+                </tr>
+                
+                <tr>
+                    <td></td>
+                    <td colspan="2"> Nombre Cajero :</td>
+                    <td></td>
+                    <td> Monto :</td>
+                </tr>
+                
+                <tr>
+                    <td></td>
+                    <td colspan="2">
+                        <select onchange="foco('ac_aumento')" class="rounded" id="ac_usuarios" ></select>
+                    </td>
+                    <td>$</td>
+                    <td><input class="rounded" id="ac_aumento" placeholder="Aumento" type="text" 
+                                           style="width: 160px;" maxlength="50" onkeypress="return validar_texto(event)" 
+                                           onkeyup="formatNumeros(this)" onchange="formatNumeros(this)"/></td>
+                    <td colspan="4"></td>
+                    <td><button id="btaumento" style="width: 140px;">Ingresar</button></td>
+                </tr>
+                
             </table>
         </div>
         <!--REPORTES-->

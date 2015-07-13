@@ -251,6 +251,12 @@ class Controlador extends CI_Controller {
     }
 
 //ADMINISTRACION DE CAJA
+    
+    function cargar_cajeros() {
+        $datos["usuarios"] = $this->modelo->mostrar_user()->result();
+        $this->load->view("cajeros", $datos);
+    }
+    
     function diferencia_keys() {
         $key_base = $this->input->post('key_base');
         $key_out = $this->input->post('key_out');
