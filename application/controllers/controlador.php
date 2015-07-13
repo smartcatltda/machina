@@ -301,6 +301,7 @@ class Controlador extends CI_Controller {
     }
 
     function ingresar_aumento() {
+        $user = $this->input->post('user');
         $monto_aumento = $this->input->post('monto_aumento');
         $hora = $this->input->post('hora');
         $min = $this->input->post('min');
@@ -308,7 +309,7 @@ class Controlador extends CI_Controller {
         $mes = $this->input->post('mes') + 1;
         $ano = $this->input->post('ano');
         $valor = 0;
-        if ($this->modelo->ingresar_aumento($monto_aumento, $hora, $min, $dia, $mes, $ano) == 0) {
+        if ($this->modelo->ingresar_aumento($user, $monto_aumento, $hora, $min, $dia, $mes, $ano) == 0) {
             $msg = "Aumento Registrado Correctamente";
             $valor = 1;
         }

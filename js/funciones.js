@@ -758,6 +758,7 @@ function registrar_key()
 
 function ingresar_aumento()
 {
+    var user = $("#ac_usuarios").val();
     var monto_aumento = $("#ac_aumento").val().replace(/\./g, '');
     var tiempo = new Date();
     var hora = tiempo.getHours();
@@ -766,7 +767,7 @@ function ingresar_aumento()
     var mes = tiempo.getMonth();
     var ano = tiempo.getFullYear();
     if (monto_aumento != "") {
-        $.post(base_url + "controlador/ingresar_aumento", {monto_aumento: monto_aumento, hora: hora, min: min, dia: dia, mes: mes, ano: ano},
+        $.post(base_url + "controlador/ingresar_aumento", {user: user, monto_aumento: monto_aumento, hora: hora, min: min, dia: dia, mes: mes, ano: ano},
         function (data) {
             $("#msj_keys").hide();
             $("#msj_keys").html("<label>" + data.msg + "</label>");

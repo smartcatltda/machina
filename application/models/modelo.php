@@ -255,8 +255,9 @@ class modelo extends CI_Model {
         endif;
     }
 
-    function ingresar_aumento($monto_aumento, $hora, $min, $dia, $mes, $ano) {
+    function ingresar_aumento($user, $monto_aumento, $hora, $min, $dia, $mes, $ano) {
         $data = array(
+            "id_usuario" => $user,
             "monto_aumento" => $monto_aumento,
             "hora_aumento" => $hora,
             "min_aumento" => $min,
@@ -280,10 +281,12 @@ class modelo extends CI_Model {
 
     function diario_aumentos($dia, $mes, $ano) {
         $this->db->select('*');
+        $this->db->from('aumento');
+        $this->db->join('usuario', 'aumento.id_usuario = usuario.id_usuario');
         $this->db->where('dia_aumento', $dia);
         $this->db->where('mes_aumento', $mes);
         $this->db->where('ano_aumento', $ano);
-        return $this->db->get('aumento');
+        return $this->db->get();
     }
 
     function diario_pagos($dia, $mes, $ano) {
@@ -363,9 +366,11 @@ class modelo extends CI_Model {
 
     function mensual_aumentos($mes, $ano) {
         $this->db->select('*');
+        $this->db->from('aumento');
+        $this->db->join('usuario', 'aumento.id_usuario = usuario.id_usuario');
         $this->db->where('mes_aumento', $mes);
         $this->db->where('ano_aumento', $ano);
-        return $this->db->get('aumento');
+        return $this->db->get();
     }
 
     function mensual_resumen_pagos($mes, $ano) {

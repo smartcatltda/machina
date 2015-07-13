@@ -8,9 +8,10 @@
                 <table cellspacing="0" cellpadding="1" border="1" width="710">
                     <tr class="ui-widget-header" >
                         <th width="100">ID</th>
-                        <th width="300">MONTO</th>
-                        <th width="150">FECHA</th>
-                        <th width="150">HORA</th>
+                        <th width="250">CAJERO</th>
+                        <th width="150">MONTO</th>
+                        <th width="100">FECHA</th>
+                        <th width="100">HORA</th>
                     </tr>
                 </table>
             </td>
@@ -37,9 +38,10 @@
                             ?>
                             <tr>
                                 <td width="100"><?= $fila->id_aumento ?></td>
-                                <td width="300">$<?= $fila->monto_aumento ?></td>
-                                <td width="150"><?= $fila->dia_aumento ?>/<?= $fila->mes_aumento ?></td>
-                                <td width="150"><?= $fila->hora_aumento ?>:<?= $fila->min_aumento ?></td>
+                                <td width="250"><?= $fila->nombre ?> <?= $fila->apellido ?></td>
+                                <td width="150">$<?= $fila->monto_aumento ?></td>
+                                <td width="100"><?= $fila->dia_aumento ?>/<?= $fila->mes_aumento ?></td>
+                                <td width="100"><?= $fila->hora_aumento ?>:<?= $fila->min_aumento ?></td>
                             </tr>
                             <?php
                         endforeach;
