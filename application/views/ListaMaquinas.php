@@ -18,22 +18,20 @@
                     <table class="table-content" cellspacing="0" cellpadding="1" border="1" width="683">
                         <?php
                         foreach ($maquinas as $fila):
-                            if ($fila->estado == 1):
-                                ?>
-                                <tr align="center">
-                                    <td width="100"><?= $fila->num_maquina ?></td>
-                                    <?php
-                                    if ($fila->obs == ""):
-                                        $fila->obs = '-';
-                                        ?>
-                                        <td width="300"><?= $fila->obs ?></td>
-                                        <?php
-                                    else:
-                                        ?>
-                                        <td width="300"><?= $fila->obs ?></td>                              
-                                    </tr>
+                            ?>
+                            <tr align="center">
+                                <td width="100"><?= $fila->num_maquina ?></td>
                                 <?php
-                                endif;
+                                if ($fila->obs == ""):
+                                    $fila->obs = '-';
+                                    ?>
+                                    <td width="300"><?= $fila->obs ?></td>
+                                    <?php
+                                else:
+                                    ?>
+                                    <td width="300"><?= $fila->obs ?></td>                              
+                                </tr>
+                            <?php
                             endif;
                         endforeach;
                     endif;

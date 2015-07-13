@@ -136,6 +136,13 @@ class modelo extends CI_Model {
         return $this->db->get();
     }
 
+    function mostrar_maquinas_activas() {
+        $this->db->select('*');
+        $this->db->from('maquina');
+        $this->db->where('estado', "1");
+        return $this->db->get();
+    }
+
     function ver_maquinas($num_maquina) {
         $this->db->select('*');
         $this->db->where('num_maquina', $num_maquina);

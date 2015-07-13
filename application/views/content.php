@@ -4,7 +4,7 @@
     <div style="font-size: 20px;"><h1>Inicio de Sesión</h1></div>
     <hr style="width: 35%;"><br>
     <input class="user_icon" placeholder="Usuario" size="30" id="user" maxlength="30" required onkeypress="enter_user(event)" autofocus/><br>
-    <input class="pass_icon" placeholder="Contraseña" type="password" size="30" id="pass" required onkeypress="capLock(event),enter_conectar(event)"/><br>
+    <input class="pass_icon" placeholder="Contraseña" type="password" size="30" id="pass" required onkeypress="capLock(event), enter_conectar(event)"/><br>
     <br>
     <button id="conectar">Conectar</button>
     <hr style="width: 35%;"><br>
@@ -34,7 +34,6 @@
                         <td>Estado: </td>
                         <td>
                             <select class="rounded" id="man_estado" style="width: 200px;" >
-                                <option value="" selected="">Seleccione</option>
                                 <option value='1'>Activa</option>
                                 <option value='0'>Inactiva</option>
                             </select>
@@ -146,12 +145,12 @@
             <div style="titulo"><h1>Administración de Caja</h1></div>
             <br>
             <table style="width: 750px;">
-                
+
                 <tr>
                     <td></td>
                     <td>Maquina :</td>
                 </tr>
-                
+
                 <tr>
                     <td></td>
                     <td>
@@ -198,7 +197,7 @@
                     <td colspan="2"></td>
                     <td> Total Acumulado :</td>
                 </tr>
-                
+
                 <tr>
                     <td>$</td>
                     <td><input class="rounded" id="ac_totalbase" placeholder="0" type="text" style="width: 160px;" disabled="true" /></td>
@@ -211,19 +210,19 @@
                     <td></td>
                     <td><button id="btreiniciarkeys" style="width: 140px;">Resetear</button></td>
                 </tr>
-                
+
                 <tr style="height: 60px"></tr>
                 <tr style="height: 60px">
                     <td colspan="8" style="font-size: 1.3em; font-weight: bold; ">Realizar Aumento</td>
                 </tr>
-                
+
                 <tr>
                     <td></td>
                     <td colspan="2"> Nombre Cajero :</td>
                     <td></td>
                     <td> Monto :</td>
                 </tr>
-                
+
                 <tr>
                     <td></td>
                     <td colspan="2">
@@ -231,12 +230,12 @@
                     </td>
                     <td>$</td>
                     <td><input class="rounded" id="ac_aumento" placeholder="Aumento" type="text" 
-                                           style="width: 160px;" maxlength="50" onkeypress="return validar_texto(event)" 
-                                           onkeyup="formatNumeros(this)" onchange="formatNumeros(this)"/></td>
+                               style="width: 160px;" maxlength="50" onkeypress="return validar_texto(event)" 
+                               onkeyup="formatNumeros(this)" onchange="formatNumeros(this)"/></td>
                     <td colspan="4"></td>
                     <td><button id="btaumento" style="width: 140px;">Ingresar</button></td>
                 </tr>
-                
+
             </table>
         </div>
         <!--REPORTES-->

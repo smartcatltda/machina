@@ -370,7 +370,6 @@ function  seleccionar_user(user)
             } else {
                 $("#man_id").val(datos.id);
                 $("#man_user").val(datos.user);
-//                $("#man_pass").val(datos.pass);
                 $("#man_tipo").val(datos.tipo);
                 $("#man_nombre").val(datos.nombre);
                 $("#man_apellido").val(datos.apellido);
@@ -767,16 +766,22 @@ function ingresar_aumento()
     var mes = tiempo.getMonth();
     var ano = tiempo.getFullYear();
     if (monto_aumento != "") {
-        $.post(base_url + "controlador/ingresar_aumento", {user: user, monto_aumento: monto_aumento, hora: hora, min: min, dia: dia, mes: mes, ano: ano},
-        function (data) {
+        if (user != "0") {
+            $.post(base_url + "controlador/ingresar_aumento", {user: user, monto_aumento: monto_aumento, hora: hora, min: min, dia: dia, mes: mes, ano: ano},
+            function (data) {
+                $("#msj_keys").hide();
+                $("#msj_keys").html("<label>" + data.msg + "</label>");
+                if (data.valor == 1) {
+                    $("#ac_aumento").val("");
+                }
+                $("#msj_keys").css("color", "#55FF00").show('drop', 'slow').delay(3000).hide('drop', 'slow');
+            }, "json"
+                    );
+        } else {
             $("#msj_keys").hide();
-            $("#msj_keys").html("<label>" + data.msg + "</label>");
-            if (data.valor == 1) {
-                $("#ac_aumento").val("");
-            }
-            $("#msj_keys").css("color", "#55FF00").show('drop', 'slow').delay(3000).hide('drop', 'slow');
-        }, "json"
-                );
+            $("#msj_keys").html("<label>Debe Asociar el aumento a un Cajero</label>");
+            $("#msj_keys").css("color", "#FF0000").show('drop', 'slow').delay(3000).hide('drop', 'slow');
+        }
     } else {
         $("#msj_keys").hide();
         $("#msj_keys").html("<label>Debe Ingresar la Cantidad del Aumento</label>");

@@ -142,7 +142,7 @@ class Controlador extends CI_Controller {
 
     //MANTENEDOR MAQUINAS
     function mostrar_maquinas() {
-        $datos = $this->modelo->mostrar_maquinas();
+        $datos = $this->modelo->mostrar_maquinas_activas();
         $data ['cantidad'] = $datos->num_rows();
         $data ['maquinas'] = $datos->result();
         $this->load->view('ListaMaquinas', $data);
@@ -154,7 +154,7 @@ class Controlador extends CI_Controller {
     }
 
     function cargar_maquinas_activas() {
-        $datos["maquinas"] = $this->modelo->mostrar_maquinas()->result();
+        $datos["maquinas"] = $this->modelo->mostrar_maquinas_activas()->result();
         $this->load->view("maquinas_activas", $datos);
     }
 
@@ -251,12 +251,13 @@ class Controlador extends CI_Controller {
     }
 
 //ADMINISTRACION DE CAJA
-    
+
     function cargar_cajeros() {
         $datos["usuarios"] = $this->modelo->mostrar_user()->result();
+        $datos["cantidad"] = $this->modelo->mostrar_user()->num_rows();
         $this->load->view("cajeros", $datos);
     }
-    
+
     function diferencia_keys() {
         $key_base = $this->input->post('key_base');
         $key_out = $this->input->post('key_out');
