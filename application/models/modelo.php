@@ -502,7 +502,7 @@ class modelo extends CI_Model {
     }
 
 //MANTENEDOR PAGO
-    function guardar_pago($num_maquina, $monto_pago, $min, $horas, $dia, $mes, $ano, $id_user,$b_tragado) {
+    function guardar_pago($num_maquina, $monto_pago, $min, $horas, $dia, $mes, $ano, $id_user, $b_tragado) {
         $data = array(
             "num_maquina" => $num_maquina,
             "monto_pago" => $monto_pago,
@@ -585,26 +585,30 @@ class modelo extends CI_Model {
         return 0;
     }
 
-    function pagos_cuadratura() {
+    function pagos_cuadratura($id_user) {
         $this->db->select('monto_pago');
+        $this->db->where('id_usuario', $id_user);
         $this->db->where('cierre_pago', '0');
         return $this->db->get('pago');
     }
 
-    function aumento_cuadratura() {
+    function aumento_cuadratura($id_user) {
         $this->db->select('monto_aumento');
+        $this->db->where('id_usuario', $id_user);
         $this->db->where('cierre_aumento', '0');
         return $this->db->get('aumento');
     }
 
-    function gastos_cuadratura() {
+    function gastos_cuadratura($id_user) {
         $this->db->select('monto_gasto');
+        $this->db->where('id_usuario', $id_user);
         $this->db->where('cierre_gasto', '0');
         return $this->db->get('gastos');
     }
 
-    function caja_anterior() {
+    function caja_anterior($id_user) {
         $this->db->select('total_cajero');
+        $this->db->where('id_usuario', $id_user);
         $this->db->from('cuadratura_caja');
         $this->db->order_by('id_caja', 'DESC');
         $this->db->limit(1);
@@ -638,29 +642,31 @@ class modelo extends CI_Model {
         $dato = array(
             "cierre_aumento" => '1',
         );
+        $this->db->where('id_usuario', $id_user);
         $this->db->where('cierre_aumento', '0');
         $this->db->update("aumento", $dato);
 
         $dat = array(
             "cierre_pago" => '1',
         );
-
+        $this->db->where('id_usuario', $id_user);
         $this->db->where('cierre_pago', '0');
         $this->db->update("pago", $dat);
 
         $data = array(
             "cierre_gasto" => '1',
         );
-
+        $this->db->where('id_usuario', $id_user);
         $this->db->where('cierre_gasto', '0');
         $this->db->update("gastos", $data);
     }
 
-    function ver_cuadratura($dia, $mes, $ano) {
+    function ver_cuadratura($dia, $mes, $ano, $id_user) {
         $this->db->select('*');
         $this->db->where('dia_cuadratura', $dia);
         $this->db->where('mes_cuadratura', $mes);
         $this->db->where('ano_cuadratura', $ano);
+        $this->db->where('id_usuario', $id_user);
         $this->db->from('cuadratura_caja');
         $this->db->order_by('id_caja', 'DESC');
         $this->db->limit(1);
