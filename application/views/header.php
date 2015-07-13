@@ -23,7 +23,7 @@
             <button onclick="foco('man_user')"id="btusuarios">Usuarios</button>
             <button onclick="seleccionar_maquina()" id="btmaquinas">Máquinas</button>
             <button onclick="foco('man_nombre_gasto')"id="btgastos">Gastos</button>
-            <button onclick="foco('ac_keybase')" id="btcaja">Caja</button>
+            <button onclick="foco('ac_keybase')" id="btcaja">Keys</button>
             <button id="btestadisticas">Estadísticas</button>
             <button style="float: right" id="salir"> Cerrar Sesión</button>
         </div>

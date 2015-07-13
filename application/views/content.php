@@ -4,10 +4,11 @@
     <div style="font-size: 20px;"><h1>Inicio de Sesión</h1></div>
     <hr style="width: 35%;"><br>
     <input class="user_icon" placeholder="Usuario" size="30" id="user" maxlength="30" required onkeypress="enter_user(event)" autofocus/><br>
-    <input class="pass_icon" placeholder="Contraseña" type="password" size="30" id="pass" required onkeypress="enter_conectar(event)"/><br>
+    <input class="pass_icon" placeholder="Contraseña" type="password" size="30" id="pass" required onkeypress="capLock(event),enter_conectar(event)"/><br>
     <br>
     <button id="conectar">Conectar</button>
     <hr style="width: 35%;"><br>
+    <h3 id="caplock" style="visibility:hidden">Bloqueo de Mayúscula Activado!</h3>
     <div id="alto_login"></div>
 </div>
 

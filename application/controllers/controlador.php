@@ -528,10 +528,10 @@ class Controlador extends CI_Controller {
         $b_1 = $this->input->post('b_1');
         $monedas = $this->input->post('monedas');
         $id_user = $this->session->userdata('id_user');
-        if ($this->modelo->caja_anterior()->num_rows() == 0):
+        if ($this->modelo->caja_anterior($id_user)->num_rows() == 0):
             $caja_anterior = 0;
         else:
-            $arr = $this->modelo->caja_anterior()->result();
+            $arr = $this->modelo->caja_anterior($id_user)->result();
             $caja = 0;
             foreach ($arr as $fila) :
                 $caja = intval($fila->total_cajero);
@@ -539,22 +539,21 @@ class Controlador extends CI_Controller {
             $caja_anterior = $caja;
         endif;
 
-        if ($this->modelo->aumento_cuadratura()->num_rows() == 0):
+        if ($this->modelo->aumento_cuadratura($id_user)->num_rows() == 0):
             $total_aumentos = 0;
         else:
-            $data = $this->modelo->aumento_cuadratura()->result();
+            $data = $this->modelo->aumento_cuadratura($id_user)->result();
             $acum = 0;
             foreach ($data as $fila) :
-
                 $acum +=intval($fila->monto_aumento);
             endforeach;
             $total_aumentos = $acum;
         endif;
 
-        if ($this->modelo->pagos_cuadratura()->num_rows() == 0):
+        if ($this->modelo->pagos_cuadratura($id_user)->num_rows() == 0):
             $total_pagos = 0;
         else:
-            $dat = $this->modelo->pagos_cuadratura()->result();
+            $dat = $this->modelo->pagos_cuadratura($id_user)->result();
             $suma = 0;
             foreach ($dat as $fila) :
                 $suma+=intval($fila->monto_pago);
@@ -562,10 +561,10 @@ class Controlador extends CI_Controller {
             $total_pagos = $suma;
         endif;
 
-        if ($this->modelo->gastos_cuadratura()->num_rows() == 0):
+        if ($this->modelo->gastos_cuadratura($id_user)->num_rows() == 0):
             $total_gastos = 0;
         else:
-            $datas = $this->modelo->gastos_cuadratura()->result();
+            $datas = $this->modelo->gastos_cuadratura($id_user)->result();
             $i = 0;
             foreach ($datas as $fila) :
                 $i+=intval($fila->monto_gasto);
@@ -582,7 +581,7 @@ class Controlador extends CI_Controller {
         endif;
 
         $this->modelo->guarda_cuadratura($total_caja, $total_aumentos, $total_pagos, $caja_anterior, $total_gastos, $dia, $mes, $ano, $min, $hora, $id_user, $b_20, $b_10, $b_5, $b_2, $b_1, $monedas, $total_cajero, $diferencia);
-        $datos['totales'] = $this->modelo->ver_cuadratura($dia, $mes, $ano)->result();
+        $datos['totales'] = $this->modelo->ver_cuadratura($dia, $mes, $ano, $id_user)->result();
         $this->load->view("ListaCuadratura", $datos);
     }
 
