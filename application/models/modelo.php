@@ -550,6 +550,7 @@ class modelo extends CI_Model {
 
     function cargar_pagos($id_user, $dia, $mes, $ano) {
         $this->db->select('*');
+        $this->db->where('cierre_pago', "0");
         $this->db->where('id_usuario', $id_user);
         $this->db->where('dia_pago', $dia);
         $this->db->where('mes_pago', $mes);
@@ -600,6 +601,7 @@ class modelo extends CI_Model {
     function pagos_cuadratura($id_user) {
         $this->db->select('monto_pago');
         $this->db->where('id_usuario', $id_user);
+        $this->db->where('estado_pago', '0');
         $this->db->where('cierre_pago', '0');
         return $this->db->get('pago');
     }
