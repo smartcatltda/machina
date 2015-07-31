@@ -5,7 +5,7 @@
     <table cellspacing="0" cellpadding="0" border="0" style="border-radius: 10px; width: 1070px; text-align: center;">
         <tr>
             <td>
-                <table cellspacing="0" cellpadding="1" border="1" width="1070">
+                <table class="table-header" cellspacing="0" cellpadding="1" border="1" width="1070">
                     <tr class="ui-widget-header" >
                         <th width="60">ID</th>
                         <th width="200">CATEGORIA</th>

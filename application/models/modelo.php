@@ -380,6 +380,16 @@ class modelo extends CI_Model {
         return $this->db->get();
     }
 
+    function mensual_pagos($maq, $mes, $ano) {
+        $this->db->select('*');
+        $this->db->from('pago');
+        $this->db->join('usuario', 'pago.id_usuario = usuario.id_usuario');
+        $this->db->where('num_maquina', $maq);
+        $this->db->where('mes_pago', $mes);
+        $this->db->where('ano_pago', $ano);
+        return $this->db->get();
+    }
+
     function mensual_resumen_pagos($mes, $ano) {
         $this->db->select('num_maquina');
         $this->db->select_sum('monto_pago');

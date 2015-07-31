@@ -5,7 +5,7 @@
     <table cellspacing="0" cellpadding="0" border="0" style="border-radius: 10px; width: 1300px; text-align: center;">
         <tr>
             <td>
-                <table cellspacing="0" cellpadding="1" border="1" width="1300">
+                <table class="table-header" cellspacing="0" cellpadding="1" border="1" width="1300">
                     <tr class="ui-widget-header" >
                         <th width="80">ID</th>
                         <th width="130">AUMENTOS</th>

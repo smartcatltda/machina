@@ -1,9 +1,16 @@
 .rounded{
     border-radius: 10px;
 }
+.table-header{
+    font-size: 12px;
+    font-family: arial;
+    font-weight: bold;
+}
 .table-content{
     background: url("images/other.png") center top repeat;
     color: white;
+    font-size: 12px;
+    font-family: arial;
 }
 .home{
     width: 800px;

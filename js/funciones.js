@@ -459,6 +459,7 @@ function cargar_maquinas_activas()
                 $("#ac_maq").html(ruta, datos);
                 $("#c_maq").html(ruta, datos);
                 $("#c_maq_cierre").html(ruta, datos);
+                $("#maq_select").html(ruta, datos);
             });
 }
 function  seleccionar_maquina()
@@ -810,15 +811,20 @@ function cargar_rangos()
 //selector de tipos de informe
 {
     var tipo = $("#tipo_select").val();
-    if (tipo == "p" || tipo == "g") {
+    if (tipo == "g") {
         $("#rango_select").html("<option value='d'>Diario</option>");
     } else {
-        if (tipo == "rp" || tipo == "rg" || tipo == "rc") {
-            $("#rango_select").html("<option value='d'>Diario</option><option value='s'>Ultimos 7 días</option><option value='m'>Mensual</option>");
+        if (tipo == "p") {
+            $("#rango_select").html("<option value='d'>Diario</option><option onchange='mostrarTD()' value='m'>Mensual</option>");
         } else {
-            $("#rango_select").html("<option value='d'>Diario</option><option value='m'>Mensual</option>");
+            if (tipo == "rp" || tipo == "rg" || tipo == "rc") {
+                $("#rango_select").html("<option value='d'>Diario</option><option value='s'>Ultimos 7 días</option><option value='m'>Mensual</option>");
+            } else {
+                $("#rango_select").html("<option value='d'>Diario</option><option value='m'>Mensual</option>");
+            }
         }
     }
+
     $("#estad_datepicker").datepicker("enable");
 }
 
@@ -827,6 +833,7 @@ function generar_informe()
     var tipo = $("#tipo_select").val();
     var rango = $("#rango_select").val();
     var fecha = $("#estad_datepicker").val();
+    var maq = $("#maq_select").val();
     if (fecha != "" || rango == "s") {
         if (rango == "d") {
             $.post(base_url + "controlador/informe_diario", {tipo: tipo, fecha: fecha},
@@ -835,7 +842,7 @@ function generar_informe()
             });
         } else {
             if (rango == "m") {
-                $.post(base_url + "controlador/informe_mensual", {tipo: tipo, fecha: fecha},
+                $.post(base_url + "controlador/informe_mensual", {tipo: tipo, fecha: fecha, maq: maq},
                 function (ruta, datos) {
                     $("#informe").html(ruta, datos);
                 });
@@ -1206,4 +1213,16 @@ function capLock(e) {
         document.getElementById('caplock').style.visibility = 'visible';
     else
         document.getElementById('caplock').style.visibility = 'hidden';
+}
+
+function cambiarTD() {
+    var tipo = $("#tipo_select").val();
+    var rango = $("#rango_select").val();
+    if (tipo == "p" && rango == "m") {
+        document.getElementById("th_maquina").style.display = "block";
+        document.getElementById("maq_select").style.display = "block";
+    } else {
+        document.getElementById("th_maquina").style.display = "none";
+        document.getElementById("maq_select").style.display = "none";
+    }
 }

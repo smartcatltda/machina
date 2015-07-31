@@ -4,7 +4,7 @@
     <table id="tabla_maquinas" cellspacing="0" cellpadding="0" border="0" style="border-radius: 10px; width: 683px; ">
         <tr>
             <td>
-                <table cellspacing="0" cellpadding="1" border="1" width="683">
+                <table class="table-header" cellspacing="0" cellpadding="1" border="1" width="683">
                     <tr class="ui-widget-header" >
                         <th width="169">N° MAQUINA</th>
                         <th>OBSERVACIONES</th>

@@ -2,7 +2,7 @@
     <label>No Se Han Registrado Pagos Hoy</label>
 <?php else:
     ?>
-    <table style="border-radius: 10px; width: 700px;" id="tabla_pagos"  border="2">
+    <table  class="table-header" style="border-radius: 10px; width: 700px;" id="tabla_pagos"  border="2">
         <thead class="ui-widget-header">
             <tr>
                 <th>FECHA</th>

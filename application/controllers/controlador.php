@@ -372,6 +372,7 @@ class Controlador extends CI_Controller {
     function informe_mensual() {
         $tipo = $this->input->post('tipo');
         $fecha = $this->input->post('fecha');
+        $maq = $this->input->post('maq');
         list($dia, $mes, $ano) = explode("/", $fecha);
         if ($tipo == "k") {
             $datos["mensual_keys"] = $this->modelo->mensual_keys($mes, $ano)->result();
@@ -398,9 +399,15 @@ class Controlador extends CI_Controller {
                             $datos["cantidad"] = $this->modelo->mensual_cierres($mes, $ano)->num_rows();
                             $this->load->view("mensual_cierres", $datos);
                         } else {
-                            $datos["mensual_resumen_cierres"] = $this->modelo->mensual_resumen_cierres($mes, $ano)->result();
-                            $datos["cantidad"] = $this->modelo->mensual_resumen_cierres($mes, $ano)->num_rows();
-                            $this->load->view("mensual_resumen_cierres", $datos);
+                            if ($tipo == "p") {
+                                $datos["mensual_pagos"] = $this->modelo->mensual_pagos($maq, $mes, $ano)->result();
+                                $datos["cantidad"] = $this->modelo->mensual_pagos($maq, $mes, $ano)->num_rows();
+                                $this->load->view("mensual_pagos", $datos);
+                            } else {
+                                $datos["mensual_resumen_cierres"] = $this->modelo->mensual_resumen_cierres($mes, $ano)->result();
+                                $datos["cantidad"] = $this->modelo->mensual_resumen_cierres($mes, $ano)->num_rows();
+                                $this->load->view("mensual_resumen_cierres", $datos);
+                            }
                         }
                     }
                 }

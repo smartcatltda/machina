@@ -24,7 +24,7 @@
             <button onclick="seleccionar_maquina()" id="btmaquinas">Máquinas</button>
             <button onclick="foco('man_nombre_gasto')"id="btgastos">Gastos</button>
             <button onclick="foco('ac_keybase')" id="btcaja">Keys</button>
-            <button id="btestadisticas">Estadísticas</button>
+            <button onclick="cargar_maquinas_activas()" id="btestadisticas">Estadísticas</button>
             <button style="float: right" id="salir"> Cerrar Sesión</button>
         </div>
         <div id="menucajero" class="ui-widget-header ui-corner-all" hidden>

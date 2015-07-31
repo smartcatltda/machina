@@ -243,12 +243,13 @@
             <div id="msj_est" class="msj"></div>
             <div style="titulo"><h1>Estadísticas</h1></div>
             <br>
-            <table style="border-radius: 8px;" border="2">
+            <table class="table-header" style="border-radius: 8px;" border="2">
                 <thead class="ui-widget-header" >
                     <tr>
-                        <th rowspan="2">Tipo de Informe</th>
-                        <th rowspan="2">Rango de Tiempo</th>
-                        <th rowspan="2">Fecha</th>
+                        <th rowspan="2">TIPO DE INFORME</th>
+                        <th rowspan="2">RANGO DE TIEMPO</th>
+                        <th rowspan="2">FECHA</th>
+                        <th style=" display: none;" id="th_maquina"  rowspan="2">Máquina</th>
                     </tr>
                     <tr>
                     </tr>
@@ -256,7 +257,7 @@
                 <tbody class="table-content">
                     <tr>
                         <td>
-                            <select class="rounded" id="tipo_select" onchange="cargar_rangos()" style="width: 200px;">
+                            <select class="rounded" id="tipo_select" onchange="cargar_rangos(), cambiarTD()" style="width: 200px;">
                                 <option value="k">Keys</option>
                                 <option value="a">Aumentos</option>
                                 <option value="p">Lista Pagos</option>
@@ -268,9 +269,10 @@
                             </select>
                         </td>
                         <td>
-                            <select class="rounded" id="rango_select" onchange="bloquear_dp()" style="width: 200px;"></select>
+                            <select class="rounded" id="rango_select" onchange="bloquear_dp(), cambiarTD()" style="width: 200px;"></select>
                         </td>
                         <td><input type="text" id="estad_datepicker" class="rounded"></td>
+                        <td><select class="rounded" id="maq_select" style="display: none; width: 100px;"></td>
                     </tr>
                 </tbody>
             </table>
