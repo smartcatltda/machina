@@ -7,16 +7,16 @@
             <td>
                 <table class="table-header" cellspacing="0" cellpadding="1" border="1" width="800">
                     <tr class="ui-widget-header">
-                        <th width="80">ID</th>
-                        <th width="60">MAQ</th>
-                        <th width="150">MONTO</th>
-                        <th width="160">FECHA</th>
-                        <th width="70">HORA</th>
-                        <th width="200">USUARIO</th>
-                        <th width="120">ESTADO</th>
-                        <th width="180">COMENTARIO</th>
-                        <th width="100">REFE RENCIA</th>
-                        <th width="100">BILLETE TRAGADO</th>
+                        <th width="50">ID</th>
+                        <th width="50">MAQ</th>
+                        <th width="85">MONTO</th>
+                        <th width="90">FECHA</th>
+                        <th width="55">HORA</th>
+                        <th width="100">USUARIO</th>
+                        <th width="75">ESTADO</th>
+                        <th width="100">COMENTARIO</th>
+                        <th width="75">REFE RENCIA</th>
+                        <th width="80">BILLETE TRAGADO</th>
                     </tr>
                 </table>
             </td>
@@ -58,16 +58,16 @@
                             $fila->monto_pago = number_format($fila->monto_pago, 0, ",", ".");
                             ?>
                             <tr align="center">
-                                <td width="80"><?= $fila->id_pago ?></td>
-                                <td width="60"><?= $fila->num_maquina ?></td>
-                                <td width="150">$<?= $fila->monto_pago ?></td>
-                                <td width="100"><?= $fila->dia_pago ?>-<?= $fila->mes_pago ?>-<?= $fila->ano_pago ?></td>
-                                <td width="70"><?= $fila->hora_pago ?>:<?= $fila->min_pago ?></td>
-                                <td width="200"><?= $fila->nombre ?> <?= $fila->apellido ?></td>
-                                <td width="120"><?= $fila->estado_pago ?></td>
-                                <td width="180"><?= $fila->coment_edit ?></td>
-                                <td width="100"><?= $fila->edit_pago ?></td>
-                                <td width="100"><?= $fila->b_tragado ?></td>
+                                <td width="50"><?= $fila->id_pago ?></td>
+                                <td width="50"><?= $fila->num_maquina ?></td>
+                                <td width="85">$<?= $fila->monto_pago ?></td>
+                                <td width="90"><?= $fila->dia_pago ?>-<?= $fila->mes_pago ?>-<?= $fila->ano_pago ?></td>
+                                <td width="55"><?= $fila->hora_pago ?>:<?= $fila->min_pago ?></td>
+                                <td width="100"><?= $fila->nombre ?> <?= $fila->apellido ?></td>
+                                <td width="75"><?= $fila->estado_pago ?></td>
+                                <td width="100"><?= $fila->coment_edit ?></td>
+                                <td width="75"><?= $fila->edit_pago ?></td>
+                                <td width="80"><?= $fila->b_tragado ?></td>
                             </tr>
                             <?php
                         endforeach;
