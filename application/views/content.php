@@ -249,7 +249,7 @@
                         <th rowspan="2">TIPO DE INFORME</th>
                         <th rowspan="2">RANGO DE TIEMPO</th>
                         <th rowspan="2">FECHA</th>
-                        <th style=" display: none;" id="th_maquina"  rowspan="2">Máquina</th>
+                        <th style="display: none;"  id="th_maquina"  rowspan="2">Máquina</th>
                     </tr>
                     <tr>
                     </tr>
@@ -272,7 +272,7 @@
                             <select class="rounded" id="rango_select" onchange="bloquear_dp(), cambiarTD()" style="width: 200px;"></select>
                         </td>
                         <td><input type="text" id="estad_datepicker" class="rounded"></td>
-                        <td><select class="rounded" id="maq_select" style="display: none; width: 100px;"></td>
+                        <td id="td_maq_select" style="display: none;" ><select class="rounded" id="maq_select" style="width: 80px;"></td>
                     </tr>
                 </tbody>
             </table>

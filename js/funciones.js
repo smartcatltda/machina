@@ -1239,9 +1239,9 @@ function cambiarTD() {
     var rango = $("#rango_select").val();
     if (tipo == "p" && rango == "m") {
         document.getElementById("th_maquina").style.display = "block";
-        document.getElementById("maq_select").style.display = "block";
+        document.getElementById("td_maq_select").style.display = "block";
     } else {
         document.getElementById("th_maquina").style.display = "none";
-        document.getElementById("maq_select").style.display = "none";
+        document.getElementById("td_maq_select").style.display = "none";
     }
 }
